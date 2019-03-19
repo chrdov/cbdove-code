@@ -100,18 +100,21 @@ end
 
 local TemplatePlayer = game.Players:WaitForChild("CBDove4")
 if TemplatePlayer.Character == nil then
-	TemplatePlayer.CharacterAdded:wait()
+	TemplatePlayer.CharacterAppearanceLoaded:wait()
 end
 TemplatePlayer.Character.Archivable = true
 local NpcTemplate = TemplatePlayer.Character:Clone()
 TemplatePlayer.Character.Archivable = false
 for _,part in pairs(NpcTemplate:GetChildren()) do
-	if not (part:IsA("BasePart") or part:IsA("Humanoid")) then
-		part:Destroy()
-	elseif part:IsA("BasePart") then
-		part.BrickColor = BrickColor.new("Medium stone grey")
+	if part:IsA("BasePart") then
+		part.BrickColor = BrickColor.Gray()
+	else
+		if not (part:IsA("Humanoid") or part:IsA("BasePart")) then
+			part:Destroy()
+		end
 	end
 end
-module.gm.npc.template = NpcTemplate
+module.gm.npc.template = NpcTemplate:Clone()
+
 
 _G.dnd = module
