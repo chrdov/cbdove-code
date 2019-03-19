@@ -1,0 +1,117 @@
+local module = {}
+
+module.dice = {}
+module.gm = {}
+module.gm.npc = {}
+module.key = ""
+module.gm.npc.template = Instance.new("Model") -- Use Dummy Model for template. Set this variable before you insert NPCs into your game.
+
+-- Set GM key. The existing GM key is meant to restrict anyone else from executing GM functions, therefore it is required as a first argument.
+function module.gm.setKey(oldKey,newKey)
+	if oldKey == module.key then
+		if newKey ~= module.key then
+			module.key = newKey
+		end
+	end
+end
+
+-- Display GM Message. This requires the GM key as a first argument.
+function module.gm.sendMessage(key,message)
+	if key == module.key then
+		local Debris = game:GetService("Debris")
+		local m = Instance.new("Hint",game.Workspace)
+		m.Text = message
+		Debris:AddItem(m,10)
+	end
+end
+
+-- GM-only function for changing health. This requires the GM key as a first argument.
+function module.gm.changeHealth(key,char,health,set,changemax)
+	if key == module.key then
+		if char ~= nil then
+			if char:IsA("Model") then
+				if char:FindFirstChild("Health") then
+					char:FindFirstChild("Health"):Destroy()
+				end
+				local humanoid = char:FindFirstChildOfClass("Humanoid")
+				if humanoid ~= nil then
+					if set then
+						if changemax then
+							humanoid.MaxHealth = health
+						else
+							humanoid.Health = health
+						end
+					else
+						if changemax then
+							humanoid.MaxHealth = humanoid.MaxHealth + health
+						else
+							humanoid.Health = humanoid.Health + health
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+-- GM-only NPC movement function. This requires the GM key as a first argument.
+function module.gm.npc.moveTo(key,char,Pos)
+	if key == module.key then
+		if char ~= nil then
+			if char:IsA("Model") then
+				assert(game.Players:GetPlayerFromCharacter(char) == nil,"Character must not be owned by a player.")
+				local humanoid = char:FindFirstChildOfClass("Humanoid")
+				if humanoid ~= nil then
+					humanoid:MoveTo(Pos)
+				end
+			end
+		end
+	end
+end
+
+-- GM-only NPC chat function. This requires the GM key as a first argument.
+function module.gm.npc.chat(key,char,message)
+	if key == module.key then
+		if char ~= nil then
+			if char:IsA("Model") then
+				assert(game.Players:GetPlayerFromCharacter(char) == nil,"Character must not be owned by a player.")
+				if char.PrimaryPart ~= nil then
+					if message ~= nil then
+						local Chat = game:GetService("Chat")
+						local Debris = game:GetService("Debris")
+						Chat:Chat(char.PrimaryPart,message,Enum.ChatColor.White)
+						local m = Instance.new("Hint",game.Workspace)
+						m.Text = char.Name..": \""..message.."\""
+						Debris:AddItem(m,10)
+					end
+				end
+			end
+		end
+	end
+end
+
+-- Basic Dice Roll function. Asserts argument is a number greater than one.
+function module.dice.roll(number)
+	assert(typeof(number) == "number","Argument must be a number.")
+	assert(number > 1,"Argument must be greater than 1.")
+	math.randomseed(math.floor(os.time()))
+	return math.random(number)
+end
+
+local TemplatePlayer = game.Players:WaitForChild("CBDove4")
+if TemplatePlayer.Character == nil then
+	TemplatePlayer.CharacterAdded:wait()
+end
+TemplatePlayer.Character.Archivable = true
+local NpcTemplate = TemplatePlayer.Character:Clone()
+TemplatePlayer.Character.Archivable = false
+for _,part in pairs(NpcTemplate:GetChildren()) do
+	if not (part:IsA("BasePart") or part:IsA("Humanoid")) then
+		part:Destroy()
+	elseif part:IsA("BasePart") then
+		part.BrickColor = BrickColor.new("Medium stone grey")
+	end
+end
+module.gm.npc.template = NpcTemplate
+
+_G.dnd = module
