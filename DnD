@@ -5,6 +5,7 @@ module.gm = {}
 module.gm.npc = {}
 module.key = ""
 module.gm.npc.template = Instance.new("Model") -- Use Dummy Model for template. Set this variable before you insert NPCs into your game.
+module.npcs = {}
 
 -- Set GM key. The existing GM key is meant to restrict anyone else from executing GM functions, therefore it is required as a first argument.
 function module.gm.setKey(oldKey,newKey)
@@ -106,12 +107,13 @@ TemplatePlayer.Character.Archivable = true
 local NpcTemplate = TemplatePlayer.Character:Clone()
 TemplatePlayer.Character.Archivable = false
 for _,part in pairs(NpcTemplate:GetChildren()) do
+	if not (part:IsA("Humanoid") or part:IsA("BasePart")) then
+		part:Destroy()
+	end
+end
+for _,part in pairs(NpcTemplate:GetChildren()) do
 	if part:IsA("BasePart") then
 		part.BrickColor = BrickColor.Gray()
-	else
-		if not (part:IsA("Humanoid") or part:IsA("BasePart")) then
-			part:Destroy()
-		end
 	end
 end
 module.gm.npc.template = NpcTemplate:Clone()
