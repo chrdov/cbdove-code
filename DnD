@@ -92,11 +92,11 @@ function module.gm.npc.chat(key,char,message)
 end
 
 -- Basic Dice Roll function. Asserts argument is a number greater than one.
-function module.dice.roll(number)
-	assert(typeof(number) == "number","Argument must be a number.")
-	assert(number >= 2,"Argument must be greater than or equal to 2.")
+function module.dice.roll(maxnumber)
+	assert(typeof(maxnumber) == "number","Argument must be a number.")
+	assert(maxnumber >= 2,"Argument must be greater than or equal to 2.")
 	math.randomseed(math.floor(os.time()))
-	local result = math.random(1,number)
+	local result = math.random(1,maxnumber)
 	print(result)
 	return result
 end
