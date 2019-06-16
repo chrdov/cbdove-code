@@ -1,3 +1,4 @@
+local Humanoid = game.Players.LocalPlayer.Character.Humanoid
 local JumpDebounce = false
 local MaxJumpsAllowed = 2 -- Change this to change how many jumps you can do at maximum.
 local JumpsLeft = MaxJumpsAllowed
@@ -5,25 +6,25 @@ if MaxJumpsAllowed > 1 then
 print("You can now jump "..(MaxJumpsAllowed - 1).." extra time(s). Press the Space key to jump, and then press the Space key again to do an extra jump and defy gravity!")
 local UserInputService = game:GetService("UserInputService")
 if JumpsLeft <= 0 then
-	game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
 else
-	game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 end
 UserInputService.JumpRequest:Connect(function()
-	if JumpsLeft > 0 and game.Players.LocalPlayer.Character.Humanoid.JumpPower > 0 and (not JumpDebounce) then
+	if JumpsLeft > 0 and Humanoid.JumpPower > 0 and (not JumpDebounce) then
 		JumpDebounce = true
 		JumpsLeft = JumpsLeft - 1
-		game.Players.LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
 		if JumpsLeft <= 0 then
-			game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
 		else
-			game.Players.LocalPlayer.Character.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 		end
 		wait(0.2)
 		JumpDebounce = false
 	end
 end)
-game.Players.LocalPlayer.Character.Humanoid.StateChanged:Connect(function(oldState,newState)
+Humanoid.StateChanged:Connect(function(oldState,newState)
 	if (newState == Enum.HumanoidStateType.Landed) then
 		JumpsLeft = MaxJumpsAllowed
 		if JumpsLeft <= 0 then
