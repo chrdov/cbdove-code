@@ -1,5 +1,5 @@
 local JumpDebounce = false
-local MaxJumpsAllowed = 2 -- Change this to change how many jumps you can do at maximum.
+local MaxJumpsAllowed = 3 -- Change this to change how many jumps you can do at maximum.
 local JumpsLeft = MaxJumpsAllowed
 if MaxJumpsAllowed > 1 then
 print("You can now jump "..(MaxJumpsAllowed - 1).." extra time(s). Press the Space key to jump, and then press the Space key again to do an extra jump and defy gravity!")
