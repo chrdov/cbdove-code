@@ -53,7 +53,7 @@ Humanoid.Changed:Connect(function(property)
 				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 			end
 		end
-	elseif property == "FloorMaterial" and Humanoid.FloorMaterial ~= Enum.Material.Air then
+	elseif property == "FloorMaterial" and Humanoid.FloorMaterial ~= Enum.Material.Air and (not JumpDebounce) then
 		if JumpsLeft < MaxJumpsAllowed then
 			JumpsLeft = MaxJumpsAllowed
 			if Character.PrimaryPart ~= nil then
