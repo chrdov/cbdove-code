@@ -1,0 +1,54 @@
+local Character = game.Players.LocalPlayer.Character
+local Humanoid = Character.Humanoid
+local JumpDebounce = false
+local MaxJumpsAllowed = 2 -- Change this to change how many jumps you can do at maximum.
+local JumpsLeft = MaxJumpsAllowed
+if MaxJumpsAllowed > 1 then
+local UserInputService = game:GetService("UserInputService")
+if JumpsLeft <= 0 then
+	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+else
+	Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+end
+UserInputService.JumpRequest:Connect(function()
+	if JumpsLeft > 0 and Humanoid.JumpPower > 0 and Humanoid.JumpHeight > 0 and (not JumpDebounce) then
+		JumpDebounce = true
+		if JumpsLeft <= (MaxJumpsAllowed - 1) then
+			Character.Head:WaitForChild("Jumping").PlaybackSpeed = 1 + ((MaxJumpsAllowed - JumpsLeft) * 0.125)
+		end
+		JumpsLeft = JumpsLeft - 1
+		Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+		if JumpsLeft <= 0 then
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		else
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		end
+		wait(0.2)
+		JumpDebounce = false
+	end
+end)
+Humanoid.StateChanged:Connect(function(oldState,newState)
+	if (newState == Enum.HumanoidStateType.Landed) then
+		JumpsLeft = MaxJumpsAllowed
+		Character.Head:WaitForChild("Jumping").PlaybackSpeed = 1 + ((MaxJumpsAllowed - JumpsLeft) * 0.125)
+		if JumpsLeft <= 0 then
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+		else
+			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+		end
+	end
+end)
+Humanoid.Changed:Connect(function(property)
+	if property == "FloorMaterial" and Humanoid.FloorMaterial == Enum.Material.Air and (not JumpDebounce) then
+		if JumpsLeft == MaxJumpsAllowed then
+			JumpsLeft = MaxJumpsAllowed - 1
+			Character.Head:WaitForChild("Jumping").PlaybackSpeed = 1 + ((MaxJumpsAllowed - JumpsLeft) * 0.125)
+			if JumpsLeft <= 0 then
+				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
+			else
+				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
+			end
+		end
+	end 
+end)
+end
