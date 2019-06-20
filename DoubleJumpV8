@@ -23,7 +23,7 @@ UserInputService.JumpRequest:Connect(function()
 		else
 			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 		end
-		wait(0.1)
+		wait(0.15)
 		JumpDebounce = false
 	end
 end)
@@ -54,7 +54,7 @@ Humanoid.Changed:Connect(function(property)
 				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 			end
 		end
-		wait(0.1)
+		wait(0.15)
 		JumpDebounce = false
 	elseif property == "FloorMaterial" and Humanoid.FloorMaterial ~= Enum.Material.Air and (not JumpDebounce) then
 		JumpDebounce = true
@@ -69,7 +69,7 @@ Humanoid.Changed:Connect(function(property)
 				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 			end
 		end
-		wait(0.1)
+		wait(0.15)
 		JumpDebounce = false
 	end 
 end)
