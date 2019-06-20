@@ -23,7 +23,7 @@ UserInputService.JumpRequest:Connect(function()
 		else
 			Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 		end
-		wait(0.15)
+		wait(0.2)
 		JumpDebounce = false
 	end
 end)
@@ -42,8 +42,8 @@ Humanoid.StateChanged:Connect(function(oldState,newState)
 end)
 Humanoid.Changed:Connect(function(property)
 	if property == "FloorMaterial" and Humanoid.FloorMaterial == Enum.Material.Air and (not JumpDebounce) then
-		JumpDebounce = true
 		if JumpsLeft == MaxJumpsAllowed then
+			JumpDebounce = true
 			JumpsLeft = MaxJumpsAllowed - 1
 			if Character.PrimaryPart ~= nil then
 				Character.PrimaryPart:WaitForChild("Jumping").PlaybackSpeed = 1 + ((MaxJumpsAllowed - JumpsLeft) * 0.125)
@@ -53,24 +53,9 @@ Humanoid.Changed:Connect(function(property)
 			else
 				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
 			end
+			wait(0.2)
+			JumpDebounce = true
 		end
-		wait(0.15)
-		JumpDebounce = false
-	elseif property == "FloorMaterial" and Humanoid.FloorMaterial ~= Enum.Material.Air and (not JumpDebounce) then
-		JumpDebounce = true
-		if JumpsLeft < MaxJumpsAllowed then
-			JumpsLeft = MaxJumpsAllowed
-			if Character.PrimaryPart ~= nil then
-				Character.PrimaryPart:WaitForChild("Jumping").PlaybackSpeed = 1 + ((MaxJumpsAllowed - JumpsLeft) * 0.125)
-			end
-			if JumpsLeft <= 0 then
-				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,false)
-			else
-				Humanoid:SetStateEnabled(Enum.HumanoidStateType.Jumping,true)
-			end
-		end
-		wait(0.15)
-		JumpDebounce = false
 	end 
 end)
 end
