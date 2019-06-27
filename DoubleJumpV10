@@ -1,4 +1,4 @@
-local Character = game.Players.LocalPlayer.Character
+local Character = game:GetService("Players").LocalPlayer.Character
 local Humanoid = Character.Humanoid
 local JumpDebounce = false
 local MaxJumpsAllowed = 2 -- Change this to change how many jumps you can do at maximum.
