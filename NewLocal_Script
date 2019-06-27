@@ -1,0 +1,16 @@
+local CustomFolder = game.ReplicatedStorage:FindFirstChild("Dove_CustomStuff") or Instance.new("Folder",game.ReplicatedStorage)
+CustomFolder.Name = "Dove_CustomStuff"
+local NewLocal = CustomFolder:FindFirstChild("NewLocal") or Instance.new("RemoteFunction",CustomFolder)
+NewLocal.Name = "NewLocal"
+NewLocal.OnServerInvoke = function(player,class,parent)
+	local Object = Instance.new(class)
+	if Object:IsA("BasePart") then
+		if parent ~= nil then
+			Object.Parent = parent
+		end
+		Object:SetNetworkOwner(player)
+		return Object
+	else
+		Object:Destroy()
+	end
+end
