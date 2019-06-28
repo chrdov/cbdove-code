@@ -284,8 +284,8 @@ mas.Parent = workspace
 mas:MakeJoints()
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-	mas1[i].Parent = game:GetService("ReplicatedStorage")
-	ypcall(function() mas1[i]:MakeJoints() end)
+  mas1[i].Parent = game:GetService("ReplicatedStorage")
+  ypcall(function() mas1[i]:MakeJoints() end)
 end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
@@ -301,10 +301,6 @@ local BaseRebirthCost = 5000
 local Cash = Instance.new("NumberValue",Tycoon)
 Cash.Name = "Cash"
 Cash.Value = 0
-Cash.Changed:Connect(function()
-  CashLabel.Text = "Cash: "..(Cash.Value)
-  
-end)
 local RebirthMultiply = Instance.new("NumberValue",Tycoon)
 RebirthMultiply.Name = "RebirthMultiply"
 RebirthMultiply.Value = 1
@@ -328,10 +324,35 @@ end)
 function CalcCost(base,level)
   return (base * RebirthMultiply.Value) * (level ^ 2)
 end
-function CheckRebirth()
+function YouCanRebirth()
   if Cash.Value >= CalcCost(BaseRebirthCost,RebirthMultiply.Value) and Speed.Value == Speed.MaxValue and Worth.Value == Worth.MaxValue then
     return true
   else
     return false
   end
 end
+function RebirthClick(Clicker)
+  if Clicker == Player then
+	  if YouCanRebirth() then
+		  
+		end
+	end
+end
+Cash.Changed:Connect(function()
+  CashLabel.Text = "Cash: "..(Cash.Value)
+	if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
+    WorthButton.Material = Enum.Material.Neon
+  else
+    WorthButton.Material = Enum.Material.Neon
+	end
+	if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
+    SpeedButton.Material = Enum.Material.Neon
+  else
+    SpeedButton.Material = Enum.Material.Neon
+	end
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.Neon
+  end
+end)
