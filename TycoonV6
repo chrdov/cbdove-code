@@ -2,34 +2,63 @@ function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
 local o1 = Instance.new("Model")
+wait()
 local o2 = Instance.new("Model")
+wait()
 local o3 = Instance.new("Part")
+wait()
 local o4 = Instance.new("Part")
+wait()
 local o5 = Instance.new("Part")
+wait()
 local o6 = Instance.new("Part")
+wait()
 local o7 = Instance.new("Part")
+wait()
 local o8 = Instance.new("Part")
+wait()
 local o9 = Instance.new("Part")
+wait()
 local o10 = Instance.new("Part")
+wait()
 local o11 = Instance.new("Part")
+wait()
 local o12 = Instance.new("Model")
+wait()
 local o13 = Instance.new("Part")
+wait()
 local o14 = Instance.new("ClickDetector")
+wait()
 local o15 = Instance.new("SurfaceGui")
+wait()
 local o16 = Instance.new("TextLabel")
+wait()
 local o17 = Instance.new("Part")
+wait()
 local o18 = Instance.new("ClickDetector")
+wait()
 local o19 = Instance.new("SurfaceGui")
+wait()
 local o20 = Instance.new("TextLabel")
+wait()
 local o21 = Instance.new("Part")
+wait()
 local o22 = Instance.new("SurfaceGui")
+wait()
 local o23 = Instance.new("TextLabel")
+wait()
 local o24 = Instance.new("TextLabel")
+wait()
 local o25 = Instance.new("TextLabel")
+wait()
 local o26 = Instance.new("TextLabel")
+wait()
 local o27 = Instance.new("Part")
+wait()
 local o28 = Instance.new("ClickDetector")
+wait()
 local o29 = Instance.new("SurfaceGui")
+wait()
 local o30 = Instance.new("TextLabel")
 o1.Name = "Tycoon"
 o1.Parent = mas
@@ -295,6 +324,12 @@ if Player == nil then
   Player = game:GetService("Players"):WaitForChild("CBDove4")
 end
 local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
+Tycoon.Name = (Player.Name).."_Tycoon"
+if Player.Character ~= nil then
+  Tycoon:MoveTo((Player.Character.PrimaryPart.Position + Vector3.new(0,0,-8)) * Vector3.new(1,0,1))
+else
+  Tycoon:MoveTo(Vector3.new(0,0,-24))
+end
 local BaseWorthCost = 25
 local BaseSpeedCost = 75
 local BaseRebirthCost = 2000
@@ -315,14 +350,7 @@ RebirthMultiply.Changed:Connect(function()
   RebirthLabel.Text = "Rebirth Mult: "..(RebirthMultiply.Value).."x"
 end)
 Worth.Name = "Worth"
-Worth.Value = 1
-Worth.Changed:Connect(function()
-  WorthLabel.Text = "Worth Value: "..(Worth.Value)
-end)
 Speed.Name = "Speed"
-Speed.Changed:Connect(function()
-  SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
-end)
 function CalcCost(base,level)
   if level == RebirthMultiply.Value then
     return base * (level ^ 2)
@@ -335,6 +363,22 @@ function YouCanRebirth()
     return true
   else
     return false
+  end
+end
+function WorthClick(Clicker)
+  if Clicker == Player then
+    if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
+      Cash.Value = Cash.Value - CalcCost(BaseWorthCost,Worth.Value)
+      Worth.Value = Worth.Value + 1
+    end
+  end
+end
+function SpeedClick(Clicker)
+  if Clicker == Player then
+    if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
+      Cash.Value = Cash.Value - CalcCost(BaseSpeedCost,Speed.Value)
+      Speed.Value = Speed.Value + 1
+    end
   end
 end
 function RebirthClick(Clicker)
@@ -362,8 +406,27 @@ Cash.Changed:Connect(function()
     RebirthButton.Material = Enum.Material.SmoothPlastic
   end
 end)
-RebirthMultiply.Value = 1
-function StartProduction()
+Worth.Changed:Connect(function()
+  WorthLabel.Text = "Worth Value: "..(Worth.Value)
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+Speed.Changed:Connect(function()
+  SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+function StartTycoon()
+  RebirthMultiply.Value = 1
+  WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
+  SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
+  RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
   spawn(function()
     while true do
       if Speed.Value <= 0 then
@@ -392,3 +455,5 @@ function StartProduction()
     end
   end)
 end
+wait()
+StartTycoon()
