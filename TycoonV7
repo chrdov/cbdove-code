@@ -433,7 +433,7 @@ function StartTycoon()
         repeat RunService.Heartbeat:Wait() until Speed.Value > 0
       end
       wait(1/Speed.Value)
-      local CashPart = SpawnerPart.Clone()
+      local CashPart = SpawnerPart:Clone()
       CashPart.Name = "CashPart"
       CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
       Worth:Clone().Parent = CashPart
