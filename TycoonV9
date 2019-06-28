@@ -313,7 +313,7 @@ mas.Parent = workspace
 mas:MakeJoints()
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-  mas1[i].Parent = nil
+  mas1[i].Parent = workspace
 end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
