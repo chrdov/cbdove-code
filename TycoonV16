@@ -377,7 +377,7 @@ function YouCanRebirth()
 end
 function WorthClick(Clicker)
   if Clicker == Player then
-    if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
+    if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
       Cash.Value = Cash.Value - CalcCost(BaseWorthCost,Worth.Value)
       Worth.Value = Worth.Value + 1
     end
@@ -385,7 +385,7 @@ function WorthClick(Clicker)
 end
 function SpeedClick(Clicker)
   if Clicker == Player then
-    if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
+    if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
       Cash.Value = Cash.Value - CalcCost(BaseSpeedCost,Speed.Value)
       Speed.Value = Speed.Value + 1
     end
@@ -400,12 +400,12 @@ function RebirthClick(Clicker)
 end
 Cash.Changed:Connect(function()
   CashLabel.Text = "Bits: "..(Cash.Value)
-  if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
+  if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
     WorthButton.Material = Enum.Material.Neon
   else
     WorthButton.Material = Enum.Material.SmoothPlastic
   end
-  if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
+  if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
     SpeedButton.Material = Enum.Material.Neon
   else
     SpeedButton.Material = Enum.Material.SmoothPlastic
