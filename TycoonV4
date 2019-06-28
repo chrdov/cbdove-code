@@ -290,6 +290,7 @@ end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
+local RunService = game:GetService("RunService")
 local Player = owner
 if Player == nil then
   Player = game:GetService("Players"):WaitForChild("CBDove4")
@@ -299,25 +300,27 @@ local BaseWorthCost = 25
 local BaseSpeedCost = 75
 local BaseRebirthCost = 5000
 local Cash = Instance.new("NumberValue",Tycoon)
+local Worth = Instance.new("IntConstrainedValue",Tycoon)
+local Speed = Instance.new("IntConstrainedValue",Tycoon)
+local RebirthMultiply = Instance.new("NumberValue",Tycoon)
 Cash.Name = "Cash"
 Cash.Value = 0
-local RebirthMultiply = Instance.new("NumberValue",Tycoon)
 RebirthMultiply.Name = "RebirthMultiply"
-RebirthMultiply.Value = 1
 RebirthMultiply.Changed:Connect(function()
+  Speed.MinValue = 0
+  Worth.MinValue = 0
+  Speed.MaxValue = (RebirthMultiply.Value ^ 2) * 5
+  Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   RebirthLabel.Text = "Rebirth Mult: "..(RebirthMultiply.Value).."x"
 end)
-local Worth = Instance.new("DoubleConstrainedValue",Tycoon)
-Worth.Name = "WorthValue"
+RebirthMultiply.Value = 1
+Worth.Name = "Worth"
 Worth.Value = 1
-Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
 Worth.Changed:Connect(function()
   WorthLabel.Text = "Worth Value: "..(Worth.Value)
 end)
-local Speed = Instance.new("DoubleConstrainedValue",Tycoon)
 Speed.Name = "Speed"
 Speed.Value = 1
-Speed.MaxValue = (RebirthMultiply.Value ^ 2) * 5
 Speed.Changed:Connect(function()
   SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
 end)
@@ -333,26 +336,45 @@ function YouCanRebirth()
 end
 function RebirthClick(Clicker)
   if Clicker == Player then
-	  if YouCanRebirth() then
-		  
-		end
-	end
+    if YouCanRebirth() then
+      RebirthMultiply.Value = RebirthMultiply.Value + 1
+    end
+  end
 end
 Cash.Changed:Connect(function()
   CashLabel.Text = "Cash: "..(Cash.Value)
-	if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
+  if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
     WorthButton.Material = Enum.Material.Neon
   else
-    WorthButton.Material = Enum.Material.Neon
-	end
-	if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
+    WorthButton.Material = Enum.Material.SmoothPlastic
+  end
+  if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) then
     SpeedButton.Material = Enum.Material.Neon
   else
-    SpeedButton.Material = Enum.Material.Neon
-	end
+    SpeedButton.Material = Enum.Material.SmoothPlastic
+  end
   if YouCanRebirth() then
     RebirthButton.Material = Enum.Material.Neon
   else
-    RebirthButton.Material = Enum.Material.Neon
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+spawn(function()
+  while wait(1/Speed.Value) do
+    local CashPart = SpawnerPart.Clone()
+    CashPart.Name = "CashPart"
+    CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
+    Worth:Clone().Parent = CashPart
+    CashPart.Touched:Connect(function(hit)
+      if hit.Name == "CollectorPart" then
+        Cash.Value = Cash.Value + CashPart.Worth.Value
+        CashPart:Destroy()
+      end
+    end)
+  end
+end)
+spawn(function()
+  while RunService.Heartbeat:Wait() do
+    ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 8)
   end
 end)
