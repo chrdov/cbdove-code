@@ -323,7 +323,7 @@ mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
 local RunService = game:GetService("RunService")
-local Player = game:GetService("Players"):WaitForChild("CBDove4")
+local Player = owner
 if Player == nil then
   Player = game:GetService("Players"):WaitForChild("CBDove4")
 end
