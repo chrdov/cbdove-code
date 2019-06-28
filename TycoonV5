@@ -284,8 +284,7 @@ mas.Parent = workspace
 mas:MakeJoints()
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-  mas1[i].Parent = game.Workspace
-  ypcall(function() mas1[i]:MakeJoints() end)
+  mas1[i].Parent = nil
 end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
