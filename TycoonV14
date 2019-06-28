@@ -315,6 +315,12 @@ o30.TextStrokeTransparency = 0
 o30.TextWrapped = true
 mas.Parent = workspace
 mas:MakeJoints()
+local mas2 = mas:GetDescendants()
+for i=1,#mas2 do
+  if mas2[i]:IsA("BasePart") then
+    mas2[i].Locked = true
+  end
+end
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
   mas1[i].Parent = workspace
