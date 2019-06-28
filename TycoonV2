@@ -288,31 +288,22 @@ for i=1,#mas1 do
 	ypcall(function() mas1[i]:MakeJoints() end)
 end
 mas:Destroy()
-return o1,o3,o9,o10,o23,o24,o25,o26,o14,o18,o28
+return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
-
 local Player = owner
 if Player == nil then
   Player = game:GetService("Players"):WaitForChild("CBDove4")
 end
-local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,Click1,Click2,Click3 = NewTycoon()
+local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
+local BaseWorthCost = 25
+local BaseSpeedCost = 75
+local BaseRebirthCost = 5000
 local Cash = Instance.new("NumberValue",Tycoon)
 Cash.Name = "Cash"
 Cash.Value = 0
 Cash.Changed:Connect(function()
   CashLabel.Text = "Cash: "..(Cash.Value)
-end)
-local Worth = Instance.new("NumberValue",Tycoon)
-Worth.Name = "WorthValue"
-Worth.Value = 1
-Worth.Changed:Connect(function()
-  WorthLabel.Text = "Worth Value: "..(Worth.Value)
-end)
-local Speed = Instance.new("NumberValue",Tycoon)
-Speed.Name = "Speed"
-Speed.Value = 1
-Speed.Changed:Connect(function()
-  SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
+  
 end)
 local RebirthMultiply = Instance.new("NumberValue",Tycoon)
 RebirthMultiply.Name = "RebirthMultiply"
@@ -320,3 +311,27 @@ RebirthMultiply.Value = 1
 RebirthMultiply.Changed:Connect(function()
   RebirthLabel.Text = "Rebirth Mult: "..(RebirthMultiply.Value).."x"
 end)
+local Worth = Instance.new("DoubleConstrainedValue",Tycoon)
+Worth.Name = "WorthValue"
+Worth.Value = 1
+Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
+Worth.Changed:Connect(function()
+  WorthLabel.Text = "Worth Value: "..(Worth.Value)
+end)
+local Speed = Instance.new("DoubleConstrainedValue",Tycoon)
+Speed.Name = "Speed"
+Speed.Value = 1
+Speed.MaxValue = (RebirthMultiply.Value ^ 2) * 5
+Speed.Changed:Connect(function()
+  SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
+end)
+function CalcCost(base,level)
+  return (base * RebirthMultiply.Value) * (level ^ 2)
+end
+function CheckRebirth()
+  if Cash.Value >= CalcCost(BaseRebirthCost,RebirthMultiply.Value) and Speed.Value == Speed.MaxValue and Worth.Value == Worth.MaxValue then
+    return true
+  else
+    return false
+  end
+end
