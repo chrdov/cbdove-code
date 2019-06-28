@@ -302,7 +302,7 @@ o29.CanvasSize = Vector2.new(100, 100)
 o29.ClipsDescendants = true
 o30.Parent = o29
 o30.Size = UDim2.new(1,0,1,0)
-o30.Text = "Upgrade Prod. Speed"
+o30.Text = "Upgrade Speed"
 o30.BackgroundColor3 = Color3.new(1, 1, 1)
 o30.BackgroundTransparency = 1
 o30.BorderColor3 = Color3.new(0, 0, 0)
@@ -351,7 +351,7 @@ RebirthMultiply.Changed:Connect(function()
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
-  RebirthLabel.Text = "Rebirth Mult: "..(RebirthMultiply.Value).."x"
+  RebirthLabel.Text = "Rebirth: Times "..(RebirthMultiply.Value)
 end)
 Worth.Name = "Worth"
 Speed.Name = "Speed"
@@ -393,7 +393,7 @@ function RebirthClick(Clicker)
   end
 end
 Cash.Changed:Connect(function()
-  CashLabel.Text = "Cash: "..(Cash.Value)
+  CashLabel.Text = "Bits: "..(Cash.Value)
   if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) then
     WorthButton.Material = Enum.Material.Neon
   else
@@ -411,7 +411,7 @@ Cash.Changed:Connect(function()
   end
 end)
 Worth.Changed:Connect(function()
-  WorthLabel.Text = "Worth Value: "..(Worth.Value)
+  WorthLabel.Text = "Bits/Packet: "..(Worth.Value)
   if YouCanRebirth() then
     RebirthButton.Material = Enum.Material.Neon
   else
@@ -419,7 +419,7 @@ Worth.Changed:Connect(function()
   end
 end)
 Speed.Changed:Connect(function()
-  SpeedLabel.Text = "Prod. Speed: "..(Speed.Value)
+  SpeedLabel.Text = "Speed: "..(Speed.Value)
   if YouCanRebirth() then
     RebirthButton.Material = Enum.Material.Neon
   else
