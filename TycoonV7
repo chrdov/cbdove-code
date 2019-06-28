@@ -455,5 +455,4 @@ function StartTycoon()
     end
   end)
 end
-wait()
 StartTycoon()
