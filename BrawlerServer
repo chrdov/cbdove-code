@@ -32,7 +32,7 @@ spawn(function()
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
-  KeysHeld[Key] = true
+  KeysHeld[tostring(string.byte(Key))] = true
   if debounce then return end
   debounce = true
   ComboKeys = ComboKeys..Key
@@ -44,5 +44,5 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
-  KeysHeld[Key] = nil
+  KeysHeld[tostring(string.byte(Key))] = nil
 end)
