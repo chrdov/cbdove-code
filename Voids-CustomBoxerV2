@@ -7,7 +7,7 @@ if Player.Character ~= nil then
       spawn(function()
         wait(0.2)
         v.Disabled = false
-      end
+      end)
     end
   end
 end
