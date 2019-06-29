@@ -37,7 +37,7 @@ RunService:BindToRenderStep("Scanner",1,function()
 	end
 	for k,v in pairs(workspaceCopy:GetDescendants()) do
 		if v:IsA("BasePart") then
-			v.Transparency = 1
+			v.Transparency = 0
 			v.Material = Enum.Material.Neon
 			v.Color = ScannerColor
 			v.Anchored = true
