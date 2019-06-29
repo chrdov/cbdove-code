@@ -1,1 +1,7 @@
 -- Server Code Goes Here
+local Player = owner
+local Character = Player.Character
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
