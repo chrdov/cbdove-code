@@ -1,0 +1,55 @@
+--Originally by PenguinAnonymous. Simplified by WaverlyCole
+--Errors: 
+local RunService = game:GetService("RunService")
+local Player = game:GetService("Players").LocalPlayer
+repeat wait() until Player.Character ~= nil
+local Character = Player.Character
+repeat wait() until Character:FindFirstChildOfClass("Humanoid") ~= nil
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+mas = Instance.new("Model",game:GetService("ReplicatedStorage")) 
+mas.Name = "Model2Script"
+o1 = Instance.new("ScreenGui")
+wait()
+o2 = Instance.new("ViewportFrame")
+o1.Parent = mas
+o2.Parent = o1
+o2.Size = UDim2.new(0,400,0,300)
+o2.Position = UDim2.new(0.75,-300,0,0)
+o2.BackgroundTransparency = 1
+o2.CurrentCamera = workspace.CurrentCamera
+mas.Parent = workspace
+mas:MakeJoints()
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+  mas1[i].Parent = game:GetService("Players").LocalPlayer.PlayerGui
+end
+local ScannerColor = Color3.new(0,1,0)
+mas:Destroy()
+RunService:BindToRenderStep("Scanner",1,function()
+	local workspaceCopy = Instance.new("Model")
+	for k,v in pairs(workspace:GetDescendants()) do
+		if v:IsA("BasePart") and v.ClassName ~= "Terrain" and v.Archivable then
+			local vCopy = v:Clone()
+			vCopy.Parent = workspaceCopy
+			vCopy.Transparency = 1
+			RunService.RenderStepped:Wait()
+		end
+	end
+	for k,v in pairs(workspaceCopy:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.Transparency = 1
+			v.Material = Enum.Material.Neon
+			v.Color = ScannerColor
+			v.Anchored = true
+			v.Parent = workspaceCopy
+		end
+	end
+	workspaceCopy.Name = workspace.Name
+	workspaceCopy.Parent = o2
+	RunService.RenderStepped:Wait()
+	workspaceCopy:Destroy()
+end)
+Humanoid.Died:Connect(function()
+	RunService:UnbindFromRenderStep("Scanner")
+	o1:Destroy()
+end)
