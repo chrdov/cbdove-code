@@ -1,6 +1,6 @@
 -- Client Code Goes Here
 local Player = game.Players.LocalPlayer
-local Character = Player.Character
+local Character = script.Parent
 local KeyDown = Character:WaitForChild("KeyDown")
 local KeyUp = Character:WaitForChild("KeyUp")
 local Mouse = Player:GetMouse()
