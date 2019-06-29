@@ -3,40 +3,42 @@ local Player = owner
 local Character = Player.Character
 local KeyDown = Instance.new("RemoteEvent",Character)
 local KeyUp = Instance.new("RemoteEvent",Character)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
+local RunService = game:GetService("RunService")
 local debounce = false
 local KeysHeld = {}
-local Keys = ""
+local ComboKeys = ""
 local Timer = 0
 local ComboFunctions = {}
 local function ResetKeys()
   if Timer < 0 then
     Timer = 0
   end
-  Keys = ""
+  ComboKeys = ""
 end
 spawn(function()
   while true do
     if Timer > 0 then
-      wait(0.1)
-      Timer = Timer - 0.1
+      local hb = RunService.Heartbeat:Wait()
+      Timer = Timer - hb
       if Timer <= 0 then
         ResetKeys()
       end
     else
-      wait()
+      local hb = RunService.Heartbeat:Wait()
     end
   end
 end)
-KeyDown.Name = "KeyDown"
-KeyUp.Name = "KeyUp"
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
   KeysHeld[Key] = true
   if debounce then return end
   debounce = true
-  Keys = Keys..Key
-  if type(ComboFunctions[Keys]) == "function" then
-    ComboFunctions[Keys]()
+  ComboKeys = ComboKeys..Key
+  if type(ComboFunctions[ComboKeys]) == "function" then
+    Timer = 1
+    ComboFunctions[ComboKeys]()
   end
   debounce = false
 end)
