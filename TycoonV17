@@ -365,7 +365,7 @@ function CalcCost(base,level)
   if level == RebirthMultiply.Value then
     return base * (level ^ 2)
   else
-    return base * (level ^ 2) * (RebirthMultiply.Value ^ 2)
+    return base * (level) * (RebirthMultiply.Value)
   end
 end
 function YouCanRebirth()
