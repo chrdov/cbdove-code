@@ -4,6 +4,7 @@ local Character = Player.Character
 local KeyDown = Instance.new("RemoteEvent",Character)
 local KeyUp = Instance.new("RemoteEvent",Character)
 local debounce = false
+local KeysHeld = {}
 local Keys = ""
 local Timer = 0
 local ComboFunctions = {}
@@ -30,6 +31,7 @@ KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
+  KeysHeld[Key] = true
   if debounce then return end
   debounce = true
   Keys = Keys..Key
@@ -37,4 +39,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
     ComboFunctions[Keys]()
   end
   debounce = false
+end)
+KeyUp.OnServerEvent:Connect(function(Plr,Key)
+  if Plr ~= Player then return end
+  KeysHeld[Key] = nil
 end)
