@@ -44,6 +44,8 @@ RunService:BindToRenderStep("ScannerV3",1,function()
 			v.Color = ScannerColor
 			v.Anchored = true
 			v.Parent = workspaceCopy
+		else
+			v:Destroy()
 		end
 	end
 	workspaceCopy.Name = workspace.Name
