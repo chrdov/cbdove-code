@@ -1,10 +1,9 @@
 -- Client Code Goes Here
-local UserInputService = game:GetService("UserInputService")
 local Player = game.Players.LocalPlayer
 local Character = Player.Character
-local Mouse = Player:GetMouse()
 local KeyDown = Character:WaitForChild("KeyDown")
 local KeyUp = Character:WaitForChild("KeyUp")
+local Mouse = Player:GetMouse()
 Mouse.KeyDown:connect(function(key)
 KeyDown:FireServer(key)
 end)
