@@ -51,6 +51,6 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
   KeysHeld[tostring(string.byte(Key))] = nil
 end)
-ComboFunctions["ss"] = function()
+ComboFunctions["q"] = function()
   
 end
