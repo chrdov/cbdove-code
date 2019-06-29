@@ -1,6 +1,7 @@
 function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
+wait()
 local o1 = Instance.new("Model")
 wait()
 local o2 = Instance.new("Model")
