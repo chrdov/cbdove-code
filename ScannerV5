@@ -48,7 +48,7 @@ RunService:BindToRenderStep("ScannerV5",1,function()
 			spawn(function()
 				RunService.RenderStepped:Wait()
 				v:Destroy()
-			end)ScannerV5
+			end)
 		end
 	end
 	workspaceCopy.Name = workspace.Name
