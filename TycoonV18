@@ -454,7 +454,10 @@ function StartTycoon()
   end)
   CollectorPart.Touched:Connect(function(hit)
     if hit.Parent ~= Tycoon.MoneyMaker or hit.Parent ~= Tycoon then
-      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
+      if hit.Locked == false then
+        Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
+        hit:Destroy()
+      end
     end
   end)
   spawn(function()
