@@ -27,7 +27,7 @@ for i=1,#mas1 do
 end
 local ScannerColor = Color3.new(0,1,0)
 mas:Destroy()
-RunService:BindToRenderStep("ScannerV4",1,function()
+RunService:BindToRenderStep("ScannerV5",1,function()
 	local workspaceCopy = Instance.new("Model")
 	for k,v in pairs(workspace:GetDescendants()) do
 		if v:IsA("BasePart") and v.ClassName ~= "Terrain" and v.Archivable then
@@ -45,7 +45,10 @@ RunService:BindToRenderStep("ScannerV4",1,function()
 			v.Anchored = true
 			v.Parent = workspaceCopy
 		else
-			v:Destroy()
+			spawn(function()
+				RunService.RenderStepped:Wait()
+				v:Destroy()
+			end)ScannerV5
 		end
 	end
 	workspaceCopy.Name = workspace.Name
@@ -54,6 +57,6 @@ RunService:BindToRenderStep("ScannerV4",1,function()
 	workspaceCopy:Destroy()
 end)
 Humanoid.Died:Connect(function()
-	RunService:UnbindFromRenderStep("ScannerV4")
+	RunService:UnbindFromRenderStep("ScannerV5")
 	o1:Destroy()
 end)
