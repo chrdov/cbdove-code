@@ -341,9 +341,9 @@ if Player.Character ~= nil then
 else
   Tycoon:MoveTo(Vector3.new(0,1,24))
 end
-local BaseWorthCost = 25
-local BaseSpeedCost = 75
-local BaseRebirthCost = 2000
+local BaseWorthCost = 50
+local BaseSpeedCost = 100
+local BaseRebirthCost = 1500
 local Cash = Instance.new("NumberValue",Tycoon)
 local Worth = Instance.new("IntConstrainedValue",Tycoon)
 local Speed = Instance.new("IntConstrainedValue",Tycoon)
@@ -354,7 +354,7 @@ RebirthMultiply.Changed:Connect(function()
   Cash.Value = 0
   Speed.MinValue = 1
   Worth.MinValue = 1
-  Speed.MaxValue = 3
+  Speed.MaxValue = 5
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
@@ -443,7 +443,7 @@ function StartTycoon()
       if Speed.Value <= 0 then
         repeat RunService.Heartbeat:Wait() until Speed.Value > 0
       end
-      wait(1/Speed.Value)
+      wait(2/Speed.Value)
       local CashPart = SpawnerPart:Clone()
       CashPart.Name = "Part"
       CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
