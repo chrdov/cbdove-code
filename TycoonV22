@@ -353,7 +353,7 @@ RebirthMultiply.Changed:Connect(function()
   Cash.Value = 0
   Speed.MinValue = 1
   Worth.MinValue = 1
-  Speed.MaxValue = 5
+  Speed.MaxValue = 3
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
@@ -449,7 +449,7 @@ function StartTycoon()
       CashPart.Transparency = 0
       CashPart.CanCollide = true
       CashPart.Anchored = false
-      CashPart.Parent = game.Workspace
+      CashPart.Parent = script
     end
   end)()
   CollectorPart.Touched:Connect(function(hit)
