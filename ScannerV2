@@ -15,7 +15,9 @@ o1.Parent = mas
 o2.Parent = o1
 o2.Size = UDim2.new(0,400,0,300)
 o2.Position = UDim2.new(0.75,-300,0,0)
-o2.BackgroundTransparency = 1
+o2.BackgroundColor3 = Color3.new(0,0,0)
+o2.BorderSizePixel = 4
+o2.BorderColor3 = Color3.new(1,1,1)
 o2.CurrentCamera = workspace.CurrentCamera
 mas.Parent = workspace
 mas:MakeJoints()
@@ -38,7 +40,7 @@ RunService:BindToRenderStep("ScannerV2",1,function()
 	for k,v in pairs(workspaceCopy:GetDescendants()) do
 		if v:IsA("BasePart") then
 			v.Transparency = 0
-			v.Material = Enum.Material.Neon
+			v.Material = Enum.Material.SmoothPlastic
 			v.Color = ScannerColor
 			v.Anchored = true
 			v.Parent = workspaceCopy
