@@ -341,9 +341,9 @@ if Player.Character ~= nil then
 else
   Tycoon:MoveTo(Vector3.new(0,1,24))
 end
-local BaseWorthCost = 50
-local BaseSpeedCost = 100
-local BaseRebirthCost = 1500
+local BaseWorthCost = 20
+local BaseSpeedCost = 50
+local BaseRebirthCost = 500
 local Cash = Instance.new("NumberValue",Tycoon)
 local Worth = Instance.new("IntConstrainedValue",Tycoon)
 local Speed = Instance.new("IntConstrainedValue",Tycoon)
@@ -364,7 +364,7 @@ Worth.Name = "Worth"
 Speed.Name = "Speed"
 function CalcCost(base,level)
   if level == RebirthMultiply.Value then
-    return base * (level ^ 2)
+    return base * (level ^ 3)
   else
     return base * (level) * (RebirthMultiply.Value)
   end
