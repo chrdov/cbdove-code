@@ -17,7 +17,7 @@ local function ResetKeys()
   end
   ComboKeys = ""
 end
-spawn(function()
+coroutine.wrap(function()
   while true do
     if Timer > 0 then
       local hb = RunService.Heartbeat:Wait()
@@ -29,6 +29,11 @@ spawn(function()
       local hb = RunService.Heartbeat:Wait()
     end
   end
+end)()
+coroutine.wrap(function()
+  while RunService.Heartbeat:Wait() do
+    
+  end
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
@@ -36,8 +41,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if debounce then return end
   debounce = true
   ComboKeys = ComboKeys..Key
+  Timer = 0.5
   if type(ComboFunctions[ComboKeys]) == "function" then
-    Timer = 1
     ComboFunctions[ComboKeys]()
   end
   debounce = false
@@ -46,3 +51,6 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
   KeysHeld[tostring(string.byte(Key))] = nil
 end)
+ComboFunctions["ss"] = function()
+  
+end
