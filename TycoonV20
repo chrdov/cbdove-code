@@ -323,7 +323,7 @@ for i=1,#mas2 do
 end
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-  mas1[i].Parent = workspace
+  mas1[i].Parent = script
 end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
@@ -437,7 +437,7 @@ function StartTycoon()
   WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
   SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
   RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
-  spawn(function()
+  coroutine.wrap(function()
     while true do
       if Speed.Value <= 0 then
         repeat RunService.Heartbeat:Wait() until Speed.Value > 0
@@ -451,17 +451,17 @@ function StartTycoon()
       CashPart.Anchored = false
       CashPart.Parent = game.Workspace
     end
-  end)
+  end)()
   CollectorPart.Touched:Connect(function(hit)
     if hit.Parent ~= nil then
       Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
       hit:Destroy()
     end
   end)
-  spawn(function()
+  coroutine.wrap(function()
     while RunService.Heartbeat:Wait() do
-      ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 8)
+      ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 16)
     end
-  end)
+  end)()
 end
 StartTycoon()
