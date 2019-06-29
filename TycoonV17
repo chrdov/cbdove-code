@@ -176,7 +176,7 @@ o15.CanvasSize = Vector2.new(100, 100)
 o15.ClipsDescendants = true
 o16.Parent = o15
 o16.Size = UDim2.new(1,0,1,0)
-o16.Text = "Upgrade Bits/Packet"
+o16.Text = "Upgrade Bits /Packet"
 o16.BackgroundColor3 = Color3.new(1, 1, 1)
 o16.BackgroundTransparency = 1
 o16.BorderColor3 = Color3.new(0, 0, 0)
@@ -353,7 +353,7 @@ RebirthMultiply.Changed:Connect(function()
   Cash.Value = 0
   Speed.MinValue = 1
   Worth.MinValue = 1
-  Speed.MaxValue = (RebirthMultiply.Value ^ 2) * 5
+  Speed.MaxValue = 5
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
@@ -444,19 +444,17 @@ function StartTycoon()
       end
       wait(1/Speed.Value)
       local CashPart = SpawnerPart:Clone()
-      CashPart.Name = "CashPart"
+      CashPart.Name = "Part"
       CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
-      Worth:Clone().Parent = CashPart
       CashPart.Transparency = 0
       CashPart.CanCollide = true
       CashPart.Anchored = false
-      CashPart.Touched:Connect(function(hit)
-        if hit.Name == "CollectorPart" then
-          Cash.Value = Cash.Value + (CashPart.Worth.Value * RebirthMultiply.Value)
-          CashPart:Destroy()
-        end
-      end)
-      CashPart.Parent = Tycoon.MoneyMaker
+      CashPart.Parent = game.Workspace
+    end
+  end)
+  CollectorPart.Touched:Connect(function(hit)
+    if hit.Parent ~= Tycoon.MoneyMaker or hit.Parent ~= Tycoon then
+      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
     end
   end)
   spawn(function()
