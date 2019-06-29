@@ -1,0 +1,40 @@
+-- Server Code Goes Here
+local Player = owner
+local Character = Player.Character
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+local debounce = false
+local Keys = ""
+local Timer = 0
+local ComboFunctions = {}
+local function ResetKeys()
+  if Timer < 0 then
+    Timer = 0
+  end
+  Keys = ""
+end
+spawn(function()
+  while true do
+    if Timer > 0 then
+      wait(0.1)
+      Timer = Timer - 0.1
+      if Timer <= 0 then
+        ResetKeys()
+      end
+    else
+      wait()
+    end
+  end
+end)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
+KeyDown.OnServerEvent:Connect(function(Plr,Key)
+  if Plr ~= Player then return end
+  if debounce then return end
+  debounce = true
+  Keys = Keys..Key
+  if type(ComboFunctions[Keys]) == "function" then
+    ComboFunctions[Keys]()
+  end
+  debounce = false
+end)
