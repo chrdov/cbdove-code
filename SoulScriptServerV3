@@ -101,13 +101,11 @@ RunService.Heartbeat:Connect(function()
 	end
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
-  if Plr ~= Player then return end
   KeysHeld[Key] = true
   if Key == "e" then
     SoulImage.Visible = not SoulImage.Visible
   end
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
-  if Plr ~= Player then return end
   KeysHeld[Key] = nil
 end)
