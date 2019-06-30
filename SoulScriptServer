@@ -1,0 +1,111 @@
+function newSoulImage(Player)
+local mas = Instance.new("Model",game:GetService("Lighting")) 
+mas.Name = "Model2Script"
+local o1 = Instance.new("BillboardGui")
+local o2 = Instance.new("ImageLabel")
+local o3 = Instance.new("TextBox")
+o1.Parent = mas
+o1.Size = UDim2.new(10,0,20,0)
+o1.Active = true
+o1.ClipsDescendants = true
+o2.Parent = o1
+o2.Size = UDim2.new(0.2,0,0.1,0)
+o2.Position = UDim2.new(0.4,0,0.45,0)
+o2.BackgroundColor3 = Color3.new(1,0,0)
+o2.BackgroundTransparency = 1
+o2.BorderSizePixel = 0
+o2.Image = "rbxassetid://318438840"
+o2.ImageColor3 = Color3.new(1,0,0)
+o3.Parent = o1
+o3.BackgroundTransparency = 1
+o3.Size = UDim2.new(1,0,0.2,0)
+o3.TextColor3 = Color3.new(1,1,1)
+o3.TextStrokeTransparency = 0
+o3.TextScaled = true
+o3.Visible = false
+o3.Text = ""
+o3.Font = Enum.Font.Arcade
+mas.Parent = workspace
+mas:MakeJoints()
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+	mas1[i].Parent = Player.Character
+end
+mas:Destroy()
+spawn(function()
+o1.Adornee = Player.Character:WaitForChild("HumanoidRootPart")
+end)
+return o2,o3
+end
+if owner == nil then
+	owner = game:GetService("Players").LocalPlayer
+end
+local Player = owner
+local Character = Player.Character
+local SoulImage,SoulText = newSoulImage(Player)
+local RunService = game:GetService("RunService")
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+local KeysHeld = {}
+local BodyVelocity = Instance.new("BodyVelocity",HumanoidRootPart)
+Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
+Humanoid.JumpPower = 0
+Humanoid.JumpHeight = 0
+SoulImage.Changed:Connect(function()
+	if SoulImage.Visible then
+		BodyVelocity.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+		for _,object in pairs(Character:GetDescendants()) do
+			if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
+				object.Transparency = 1
+			end
+		end
+	else
+		BodyVelocity.MaxForce = Vector3.new(0,0,0)
+		for _,object in pairs(Character:GetDescendants()) do
+			if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
+				object.Transparency = 0
+			end
+		end
+	end
+end)
+local deathanim = false
+SoulImage.Visible = false
+function CustomDied()
+	SoulImage.Visible = true
+	HumanoidRootPart.Anchored = true
+	SoulText.Visible = true
+  wait(2)
+  SoulText.Text = "HOWEVER, "
+  wait(1)
+  SoulText.Text = "HOWEVER, IT REFUSED."
+	SoulImage.Visible = false
+end
+RunService.Heartbeat:Connect(function()
+	BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
+  if KeysHeld["e"] then
+    BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * 1,0)
+  elseif KeysHeld["q"] then
+    BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * -1,0)
+  end
+	if Humanoid.Health == 0 then
+		Humanoid.Health = 1
+		if deathanim == false then
+      deathanim = true
+			CustomDied()
+      deathanim = false
+		end
+	end
+end)
+KeyDown.OnServerEvent:Connect(function(Plr,Key)
+  if Plr ~= Player then return end
+  KeysHeld[Key] = true
+  if Key == " " then
+    SoulImage.Visible = not SoulImage.Visible
+  end
+end)
+KeyUp.OnServerEvent:Connect(function(Plr,Key)
+  if Plr ~= Player then return end
+  KeysHeld[Key] = nil
+end)
