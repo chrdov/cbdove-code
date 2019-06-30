@@ -406,7 +406,7 @@ function StartTycoon()
       ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 16)
     end
   end)()
-en
+end
 function WorthClick(Clicker)
   if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
     if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
