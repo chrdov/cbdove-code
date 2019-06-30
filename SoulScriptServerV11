@@ -74,8 +74,12 @@ SoulImage.Visible = false
 function CustomDied()
   SoulImage.Visible = true
   SoulText.Visible = true
+  for _,object in pairs(Character:GetDescendants()) do
+    if (object:IsA("BasePart")) then
+      object.Anchored = true
+    end
+  end
   SoulText.Text = ""
-  HumanoidRootPart.Anchored = true
   wait(2)
   SoulText.Text = "HOWEVER, "
   wait(1)
@@ -83,6 +87,11 @@ function CustomDied()
   wait(2)
   SoulImage.Visible = false
   SoulText.Visible = false
+  for _,object in pairs(Character:GetDescendants()) do
+    if (object:IsA("BasePart")) then
+      object.Anchored = false
+    end
+  end
 end
 RunService.Heartbeat:Connect(function()
   BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
@@ -94,7 +103,7 @@ RunService.Heartbeat:Connect(function()
 end)
 Humanoid.Died:Connect(function()
   Character:MakeJoints()
-  Humanoid.Health = 1
+  Humanoid.Health = Humanoid.MaxHealth
   if deathanim == false then
     deathanim = true
     CustomDied()
