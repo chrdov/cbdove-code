@@ -102,13 +102,10 @@ RunService.Heartbeat:Connect(function()
   end
 end)
 Humanoid.Died:Connect(function()
-  Character:MakeJoints()
-  Humanoid.Health = Humanoid.MaxHealth
-  if deathanim == false then
-    deathanim = true
-    CustomDied()
-    deathanim = false
-  end
+  if deathanim then return end
+  deathanim = true
+  CustomDied()
+  deathanim = false
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   KeysHeld[Key] = true
