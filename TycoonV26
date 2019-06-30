@@ -377,27 +377,27 @@ function YouCanRebirth()
   end
 end
 function WorthClick(Clicker)
---if Clicker == Player then
+  if Clicker == Player then
     if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
       Cash.Value = Cash.Value - CalcCost(BaseWorthCost,Worth.Value)
       Worth.Value = Worth.Value + 1
     end
---end
+  end
 end
 function SpeedClick(Clicker)
---if Clicker == Player then
+  if Clicker == Player then
     if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
       Cash.Value = Cash.Value - CalcCost(BaseSpeedCost,Speed.Value)
       Speed.Value = Speed.Value + 1
     end
---end
+  end
 end
 function RebirthClick(Clicker)
---if Clicker == Player then
+  if Clicker == Player then
     if YouCanRebirth() then
       RebirthMultiply.Value = RebirthMultiply.Value + 1
     end
---end
+  end
 end
 Cash.Changed:Connect(function()
   CashLabel.Text = "Bits: "..(Cash.Value)
