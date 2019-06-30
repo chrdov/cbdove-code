@@ -37,9 +37,6 @@ o1.Adornee = Player.Character:WaitForChild("HumanoidRootPart")
 end)
 return o2,o3
 end
-if owner == nil then
-	owner = game:GetService("Players").LocalPlayer
-end
 local Player = owner
 local Character = Player.Character
 local SoulImage,SoulText = newSoulImage(Player)
