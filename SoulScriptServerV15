@@ -79,9 +79,9 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
 end)
 local connection1 = RunService.Heartbeat:Connect(function()
   BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed * 2
-  if HeldKeys["e"] then
+  if KeysHeld["e"] then
     BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * 2,0)
-  elseif HeldKeys["q"] then
+  elseif KeysHeld["q"] then
     BodyVelocity.Velocity = BodyVelocity.Velocity - Vector3.new(0,Humanoid.WalkSpeed * 2,0)
   end
 end)
