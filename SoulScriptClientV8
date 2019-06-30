@@ -1,5 +1,5 @@
 local Player = game.Players.LocalPlayer
-script.Parent = Player.PlayerScripts
+script.Parent = Player.PlayerGui
 local Character = Player.Character
 local KeyDown = Character:WaitForChild("KeyDown")
 local KeyUp = Character:WaitForChild("KeyUp")
