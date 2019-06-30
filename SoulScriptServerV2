@@ -50,6 +50,8 @@ local KeyDown = Instance.new("RemoteEvent",Character)
 local KeyUp = Instance.new("RemoteEvent",Character)
 local KeysHeld = {}
 local BodyVelocity = Instance.new("BodyVelocity",HumanoidRootPart)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
 Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
 Humanoid.JumpPower = 0
 Humanoid.JumpHeight = 0
@@ -101,7 +103,7 @@ end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   if Plr ~= Player then return end
   KeysHeld[Key] = true
-  if Key == " " then
+  if Key == "e" then
     SoulImage.Visible = not SoulImage.Visible
   end
 end)
