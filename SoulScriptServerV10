@@ -73,13 +73,16 @@ local deathanim = false
 SoulImage.Visible = false
 function CustomDied()
   SoulImage.Visible = true
-  HumanoidRootPart.Anchored = true
   SoulText.Visible = true
+  SoulText.Text = ""
+  HumanoidRootPart.Anchored = true
   wait(2)
   SoulText.Text = "HOWEVER, "
   wait(1)
   SoulText.Text = "HOWEVER, IT REFUSED."
+  wait(2)
   SoulImage.Visible = false
+  SoulText.Visible = false
 end
 RunService.Heartbeat:Connect(function()
   BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
