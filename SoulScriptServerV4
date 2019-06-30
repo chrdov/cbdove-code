@@ -33,7 +33,7 @@ for i=1,#mas1 do
 end
 mas:Destroy()
 spawn(function()
-o1.Adornee = Player.Character:WaitForChild("HumanoidRootPart")
+o1.Parent = Player.Character:WaitForChild("HumanoidRootPart")
 end)
 return o2,o3
 end
