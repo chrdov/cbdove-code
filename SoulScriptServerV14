@@ -35,7 +35,9 @@ mas:Destroy()
 return o2,o3
 end
 local Player = owner
+local DiedCFrame = CFrame.new(Vector3.new(0,200,0))
 function onCharacterAppearanceLoaded(Character)
+Character:SetPrimaryPartCFrame(DiedCFrame)
 local SoulImage,SoulText = newSoulImage(Character)
 local RunService = game:GetService("RunService")
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
@@ -65,7 +67,6 @@ SoulImage.Changed:Connect(function()
     end
   end
 end)
-local deathanim = false
 SoulImage.Visible = false
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   KeysHeld[Key] = true
@@ -76,7 +77,18 @@ end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
   KeysHeld[Key] = nil
 end)
+local connection1 = RunService.Heartbeat:Connect(function()
+  BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed * 2
+  if HeldKeys["e"] then
+    BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * 2,0)
+  elseif HeldKeys["q"] then
+    BodyVelocity.Velocity = BodyVelocity.Velocity - Vector3.new(0,Humanoid.WalkSpeed * 2,0)
+  end
+end)
 function CustomDied()
+  DiedCFrame = Character:GetPrimaryPartCFrame()
+  connection1:disconnect()
+  BodyVelocity.Velocity = Vector3.new()
   SoulImage.Visible = true
   SoulText.Visible = true
   for _,object in pairs(Character:GetDescendants()) do
@@ -90,12 +102,7 @@ function CustomDied()
   wait(1)
   SoulText.Text = "HOWEVER, IT REFUSED."
 end
-Humanoid.Died:Connect(function()
-  if deathanim then return end
-  deathanim = true
-  CustomDied()
-  deathanim = false
-end)
+Humanoid.Died:Connect(CustomDied)
 end
 Player.CharacterAppearanceLoaded:Connect(onCharacterAppearanceLoaded)
 onCharacterAppearanceLoaded(Player.Character)
