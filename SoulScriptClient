@@ -1,4 +1,3 @@
--- Client Code Goes Here
 local Player = game.Players.LocalPlayer
 local Character = Player.Character
 local KeyDown = Character:WaitForChild("KeyDown")
