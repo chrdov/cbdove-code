@@ -34,7 +34,6 @@ RunService:BindToRenderStep("ScannerV5",1,function()
 			local vCopy = v:Clone()
 			vCopy.Parent = workspaceCopy
 			vCopy.Transparency = 1
-			RunService.RenderStepped:Wait()
 		end
 	end
 	for k,v in pairs(workspaceCopy:GetDescendants()) do
