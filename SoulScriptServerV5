@@ -29,7 +29,7 @@ mas.Parent = workspace
 mas:MakeJoints()
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-	mas1[i].Parent = Player.Character
+  mas1[i].Parent = Player.Character
 end
 mas:Destroy()
 spawn(function()
@@ -53,21 +53,21 @@ Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
 Humanoid.JumpPower = 0
 Humanoid.JumpHeight = 0
 SoulImage.Changed:Connect(function()
-	if SoulImage.Visible then
-		BodyVelocity.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
-		for _,object in pairs(Character:GetDescendants()) do
-			if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
-				object.Transparency = 1
-			end
-		end
-	else
+  if SoulImage.Visible then
+    BodyVelocity.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+    for _,object in pairs(Character:GetDescendants()) do
+      if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
+        object.Transparency = 1
+      end
+    end
+  else
 		BodyVelocity.MaxForce = Vector3.new(0,0,0)
 		for _,object in pairs(Character:GetDescendants()) do
 			if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
-				object.Transparency = 0
-			end
-		end
-	end
+        object.Transparency = 0
+      end
+    end
+  end
 end)
 local deathanim = false
 SoulImage.Visible = false
@@ -88,14 +88,17 @@ RunService.Heartbeat:Connect(function()
   elseif KeysHeld["q"] then
     BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * -1,0)
   end
+end)
+Humanoid.HealthChanged:Connect(function()
 	if Humanoid.Health == 0 then
-		Humanoid.Health = 1
-		if deathanim == false then
-			deathanim = true
-			CustomDied()
-     			deathanim = false
-		end
-	end
+    Character:MakeJoints()
+    Humanoid.Health = 1
+    if deathanim == false then
+      deathanim = true
+      CustomDied()
+      deathanim = false
+    end
+  end
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   KeysHeld[Key] = true
