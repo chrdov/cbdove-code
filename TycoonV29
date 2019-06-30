@@ -376,10 +376,11 @@ function YouCanRebirth()
   end
 end
 function StartTycoon()
+  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\nRebirth: Times "..(RebirthMultiply.Value)
+  WorthLabel.Text = "Bits/Packet: "..(Worth.Value)
+  SpeedLabel.Text = "Speed: "..(Speed.Value)
+  CashLabel.Text = "Bits: "..(Cash.Value)
   RebirthMultiply.Value = 1
-  WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
-  SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
-  RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
   coroutine.wrap(function()
     while true do
       if Speed.Value <= 0 then
@@ -477,3 +478,6 @@ RebirthLabel.Text = "Unclaimed Tycoon"
 WorthLabel.Text = "Press any"
 SpeedLabel.Text = "button"
 CashLabel.Text = "to claim."
+WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
+SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
+RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
