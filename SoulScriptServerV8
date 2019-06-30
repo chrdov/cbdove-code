@@ -61,7 +61,7 @@ SoulImage.Changed:Connect(function()
       end
     end
   else
-BodyVelocity.MaxForce = Vector3.new(0,0,0)
+    BodyVelocity.MaxForce = Vector3.new(0,0,0)
     for _,object in pairs(Character:GetDescendants()) do
       if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
         object.Transparency = 0
@@ -82,7 +82,7 @@ function CustomDied()
   SoulImage.Visible = false
 end
 RunService.Heartbeat:Connect(function()
-	BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
+  BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
   if KeysHeld["e"] then
     BodyVelocity.Velocity = BodyVelocity.Velocity + Vector3.new(0,Humanoid.WalkSpeed * 1,0)
   elseif KeysHeld["q"] then
