@@ -1,0 +1,26 @@
+function NewCharacterTemplate()
+  local TemplatePlayer = owner
+  if TemplatePlayer.Character == nil then
+  	TemplatePlayer.CharacterAppearanceLoaded:wait()
+    wait(1/10)
+  end
+  TemplatePlayer.Character.Archivable = true
+  local NpcTemplate = TemplatePlayer.Character:Clone()
+  TemplatePlayer.Character.Archivable = false
+  for _,part in pairs(NpcTemplate:GetChildren()) do
+  	if not (part:IsA("Humanoid") or part:IsA("BasePart")) then
+  		part:Destroy()
+  	end
+  end
+  for _,part in pairs(NpcTemplate:GetChildren()) do
+  	if part:IsA("BasePart") then
+  		part.BrickColor = BrickColor.Gray()
+  	end
+  end
+  NpcTemplate.Name = "Actor"
+  return NpcTemplate
+end
+
+local TemplateCharacter = NewCharacterTemplate()
+local Characters = {}
+
