@@ -61,9 +61,9 @@ SoulImage.Changed:Connect(function()
       end
     end
   else
-		BodyVelocity.MaxForce = Vector3.new(0,0,0)
-		for _,object in pairs(Character:GetDescendants()) do
-			if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
+BodyVelocity.MaxForce = Vector3.new(0,0,0)
+    for _,object in pairs(Character:GetDescendants()) do
+      if (object:IsA("BasePart") or object:IsA("Decal")) and object.Name ~= "HumanoidRootPart" then
         object.Transparency = 0
       end
     end
@@ -72,14 +72,14 @@ end)
 local deathanim = false
 SoulImage.Visible = false
 function CustomDied()
-	SoulImage.Visible = true
-	HumanoidRootPart.Anchored = true
-	SoulText.Visible = true
+  SoulImage.Visible = true
+  HumanoidRootPart.Anchored = true
+  SoulText.Visible = true
   wait(2)
   SoulText.Text = "HOWEVER, "
   wait(1)
   SoulText.Text = "HOWEVER, IT REFUSED."
-	SoulImage.Visible = false
+  SoulImage.Visible = false
 end
 RunService.Heartbeat:Connect(function()
 	BodyVelocity.Velocity = Humanoid.MoveDirection * Humanoid.WalkSpeed
@@ -90,7 +90,7 @@ RunService.Heartbeat:Connect(function()
   end
 end)
 Humanoid.HealthChanged:Connect(function()
-	if Humanoid.Health == 0 then
+  if Humanoid.Health == 0 then
     Character:MakeJoints()
     Humanoid.Health = 1
     if deathanim == false then
