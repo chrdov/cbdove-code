@@ -91,15 +91,15 @@ RunService.Heartbeat:Connect(function()
 	if Humanoid.Health == 0 then
 		Humanoid.Health = 1
 		if deathanim == false then
-      deathanim = true
+			deathanim = true
 			CustomDied()
-      deathanim = false
+     			deathanim = false
 		end
 	end
 end)
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
   KeysHeld[Key] = true
-  if Key == "e" then
+  if Key == " " then
     SoulImage.Visible = not SoulImage.Visible
   end
 end)
