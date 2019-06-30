@@ -331,15 +331,14 @@ return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
 local RunService = game:GetService("RunService")
 local Player = owner
-if Player == nil then
-  Player = game:GetService("Players"):WaitForChild("CBDove4")
-end
 local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
-Tycoon.Name = (Player.Name).."_Tycoon"
+Tycoon.Name = "Tycoon"
+local PlayerObject = Instance.new("ObjectValue",Tycoon)
+PlayerObject.Name = "Owner"
 if Player.Character ~= nil then
-  Tycoon:MoveTo(((Player.Character.PrimaryPart.Position + Vector3.new(0,0,8)) * Vector3.new(1,0,1)) + Vector3.new(0,1,0))
+  Tycoon:MoveTo(((Player.Character.PrimaryPart.Position + Vector3.new(0,0,16)) * Vector3.new(1,0,1)) + Vector3.new(0,1,0))
 else
-  Tycoon:MoveTo(Vector3.new(0,1,24))
+  Tycoon:MoveTo(Vector3.new(0,1,64))
 end
 local BaseWorthCost = 20
 local BaseSpeedCost = 50
@@ -358,7 +357,7 @@ RebirthMultiply.Changed:Connect(function()
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
-  RebirthLabel.Text = "Rebirth: Times "..(RebirthMultiply.Value)
+  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\nRebirth: Times "..(RebirthMultiply.Value)
 end)
 Worth.Name = "Worth"
 Speed.Name = "Speed"
@@ -376,27 +375,68 @@ function YouCanRebirth()
     return false
   end
 end
+function StartTycoon()
+  RebirthMultiply.Value = 1
+  WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
+  SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
+  RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
+  coroutine.wrap(function()
+    while true do
+      if Speed.Value <= 0 then
+        repeat RunService.Heartbeat:Wait() until Speed.Value > 0
+      end
+      wait(2/Speed.Value)
+      local CashPart = SpawnerPart:Clone()
+      CashPart.Name = "Part"
+      CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
+      CashPart.Transparency = 0
+      CashPart.CanCollide = true
+      CashPart.Anchored = false
+      CashPart.Parent = script
+    end
+  end)()
+  CollectorPart.Touched:Connect(function(hit)
+    if hit.Parent ~= nil then
+      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
+      hit:Destroy()
+    end
+  end)
+  coroutine.wrap(function()
+    while RunService.Heartbeat:Wait() do
+      ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 16)
+    end
+  end)()
+en
 function WorthClick(Clicker)
-  if Clicker == Player then
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
     if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
       Cash.Value = Cash.Value - CalcCost(BaseWorthCost,Worth.Value)
       Worth.Value = Worth.Value + 1
     end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
   end
 end
 function SpeedClick(Clicker)
-  if Clicker == Player then
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
     if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
       Cash.Value = Cash.Value - CalcCost(BaseSpeedCost,Speed.Value)
       Speed.Value = Speed.Value + 1
     end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
   end
 end
 function RebirthClick(Clicker)
-  if Clicker == Player then
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
     if YouCanRebirth() then
       RebirthMultiply.Value = RebirthMultiply.Value + 1
     end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
   end
 end
 Cash.Changed:Connect(function()
@@ -433,36 +473,7 @@ Speed.Changed:Connect(function()
     RebirthButton.Material = Enum.Material.SmoothPlastic
   end
 end)
-function StartTycoon()
-  RebirthMultiply.Value = 1
-  WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
-  SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
-  RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
-  coroutine.wrap(function()
-    while true do
-      if Speed.Value <= 0 then
-        repeat RunService.Heartbeat:Wait() until Speed.Value > 0
-      end
-      wait(2/Speed.Value)
-      local CashPart = SpawnerPart:Clone()
-      CashPart.Name = "Part"
-      CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
-      CashPart.Transparency = 0
-      CashPart.CanCollide = true
-      CashPart.Anchored = false
-      CashPart.Parent = script
-    end
-  end)()
-  CollectorPart.Touched:Connect(function(hit)
-    if hit.Parent ~= nil then
-      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
-      hit:Destroy()
-    end
-  end)
-  coroutine.wrap(function()
-    while RunService.Heartbeat:Wait() do
-      ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 16)
-    end
-  end)()
-end
-StartTycoon()
+RebirthLabel.Text = "Unclaimed Tycoon"
+WorthLabel.Text = "Press any"
+SpeedLabel.Text = "button"
+CashLabel.Text = "to claim."
