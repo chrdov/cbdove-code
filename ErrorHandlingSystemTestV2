@@ -1,4 +1,4 @@
-function ExecuteCodeSafe(func)
+function ExecuteCodeSafe(name,func)
 	local results,errorcode = pcall(func)
 	if results == nil and errorcode ~= nil then
 		local ErrorSound = Instance.new("Sound")
@@ -8,10 +8,9 @@ function ExecuteCodeSafe(func)
 		ErrorSound.PlayOnRemove = true
 		script:ClearAllChildren()
 		ErrorSound.Parent = script
-		ErrorSound:Play()
-		spawn(function()
+		ErrorSound:Play()		spawn(function()
 			local ErrorMsg = Instance.new("Message",script)
-			ErrorMsg.Text = (script.Name)..":"..(errorcode)
+			ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
 			wait(5)
 			ErrorMsg:Destroy()
 		end)
@@ -20,4 +19,4 @@ end
 function MainCode()
 	error("Cannot execute, no function defined")
 end
-ExecuteCodeSafe(MainCode)
+ExecuteCodeSafe("MainCode",MainCode)
