@@ -1,9 +1,8 @@
-function ErrorHandler(errorcode)
+function ErrorHandler(name,errorcode)
 	local ErrorSound = Instance.new("Sound")
 	ErrorSound.Name = "ErrorSound"
 	ErrorSound.SoundId = "rbxassetid://130840811"
 	ErrorSound.Volume = 2
-	ErrorSound.PlayOnRemove = true
 	script:ClearAllChildren()
 	ErrorSound.Parent = script
 	ErrorSound:Play()
@@ -15,7 +14,9 @@ function ErrorHandler(errorcode)
 	end)
 end
 function ExecuteCodeSafe(name,func)
-	local results,errorcode = xpcall(func,ErrorHandler)
+	local results,errorcode = xpcall(func,function(errorcode)
+		ErrorHandler(name,errorcode)
+	end)
 end
 function MainCode()
 function NewTycoon()
