@@ -8,7 +8,8 @@ function ExecuteCodeSafe(name,func)
 		ErrorSound.PlayOnRemove = true
 		script:ClearAllChildren()
 		ErrorSound.Parent = script
-		ErrorSound:Play()		spawn(function()
+		ErrorSound:Play()
+		spawn(function()
 			local ErrorMsg = Instance.new("Message",script)
 			ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
 			wait(5)
