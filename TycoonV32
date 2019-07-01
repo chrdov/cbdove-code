@@ -501,5 +501,9 @@ CashLabel.Text = "to claim."
 WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
 SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
 RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
+spawn(function()
+wait(9)
+error("This is a test")
+end)
 end
 ExecuteCodeSafe("MainCode",MainCode)
