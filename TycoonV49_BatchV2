@@ -1,4 +1,4 @@
-for z = 1,5 do
+for z = 1,10 do
 print("Placing Tycoon #"..(z))
 local function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
@@ -337,7 +337,7 @@ local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLa
 Tycoon.Name = "Tycoon"
 local PlayerObject = Instance.new("ObjectValue",Tycoon)
 PlayerObject.Name = "Owner"
-Tycoon:MoveTo(Vector3.new(0,1,32 * z))
+Tycoon:MoveTo(Vector3.new(0,1,16 * z))
 local BaseWorthCost = 20
 local BaseSpeedCost = 50
 local BaseRebirthCost = 500
