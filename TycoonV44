@@ -3,7 +3,6 @@ function ErrorHandler(name,errorcode)
 	ErrorSound.Name = "ErrorSound"
 	ErrorSound.SoundId = "rbxassetid://130840811"
 	ErrorSound.Volume = 2
-	script:ClearAllChildren()
 	ErrorSound.Parent = script
 	ErrorSound:Play()
 	print(errorcode)
@@ -497,9 +496,5 @@ CashLabel.Text = "to claim."
 WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
 SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
 RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
-spawn(function()
-wait(9)
-error("This is a test")
-end)
 end
 ExecuteCodeSafe("MainCode",MainCode)
