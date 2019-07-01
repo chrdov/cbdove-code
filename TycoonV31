@@ -1,3 +1,23 @@
+function ExecuteCodeSafe(name,func)
+	local results,errorcode = pcall(func)
+	if results == nil and errorcode ~= nil then
+		local ErrorSound = Instance.new("Sound")
+		ErrorSound.Name = "ErrorSound"
+		ErrorSound.SoundId = "rbxassetid://130840811"
+		ErrorSound.Volume = 2
+		ErrorSound.PlayOnRemove = true
+		script:ClearAllChildren()
+		ErrorSound.Parent = script
+		ErrorSound:Play()
+		spawn(function()
+			local ErrorMsg = Instance.new("Message",script)
+			ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
+			wait(5)
+			ErrorMsg:Destroy()
+		end)
+	end
+end
+function MainCode()
 function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
@@ -481,3 +501,4 @@ CashLabel.Text = "to claim."
 WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
 SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
 RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
+end
