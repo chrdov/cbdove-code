@@ -6,7 +6,7 @@ function ErrorHandler(name,errorcode)
 	script:ClearAllChildren()
 	ErrorSound.Parent = script
 	ErrorSound:Play()
-	print(errorcoce)
+	print(errorcode)
 end
 function ExecuteCodeSafe(name,func)
 	local results,errorcode = xpcall(func,function(errorcode)
