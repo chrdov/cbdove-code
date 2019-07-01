@@ -1,0 +1,12 @@
+local Player = game.Players.LocalPlayer
+script.Parent = Player.PlayerGui
+local Character = Player.Character
+local KeyDown = Character:WaitForChild("KeyDown")
+local KeyUp = Character:WaitForChild("KeyUp")
+local Mouse = Player:GetMouse()
+Mouse.Button1Down:connect(function()
+KeyDown:FireServer("mouseLeft")
+end)
+Mouse.Button1Up:connect(function()
+KeyUp:FireServer("mouseLeft")
+end)
