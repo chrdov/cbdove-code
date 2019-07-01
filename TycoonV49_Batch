@@ -1,0 +1,482 @@
+for z = 1,5 do
+print("Placing Tycoon #"..(z))
+local function NewTycoon()
+local mas = Instance.new("Model",game:GetService("Lighting")) 
+mas.Name = "Model2Script"
+wait()
+local o1 = Instance.new("Model")
+wait()
+local o2 = Instance.new("Model")
+wait()
+local o3 = Instance.new("Part")
+wait()
+local o4 = Instance.new("Part")
+wait()
+local o5 = Instance.new("Part")
+wait()
+local o6 = Instance.new("Part")
+wait()
+local o7 = Instance.new("Part")
+wait()
+local o8 = Instance.new("Part")
+wait()
+local o9 = Instance.new("Part")
+wait()
+local o10 = Instance.new("Part")
+wait()
+local o11 = Instance.new("Part")
+wait()
+local o12 = Instance.new("Model")
+wait()
+local o13 = Instance.new("Part")
+wait()
+local o14 = Instance.new("ClickDetector")
+wait()
+local o15 = Instance.new("SurfaceGui")
+wait()
+local o16 = Instance.new("TextBox")
+wait()
+local o17 = Instance.new("Part")
+wait()
+local o18 = Instance.new("ClickDetector")
+wait()
+local o19 = Instance.new("SurfaceGui")
+wait()
+local o20 = Instance.new("TextBox")
+wait()
+local o21 = Instance.new("Part")
+wait()
+local o22 = Instance.new("SurfaceGui")
+wait()
+local o23 = Instance.new("TextBox")
+wait()
+local o24 = Instance.new("TextBox")
+wait()
+local o25 = Instance.new("TextBox")
+wait()
+local o26 = Instance.new("TextBox")
+wait()
+local o27 = Instance.new("Part")
+wait()
+local o28 = Instance.new("ClickDetector")
+wait()
+local o29 = Instance.new("SurfaceGui")
+wait()
+local o30 = Instance.new("TextBox")
+o1.Name = "Tycoon"
+o1.Parent = mas
+o1.PrimaryPart = o21
+o2.Name = "MoneyMaker"
+o2.Parent = o1
+o2.PrimaryPart = o4
+o3.Name = "CollectorPart"
+o3.Parent = o2
+o3.Material = Enum.Material.Neon
+o3.BrickColor = BrickColor.new("New Yeller")
+o3.Transparency = 1
+o3.Anchored = true
+o3.CanCollide = false
+o3.Size = Vector3.new(1, 8, 4)
+o3.CFrame = CFrame.new(-10.5485115, 5.99999714, 32.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o3.BottomSurface = Enum.SurfaceType.Smooth
+o3.TopSurface = Enum.SurfaceType.Smooth
+o3.Color = Color3.new(1, 1, 0)
+o3.Color = Color3.new(1, 1, 0)
+o4.Name = "MachinePart"
+o4.Parent = o2
+o4.Material = Enum.Material.DiamondPlate
+o4.Anchored = true
+o4.Size = Vector3.new(16, 2, 2)
+o4.CFrame = CFrame.new(-3.04851198, 1, 29.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o4.BottomSurface = Enum.SurfaceType.Smooth
+o4.TopSurface = Enum.SurfaceType.Smooth
+o5.Name = "MachinePart"
+o5.Parent = o2
+o5.Material = Enum.Material.DiamondPlate
+o5.Anchored = true
+o5.Size = Vector3.new(16, 10, 2)
+o5.CFrame = CFrame.new(-3.04851198, 4.99999714, 35.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o5.BottomSurface = Enum.SurfaceType.Smooth
+o5.TopSurface = Enum.SurfaceType.Smooth
+o6.Name = "MachinePart"
+o6.Parent = o2
+o6.Material = Enum.Material.DiamondPlate
+o6.Anchored = true
+o6.Size = Vector3.new(2, 10, 8)
+o6.CFrame = CFrame.new(-12.0485115, 4.99999714, 32.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o6.BottomSurface = Enum.SurfaceType.Smooth
+o6.TopSurface = Enum.SurfaceType.Smooth
+o7.Name = "MachinePart"
+o7.Parent = o2
+o7.Material = Enum.Material.DiamondPlate
+o7.Anchored = true
+o7.Size = Vector3.new(20, 2, 8)
+o7.CFrame = CFrame.new(-3.04851198, 10.9999895, 32.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o7.BottomSurface = Enum.SurfaceType.Smooth
+o7.TopSurface = Enum.SurfaceType.Smooth
+o8.Name = "MachinePart"
+o8.Parent = o2
+o8.Material = Enum.Material.Glass
+o8.BrickColor = BrickColor.new("Institutional white")
+o8.Transparency = 0.89999997615814
+o8.Anchored = true
+o8.Size = Vector3.new(16, 8, 2)
+o8.CFrame = CFrame.new(-3.04851198, 5.99999714, 29.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o8.BottomSurface = Enum.SurfaceType.Smooth
+o8.TopSurface = Enum.SurfaceType.Smooth
+o8.Color = Color3.new(1, 1, 1)
+o8.Color = Color3.new(1, 1, 1)
+o9.Name = "SpawnerPart"
+o9.Parent = o2
+o9.Material = Enum.Material.Neon
+o9.BrickColor = BrickColor.new("New Yeller")
+o9.Transparency = 1
+o9.Anchored = true
+o9.CanCollide = false
+o9.Size = Vector3.new(2, 1, 2)
+o9.CFrame = CFrame.new(3.95148706, 2.49999785, 32.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o9.BottomSurface = Enum.SurfaceType.Smooth
+o9.TopSurface = Enum.SurfaceType.Smooth
+o9.Color = Color3.new(1, 1, 0)
+o9.Color = Color3.new(1, 1, 0)
+o10.Name = "ConveyorPart"
+o10.Parent = o2
+o10.Material = Enum.Material.SmoothPlastic
+o10.BrickColor = BrickColor.new("Really black")
+o10.Rotation = Vector3.new(0, 90, 0)
+o10.Anchored = true
+o10.Size = Vector3.new(4, 2, 16)
+o10.CFrame = CFrame.new(-3.04851198, 1, 32.03228, 0, 0, 1, 0, 1, 0, -1, 0, 0)
+o10.BottomSurface = Enum.SurfaceType.Smooth
+o10.TopSurface = Enum.SurfaceType.Smooth
+o10.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+o10.Color = Color3.new(0.0666667, 0.0666667, 0.0666667)
+o11.Name = "MachinePart"
+o11.Parent = o2
+o11.Material = Enum.Material.DiamondPlate
+o11.Anchored = true
+o11.Size = Vector3.new(2, 10, 8)
+o11.CFrame = CFrame.new(5.95148802, 5.00000858, 32.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o11.BottomSurface = Enum.SurfaceType.Smooth
+o11.TopSurface = Enum.SurfaceType.Smooth
+o12.Name = "ControlPanel"
+o12.Parent = o1
+o12.PrimaryPart = o21
+o13.Name = "Upgrade_WorthValue"
+o13.Parent = o12
+o13.Material = Enum.Material.SmoothPlastic
+o13.BrickColor = BrickColor.new("Olive")
+o13.Anchored = true
+o13.Size = Vector3.new(2, 2, 0.200000003)
+o13.CFrame = CFrame.new(18.9514885, 2.00000978, 27.9322796, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o13.BottomSurface = Enum.SurfaceType.Smooth
+o13.TopSurface = Enum.SurfaceType.Smooth
+o13.Color = Color3.new(0.74902, 0.74902, 0)
+o13.Color = Color3.new(0.74902, 0.74902, 0)
+o14.Parent = o13
+o15.Parent = o13
+o15.CanvasSize = Vector2.new(100, 100)
+o15.ClipsDescendants = true
+o16.Parent = o15
+o16.Size = UDim2.new(1,0,1,0)
+o16.Text = "Upgrade Bits /Packet"
+o16.BackgroundColor3 = Color3.new(1, 1, 1)
+o16.BackgroundTransparency = 1
+o16.BorderColor3 = Color3.new(0, 0, 0)
+o16.BorderSizePixel = 0
+o16.Font = Enum.Font.SourceSans
+o16.FontSize = Enum.FontSize.Size14
+o16.TextColor3 = Color3.new(1, 1, 1)
+o16.TextScaled = true
+o16.TextStrokeTransparency = 0
+o16.TextWrapped = true
+o17.Name = "Rebirth"
+o17.Parent = o12
+o17.Material = Enum.Material.SmoothPlastic
+o17.BrickColor = BrickColor.new("Crimson")
+o17.Anchored = true
+o17.Size = Vector3.new(2, 2, 0.200000003)
+o17.CFrame = CFrame.new(12.9514885, 2.00000978, 27.9322796, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o17.BottomSurface = Enum.SurfaceType.Smooth
+o17.TopSurface = Enum.SurfaceType.Smooth
+o17.Color = Color3.new(0.74902, 0, 0)
+o17.Color = Color3.new(0.74902, 0, 0)
+o18.Parent = o17
+o19.Parent = o17
+o19.CanvasSize = Vector2.new(100, 100)
+o19.ClipsDescendants = true
+o20.Parent = o19
+o20.Size = UDim2.new(1,0,1,0)
+o20.Text = "Rebirth"
+o20.BackgroundColor3 = Color3.new(1, 1, 1)
+o20.BackgroundTransparency = 1
+o20.BorderColor3 = Color3.new(0, 0, 0)
+o20.BorderSizePixel = 0
+o20.Font = Enum.Font.SourceSans
+o20.FontSize = Enum.FontSize.Size14
+o20.TextColor3 = Color3.new(1, 1, 1)
+o20.TextScaled = true
+o20.TextStrokeTransparency = 0
+o20.TextWrapped = true
+o21.Name = "DisplayPart"
+o21.Parent = o12
+o21.Material = Enum.Material.DiamondPlate
+o21.Anchored = true
+o21.Size = Vector3.new(10, 8, 2)
+o21.CFrame = CFrame.new(15.9514885, 4.00002193, 29.03228, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o21.BottomSurface = Enum.SurfaceType.Smooth
+o21.TopSurface = Enum.SurfaceType.Smooth
+o22.Parent = o21
+o22.CanvasSize = Vector2.new(500, 400)
+o22.ClipsDescendants = true
+o23.Name = "TextLabel1"
+o23.Parent = o22
+o23.Position = UDim2.new(0,250,0,100)
+o23.Size = UDim2.new(0,200,0,100)
+o23.Text = "Bits: 0"
+o23.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0.121569)
+o23.BorderColor3 = Color3.new(1, 1, 1)
+o23.BorderSizePixel = 0
+o23.ZIndex = 2
+o23.Font = Enum.Font.Arcade
+o23.FontSize = Enum.FontSize.Size32
+o23.TextColor3 = Color3.new(1, 1, 1)
+o23.TextStrokeColor3 = Color3.new(0.247059, 0.247059, 0.247059)
+o23.TextStrokeTransparency = 0
+o23.TextWrapped = true
+o24.Name = "TextLabel2"
+o24.Parent = o22
+o24.Position = UDim2.new(0,50,0,100)
+o24.Size = UDim2.new(0,100,0,100)
+o24.Text = "Worth Value: 1"
+o24.BackgroundColor3 = Color3.new(0.121569, 0.121569, 0)
+o24.BorderColor3 = Color3.new(1, 1, 1)
+o24.BorderSizePixel = 0
+o24.ZIndex = 2
+o24.Font = Enum.Font.Arcade
+o24.FontSize = Enum.FontSize.Size18
+o24.TextColor3 = Color3.new(1, 1, 0)
+o24.TextStrokeColor3 = Color3.new(0.247059, 0.247059, 0)
+o24.TextStrokeTransparency = 0
+o24.TextWrapped = true
+o25.Name = "TextLabel3"
+o25.Parent = o22
+o25.Position = UDim2.new(0,150,0,100)
+o25.Size = UDim2.new(0,100,0,100)
+o25.Text = "Speed: 1"
+o25.BackgroundColor3 = Color3.new(0, 0.121569, 0)
+o25.BorderColor3 = Color3.new(1, 1, 1)
+o25.BorderSizePixel = 0
+o25.ZIndex = 2
+o25.Font = Enum.Font.Arcade
+o25.FontSize = Enum.FontSize.Size18
+o25.TextColor3 = Color3.new(0, 1, 0)
+o25.TextStrokeColor3 = Color3.new(0, 0.247059, 0)
+o25.TextStrokeTransparency = 0
+o25.TextWrapped = true
+o26.Name = "TextLabel4"
+o26.Parent = o22
+o26.Position = UDim2.new(0,50,0,50)
+o26.Size = UDim2.new(0,400,0,50)
+o26.Text = "Rebirth Mult: 1x"
+o26.BackgroundColor3 = Color3.new(0.121569, 0, 0)
+o26.BorderColor3 = Color3.new(1, 1, 1)
+o26.BorderSizePixel = 0
+o26.Font = Enum.Font.Arcade
+o26.FontSize = Enum.FontSize.Size18
+o26.TextColor3 = Color3.new(1, 0, 0)
+o26.TextStrokeColor3 = Color3.new(0.247059, 0, 0)
+o26.TextStrokeTransparency = 0
+o26.TextWrapped = true
+o27.Name = "Upgrade_ProdSpeed"
+o27.Parent = o12
+o27.Material = Enum.Material.SmoothPlastic
+o27.BrickColor = BrickColor.new("Lime green")
+o27.Anchored = true
+o27.Size = Vector3.new(2, 2, 0.200000003)
+o27.CFrame = CFrame.new(15.9514885, 2.00002265, 27.9322796, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o27.BottomSurface = Enum.SurfaceType.Smooth
+o27.TopSurface = Enum.SurfaceType.Smooth
+o27.Color = Color3.new(0, 0.74902, 0)
+o27.Color = Color3.new(0, 0.74902, 0)
+o28.Parent = o27
+o29.Parent = o27
+o29.CanvasSize = Vector2.new(100, 100)
+o29.ClipsDescendants = true
+o30.Parent = o29
+o30.Size = UDim2.new(1,0,1,0)
+o30.Text = "Upgrade Speed"
+o30.BackgroundColor3 = Color3.new(1, 1, 1)
+o30.BackgroundTransparency = 1
+o30.BorderColor3 = Color3.new(0, 0, 0)
+o30.BorderSizePixel = 0
+o30.Font = Enum.Font.SourceSans
+o30.FontSize = Enum.FontSize.Size14
+o30.TextColor3 = Color3.new(1, 1, 1)
+o30.TextScaled = true
+o30.TextStrokeTransparency = 0
+o30.TextWrapped = true
+mas.Parent = workspace
+mas:MakeJoints()
+local mas2 = mas:GetDescendants()
+for i=1,#mas2 do
+  if mas2[i]:IsA("BasePart") then
+    mas2[i].Locked = true
+  end
+end
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+  mas1[i].Parent = script
+end
+mas:Destroy()
+return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
+end
+local RunService = game:GetService("RunService")
+local Player = owner
+local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
+Tycoon.Name = "Tycoon"
+local PlayerObject = Instance.new("ObjectValue",Tycoon)
+PlayerObject.Name = "Owner"
+Tycoon:MoveTo(Vector3.new(0,1,32 * z))
+local BaseWorthCost = 20
+local BaseSpeedCost = 50
+local BaseRebirthCost = 500
+local Cash = Instance.new("NumberValue",Tycoon)
+local Worth = Instance.new("IntConstrainedValue",Tycoon)
+local Speed = Instance.new("IntConstrainedValue",Tycoon)
+local RebirthMultiply = Instance.new("NumberValue",Tycoon)
+Cash.Name = "Cash"
+RebirthMultiply.Name = "RebirthMultiply"
+RebirthMultiply.Changed:Connect(function()
+  Cash.Value = 0
+  Speed.MinValue = 1
+  Worth.MinValue = 1
+  Speed.MaxValue = 5
+  Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
+  Speed.Value = Speed.MinValue
+  Worth.Value = Worth.MinValue
+  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\nRebirth: Times "..(RebirthMultiply.Value)
+end)
+Worth.Name = "Worth"
+Speed.Name = "Speed"
+local function CalcCost(base,level)
+  if level == RebirthMultiply.Value then
+    return base * (level ^ 3)
+  else
+    return base * (level) * (RebirthMultiply.Value)
+  end
+end
+local function YouCanRebirth()
+  if Cash.Value >= CalcCost(BaseRebirthCost,RebirthMultiply.Value) and Speed.Value == Speed.MaxValue and Worth.Value == Worth.MaxValue then
+    return true
+  else
+    return false
+  end
+end
+local function StartTycoon()
+  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\nRebirth: Times "..(RebirthMultiply.Value)
+  WorthLabel.Text = "Bits/Packet: "..(Worth.Value)
+  SpeedLabel.Text = "Speed: "..(Speed.Value)
+  CashLabel.Text = "Bits: "..(Cash.Value)
+  RebirthMultiply.Value = 1
+  coroutine.wrap(function()
+    while true do
+      if Speed.Value <= 0 then
+        repeat RunService.Heartbeat:Wait() until Speed.Value > 0
+      end
+      wait(2/Speed.Value)
+      local CashPart = SpawnerPart:Clone()
+      CashPart.Name = "Part"
+      CashPart.Size = SpawnerPart.Size * Vector3.new(0.5,1,0.5)
+      CashPart.Transparency = 0
+      CashPart.CanCollide = true
+      CashPart.Anchored = false
+      CashPart.Parent = script
+    end
+  end)()
+  CollectorPart.Touched:Connect(function(hit)
+    if hit.Parent ~= nil then
+      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
+      hit:Destroy()
+    end
+  end)
+  coroutine.wrap(function()
+    while RunService.Heartbeat:Wait() do
+      ConveyorPart.Velocity = ConveyorPart.CFrame.LookVector * (Speed.Value * 16)
+    end
+  end)()
+end
+local function WorthClick(Clicker)
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
+    if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
+      Cash.Value = Cash.Value - CalcCost(BaseWorthCost,Worth.Value)
+      Worth.Value = Worth.Value + 1
+    end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
+  end
+end
+local function SpeedClick(Clicker)
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
+    if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
+      Cash.Value = Cash.Value - CalcCost(BaseSpeedCost,Speed.Value)
+      Speed.Value = Speed.Value + 1
+    end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
+  end
+end
+local function RebirthClick(Clicker)
+  if (PlayerObject.Value ~= nil) and (Clicker == PlayerObject.Value) then
+    if YouCanRebirth() then
+      RebirthMultiply.Value = RebirthMultiply.Value + 1
+    end
+  elseif (PlayerObject.Value == nil) then
+    PlayerObject.Value = Clicker
+    StartTycoon()
+  end
+end
+Cash.Changed:Connect(function()
+  CashLabel.Text = "Bits: "..(Cash.Value)
+  if Cash.Value >= CalcCost(BaseWorthCost,Worth.Value) and Worth.MaxValue > Worth.Value then
+    WorthButton.Material = Enum.Material.Neon
+  else
+    WorthButton.Material = Enum.Material.SmoothPlastic
+  end
+  if Cash.Value >= CalcCost(BaseSpeedCost,Speed.Value) and Speed.MaxValue > Speed.Value then
+    SpeedButton.Material = Enum.Material.Neon
+  else
+    SpeedButton.Material = Enum.Material.SmoothPlastic
+  end
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+Worth.Changed:Connect(function()
+  WorthLabel.Text = "Bits/Packet: "..(Worth.Value)
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+Speed.Changed:Connect(function()
+  SpeedLabel.Text = "Speed: "..(Speed.Value)
+  if YouCanRebirth() then
+    RebirthButton.Material = Enum.Material.Neon
+  else
+    RebirthButton.Material = Enum.Material.SmoothPlastic
+  end
+end)
+RebirthLabel.Text = "Unclaimed Tycoon"
+WorthLabel.Text = "Press any"
+SpeedLabel.Text = "button"
+CashLabel.Text = "to claim."
+WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
+SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
+RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
+end
