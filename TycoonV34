@@ -1,5 +1,5 @@
 function ExecuteCodeSafe(name,func)
-	local results,errorcode = pcall(func)
+	local results,errorcode = xpcall(func)
 	if results == nil and errorcode ~= nil then
 		local ErrorSound = Instance.new("Sound")
 		ErrorSound.Name = "ErrorSound"
