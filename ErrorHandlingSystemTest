@@ -11,7 +11,7 @@ function ExecuteCodeSafe(func)
 		ErrorSound:Play()
 		spawn(function()
 			local ErrorMsg = Instance.new("Message",script)
-			ErrorMsg.Text = errorcode or "Cannot execute, no function defined"
+			ErrorMsg.Text = (script.Name)..":"..(errorcode)
 			wait(5)
 			ErrorMsg:Destroy()
 		end)
