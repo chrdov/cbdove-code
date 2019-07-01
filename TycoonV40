@@ -6,19 +6,13 @@ function ErrorHandler(name,errorcode)
 	script:ClearAllChildren()
 	ErrorSound.Parent = script
 	ErrorSound:Play()
-	spawn(function()
-		local ErrorMsg = Instance.new("Message",script)
-		ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
-		wait(5)
-		ErrorMsg:Destroy()
-	end)
+	print(errorcoce)
 end
 function ExecuteCodeSafe(name,func)
 	local results,errorcode = xpcall(func,function(errorcode)
 		ErrorHandler(name,errorcode)
 	end)
 end
-function MainCode()
 function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
@@ -350,6 +344,7 @@ end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
+function MainCode()
 local RunService = game:GetService("RunService")
 local Player = owner
 local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
