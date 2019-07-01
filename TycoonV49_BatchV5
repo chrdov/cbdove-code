@@ -1,4 +1,4 @@
-for z = 1,10 do
+for z = 1,game.Players.NumPlayers do
 print("Placing Tycoon #"..(z))
 local function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
