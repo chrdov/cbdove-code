@@ -1,21 +1,21 @@
+function ErrorHandler(errorcode)
+	local ErrorSound = Instance.new("Sound")
+	ErrorSound.Name = "ErrorSound"
+	ErrorSound.SoundId = "rbxassetid://130840811"
+	ErrorSound.Volume = 2
+	ErrorSound.PlayOnRemove = true
+	script:ClearAllChildren()
+	ErrorSound.Parent = script
+	ErrorSound:Play()
+	spawn(function()
+		local ErrorMsg = Instance.new("Message",script)
+		ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
+		wait(5)
+		ErrorMsg:Destroy()
+	end)
+end
 function ExecuteCodeSafe(name,func)
-	local results,errorcode = xpcall(func)
-	if results == nil and errorcode ~= nil then
-		local ErrorSound = Instance.new("Sound")
-		ErrorSound.Name = "ErrorSound"
-		ErrorSound.SoundId = "rbxassetid://130840811"
-		ErrorSound.Volume = 2
-		ErrorSound.PlayOnRemove = true
-		script:ClearAllChildren()
-		ErrorSound.Parent = script
-		ErrorSound:Play()
-		spawn(function()
-			local ErrorMsg = Instance.new("Message",script)
-			ErrorMsg.Text = (script:GetFullName())..":function_"..(name)..":"..(errorcode)
-			wait(5)
-			ErrorMsg:Destroy()
-		end)
-	end
+	local results,errorcode = xpcall(func,ErrorHandler)
 end
 function MainCode()
 function NewTycoon()
