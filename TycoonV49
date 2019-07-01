@@ -1,17 +1,3 @@
-function ErrorHandler(name,errorcode)
-	local ErrorSound = Instance.new("Sound")
-	ErrorSound.Name = "ErrorSound"
-	ErrorSound.SoundId = "rbxassetid://130840811"
-	ErrorSound.Volume = 2
-	ErrorSound.Parent = script
-	ErrorSound:Play()
-	print(errorcode)
-end
-function ExecuteCodeSafe(name,func)
-	local results,errorcode = xpcall(func,function(errorcode)
-		ErrorHandler(name,errorcode)
-	end)
-end
 function NewTycoon()
 local mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
@@ -343,7 +329,6 @@ end
 mas:Destroy()
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
-function MainCode()
 local RunService = game:GetService("RunService")
 local Player = owner
 local Tycoon,CollectorPart,SpawnerPart,ConveyorPart,CashLabel,WorthLabel,SpeedLabel,RebirthLabel,WorthButton,SpeedButton,RebirthButton = NewTycoon()
@@ -496,5 +481,3 @@ CashLabel.Text = "to claim."
 WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
 SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
 RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
-end
-ExecuteCodeSafe("MainCode",MainCode)
