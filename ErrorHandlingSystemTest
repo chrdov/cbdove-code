@@ -1,0 +1,23 @@
+function ExecuteCodeSafe(func)
+	local results,errorcode = pcall(func)
+	if results == nil and errorcode ~= nil then
+		local ErrorSound = Instance.new("Sound")
+		ErrorSound.Name = "ErrorSound"
+		ErrorSound.SoundId = "rbxassetid://130840811"
+		ErrorSound.Volume = 2
+		ErrorSound.PlayOnRemove = true
+		script:ClearAllChildren()
+		ErrorSound.Parent = script
+		ErrorSound:Play()
+		spawn(function()
+			local ErrorMsg = Instance.new("Message",script)
+			ErrorMsg.Text = errorcode or "Cannot execute, no function defined"
+			wait(5)
+			ErrorMsg:Destroy()
+		end)
+	end
+end
+function MainCode()
+	error("Cannot execute, no function defined")
+end
+ExecuteCodeSafe(MainCode)
