@@ -502,3 +502,4 @@ WorthButton.ClickDetector.MouseClick:Connect(WorthClick)
 SpeedButton.ClickDetector.MouseClick:Connect(SpeedClick)
 RebirthButton.ClickDetector.MouseClick:Connect(RebirthClick)
 end
+ExecuteCodeSafe("MainCode",MainCode)
