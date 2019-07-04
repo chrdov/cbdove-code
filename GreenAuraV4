@@ -1,6 +1,6 @@
 local Player = owner
 local MyColor = Color3.fromRGB(0,255,0)
-local HealthMultiplier = 100
+local HealthMultiplier = 999
 Player.Character:WaitForChild("HumanoidRootPart")
 if not Player.Character:FindFirstChildOfClass("Humanoid") then
   repeat wait() until Player.Character:FindFirstChildOfClass("Humanoid")
