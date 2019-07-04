@@ -12,7 +12,7 @@ local Light = Instance.new("PointLight",Player.Character:FindFirstChild("Humanoi
 Light.Color = MyColor
 Light.Brightness = 10
 for k,v in pairs(Player.Character:GetDescendants()) do
-  if v:IsA("BasePart") then
+  if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
     local Fire = Instance.new("Fire",v)
     Fire.Color = MyColor
     Fire.SecondaryColor = Color3.new()
