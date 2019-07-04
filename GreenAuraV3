@@ -8,6 +8,7 @@ end
 local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
 Humanoid.MaxHealth = Humanoid.MaxHealth * HealthMultiplier
 Humanoid.Health = Humanoid.Health * HealthMultiplier
+Instance.new("ForceField",Player.Character).Visible = false
 local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
 Light.Color = MyColor
 Light.Brightness = 10
