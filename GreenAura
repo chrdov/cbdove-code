@@ -1,0 +1,22 @@
+local Player = owner
+local MyColor = Color3.fromRGB(0,255,0)
+local HealthMultiplier = 100
+Player.Character:WaitForChild("HumanoidRootPart")
+if not Player.Character:FindFirstChildOfClass("Humanoid") then
+  repeat wait() until Player.Character:FindFirstChildOfClass("Humanoid")
+end
+local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
+Humanoid.MaxHealth = Humanoid.MaxHealth * HealthMultiplier
+Humanoid.Health = Humanoid.Health * HealthMultiplier
+local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
+Light.Color = MyColor
+Light.Brightness = 10
+for k,v in pairs(Player.Character:GetDescendants()) do
+  if v:IsA("BasePart") then
+    local Fire = Instance.new("Fire",v)
+    Fire.Color = MyColor
+    Fire.SecondaryColor = Color3.new()
+    Fire.Size = 4
+    Fire.Heat = 2
+  end
+end
