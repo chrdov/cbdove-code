@@ -1,6 +1,6 @@
 local Player = owner
 local MyColor = Color3.fromRGB(0,255,0)
-local Health = 1000000000
+local Health = math.huge
 local Speed = 32
 local Jump = 100
 Player.Character:WaitForChild("HumanoidRootPart")
@@ -9,8 +9,9 @@ if not Player.Character:FindFirstChildOfClass("Humanoid") then
   repeat wait() until Player.Character:FindFirstChildOfClass("Humanoid")
 end
 local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
-Humanoid.MaxHealth = (Humanoid.MaxHealth * Health) / 100
-Humanoid.Health = (Humanoid.Health * Health) / 100
+local HPercent = Humanoid.Health / Humanoid.MaxHealth
+Humanoid.MaxHealth = Health
+Humanoid.Health = Health * HPercent
 Humanoid.WalkSpeed = Speed
 Humanoid.JumpPower = Jump
 Instance.new("ForceField",Player.Character).Visible = false
