@@ -16,7 +16,7 @@ Humanoid.JumpPower = Jump
 Instance.new("ForceField",Player.Character).Visible = false
 local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
 Light.Color = MyColor
-Light.Brightness = 15
+Light.Brightness = 25
 for k,v in pairs(Player.Character:GetDescendants()) do
   if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
     local Fire = Instance.new("Fire",v)
