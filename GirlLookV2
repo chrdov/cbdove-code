@@ -3,12 +3,23 @@
 mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
 o1 = Instance.new("BodyColors")
+wait()
 o2 = Instance.new("Pants")
+wait()
+o3 = Instance.new("Hat")
+wait()
 o4 = Instance.new("Part")
+wait()
 o5 = Instance.new("SpecialMesh")
+wait()
 o6 = Instance.new("Attachment")
+wait()
 o7 = Instance.new("Weld")
+wait()
 o8 = Instance.new("CharacterMesh")
+wait()
+local Player = owner or game.Players.LocalPlayer
+Player:ClearCharacterAppearance()
 o1.Parent = mas
 o1.HeadColor = BrickColor.new("Light orange")
 o1.LeftArmColor = BrickColor.new("Light orange")
@@ -19,13 +30,18 @@ o1.TorsoColor = BrickColor.new("Light orange")
 o2.Name = "Pants"
 o2.Parent = mas
 o2.PantsTemplate = "http://www.roblox.com/asset/?id=56903591"
+o3.Parent = mas
+o3.AttachmentForward = Vector3.new(0, -0.0999987498, -0.994987547)
+o3.AttachmentPos = Vector3.new(0, 0.899999976, 0)
+o3.AttachmentRight = Vector3.new(0.99999994, -0, 0)
+o3.AttachmentUp = Vector3.new(0, 0.994987607, -0.0999987572)
 o4.Name = "Handle"
-o4.Parent = mas
+o4.Parent = o3
 o4.Rotation = Vector3.new(5.71000004, 0, 0)
 o4.CanCollide = false
 o4.FormFactor = Enum.FormFactor.Plate
 o4.Size = Vector3.new(1, 2.4000001, 2)
-o4.CFrame = CFrame.new(-3, 4.10446596, -0.0892810747, 1, -7.83231258e-09, 7.83188625e-10, 7.87137289e-09, 0.995037198, -0.0995037183, 4.24105195e-14, 0.0995037183, 0.995037198)
+o4.CFrame = CFrame.new(-2, 4.10446596, -0.0892810747, 1, -7.83231258e-09, 7.83188625e-10, 7.87137289e-09, 0.995037198, -0.0995037183, 4.24105195e-14, 0.0995037183, 0.995037198)
 o4.BottomSurface = Enum.SurfaceType.Smooth
 o4.TopSurface = Enum.SurfaceType.Smooth
 o5.Parent = o4
@@ -46,8 +62,6 @@ o8.MeshId = 48112070
 o8.BodyPart = Enum.BodyPart.Torso
 mas.Parent = workspace
 mas:MakeJoints()
-local Player = owner or game.Players.LocalPlayer
-Player:ClearCharacterAppearance()
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
 	mas1[i].Parent = Player.Character
