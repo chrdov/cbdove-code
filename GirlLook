@@ -1,0 +1,56 @@
+--Originally by PenguinAnonymous. Simplified by WaverlyCole
+--Errors: Accessory
+mas = Instance.new("Model",game:GetService("Lighting")) 
+mas.Name = "Model2Script"
+o1 = Instance.new("BodyColors")
+o2 = Instance.new("Pants")
+o4 = Instance.new("Part")
+o5 = Instance.new("SpecialMesh")
+o6 = Instance.new("Attachment")
+o7 = Instance.new("Weld")
+o8 = Instance.new("CharacterMesh")
+o1.Parent = mas
+o1.HeadColor = BrickColor.new("Light orange")
+o1.LeftArmColor = BrickColor.new("Light orange")
+o1.LeftLegColor = BrickColor.new("Light orange")
+o1.RightArmColor = BrickColor.new("Light orange")
+o1.RightLegColor = BrickColor.new("Light orange")
+o1.TorsoColor = BrickColor.new("Light orange")
+o2.Name = "Pants"
+o2.Parent = mas
+o2.PantsTemplate = "http://www.roblox.com/asset/?id=56903591"
+o4.Name = "Handle"
+o4.Parent = mas
+o4.Rotation = Vector3.new(5.71000004, 0, 0)
+o4.CanCollide = false
+o4.FormFactor = Enum.FormFactor.Plate
+o4.Size = Vector3.new(1, 2.4000001, 2)
+o4.CFrame = CFrame.new(-3, 4.10446596, -0.0892810747, 1, -7.83231258e-09, 7.83188625e-10, 7.87137289e-09, 0.995037198, -0.0995037183, 4.24105195e-14, 0.0995037183, 0.995037198)
+o4.BottomSurface = Enum.SurfaceType.Smooth
+o4.TopSurface = Enum.SurfaceType.Smooth
+o5.Parent = o4
+o5.MeshId = "http://www.roblox.com/asset/?id=13070796"
+o5.TextureId = "http://www.roblox.com/asset/?id=25516224"
+o5.MeshType = Enum.MeshType.FileMesh
+o6.Name = "HairAttachment"
+o6.Parent = o4
+o6.Rotation = Vector3.new(-5.71059275, 2.42994362e-12, -4.50996424e-07)
+o6.CFrame = CFrame.new(8.65838956e-09, 0.999476433, -0.0102212727, 1, 7.87137289e-09, 4.24105195e-14, -7.83231258e-09, 0.995037198, 0.0995037183, 7.83188625e-10, -0.0995037183, 0.995037198)
+o6.Axis = Vector3.new(1, -7.83231258e-09, 7.83188625e-10)
+o7.Name = "AccessoryWeld"
+o7.Parent = o4
+o7.C0 = CFrame.new(8.65838956e-09, 0.999476433, -0.0102212727, 1, 7.87137289e-09, 4.24105195e-14, -7.83231258e-09, 0.995037198, 0.0995037183, 7.83188625e-10, -0.0995037183, 0.995037198)
+o7.C1 = CFrame.new(0, 0.600000024, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o8.Parent = mas
+o8.MeshId = 48112070
+o8.BodyPart = Enum.BodyPart.Torso
+mas.Parent = workspace
+mas:MakeJoints()
+local Player = owner or game.Players.LocalPlayer
+Player:ClearCharacterAppearance()
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+	mas1[i].Parent = Player.Character
+end
+mas:Destroy()
+print('Loaded M2S')
