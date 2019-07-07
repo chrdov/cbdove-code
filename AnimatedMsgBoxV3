@@ -31,13 +31,13 @@ o2.TextStrokeColor3 = Color3.new(0.74902, 0.247059, 1)
 o2.TextStrokeTransparency = 0
 o2.TextWrapped = true
 o3.Parent = mas
-o3.Pitch = 1.25
+o3.Pitch = 1.5
 o3.SoundId = "rbxassetid://2459890956"
 o3.Volume = 3
 o4.Name = "PitchShift"
 o4.Octave = 1
 o4.Parent = o3
-o5.Octave = 0.8
+o5.Octave = 1/1.5
 o5.Parent = o3
 mas.Parent = workspace
 mas:MakeJoints()
@@ -62,12 +62,12 @@ while true do
       MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
       if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= "'" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
         TextVoice:Play()
-        wait(1/10)
+        wait(1/15)
       else
         if string.sub(Message,x,x) ~= " " then
           wait(1/2)
         else
-          wait(1/10)
+          wait(1/15)
         end
       end
     end
