@@ -1,4 +1,4 @@
-local Player = game.Players:WaitForChild("CBDove4")
+local Player = owner
 function NewTextBox(part)
 local mas = Instance.new("Model",game:GetService("Lighting"))
 mas.Name = "Model2Script"
