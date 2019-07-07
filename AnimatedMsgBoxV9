@@ -53,22 +53,24 @@ end)
 while true do
   if #Messages >= 1 then
     local Message = table.remove(Messages,1)
-    for x = 1,string.len(Message) do
-      MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
-      if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
-        TextVoice.PitchShift.Octave = math.random(8,12)/10
-        TextVoice:Play()
-        wait(1/16)
-      else
-        if string.sub(Message,x,x) ~= " " then
-          wait(1/2)
-        else
+    if not (string.sub(Message,1,1) == "/" or string.sub(Message,1,2) == "g/") then
+      for x = 1,string.len(Message) do
+        MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
+        if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
+          TextVoice.PitchShift.Octave = math.random(8,12)/10
+          TextVoice:Play()
           wait(1/16)
+        else
+          if string.sub(Message,x,x) ~= " " then
+            wait(1/2)
+          else
+            wait(1/16)
+          end
         end
       end
+      wait(2)
+      MsgDisplay.TextLabel.Text = ""
     end
-    wait(2)
-    MsgDisplay.TextLabel.Text = ""
   end
   wait()
 end
