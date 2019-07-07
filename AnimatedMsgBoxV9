@@ -26,13 +26,13 @@ o2.TextStrokeColor3 = Color3.new(0.74902, 0.247059, 1)
 o2.TextStrokeTransparency = 0
 o2.TextWrapped = true
 o3.Parent = mas
-o3.Pitch = 1.5
+o3.Pitch = 1.2
 o3.SoundId = "rbxassetid://2459890956"
 o3.Volume = 3
 o4.Name = "PitchShift"
 o4.Octave = 1
 o4.Parent = o3
-o5.Octave = 1/1.5
+o5.Octave = 1/1.2
 o5.Parent = o3
 mas.Parent = workspace
 mas:MakeJoints()
