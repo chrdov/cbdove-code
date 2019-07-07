@@ -1,0 +1,17 @@
+local Player = owner
+local MyColor = Color3.fromRGB(127,0,255)
+Player.Character:WaitForChild("HumanoidRootPart")
+local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
+Light.Color = MyColor
+Light.Brightness = 48
+for k,v in pairs(Player.Character:GetDescendants()) do
+  if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+    for x = 1,3 do
+      local Fire = Instance.new("Fire",v)
+      Fire.Color = MyColor
+      Fire.SecondaryColor = Color3.new()
+      Fire.Size = 4
+      Fire.Heat = 2
+    end
+  end
+end
