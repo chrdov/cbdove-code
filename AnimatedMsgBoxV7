@@ -1,16 +1,11 @@
-local Player = owner
+local Player = game.Players:WaitFor
 function NewTextBox(part)
 local mas = Instance.new("Model",game:GetService("Lighting"))
 mas.Name = "Model2Script"
-wait()
 local o1 = Instance.new("BillboardGui")
-wait()
 local o2 = Instance.new("TextBox")
-wait()
 local o3 = Instance.new("Sound")
-wait()
 local o4 = Instance.new("PitchShiftSoundEffect")
-wait()
 local o5 = Instance.new("PitchShiftSoundEffect")
 o1.Parent = mas
 o1.Size = UDim2.new(8,0,2,0)
@@ -63,12 +58,12 @@ while true do
       if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
         TextVoice.PitchShift.Octave = math.random(8,12)/10
         TextVoice:Play()
-        wait(1/20)
+        wait(1/16)
       else
         if string.sub(Message,x,x) ~= " " then
           wait(1/2)
         else
-          wait(1/20)
+          wait(1/16)
         end
       end
     end
