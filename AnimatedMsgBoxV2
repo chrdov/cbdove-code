@@ -62,16 +62,16 @@ while true do
       MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
       if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= "'" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
         TextVoice:Play()
-        wait(1/20)
+        wait(1/10)
       else
         if string.sub(Message,x,x) ~= " " then
           wait(1/2)
         else
-          wait(1/20)
+          wait(1/10)
         end
       end
     end
-    wait(3)
+    wait(2)
     MsgDisplay.TextLabel.Text = ""
   end
   wait()
