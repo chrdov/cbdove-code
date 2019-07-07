@@ -63,12 +63,12 @@ while true do
       if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= "'" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
         TextVoice.PitchShift.Octave = math.random(8,12)/10
         TextVoice:Play()
-        wait(1/15)
+        wait(1/20)
       else
         if string.sub(Message,x,x) ~= " " then
           wait(1/2)
         else
-          wait(1/15)
+          wait(1/20)
         end
       end
     end
