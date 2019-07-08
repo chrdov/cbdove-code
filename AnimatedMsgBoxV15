@@ -61,12 +61,12 @@ function onCharacterAppearanceLoaded(Character)
           if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
             TextVoice.PitchShift.Octave = math.random(18,22)/20
             TextVoice:Play()
-            wait(1/16)
+            wait(1/20)
           else
             if string.sub(Message,x,x) ~= " " then
               wait(1/2)
             else
-              wait(1/16)
+              wait(1/10)
             end
           end
         end
