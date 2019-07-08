@@ -7,8 +7,8 @@ Light.Brightness = 48
 repeat wait() until Player.Character:FindFirstChildOfClass("Humanoid") ~= nil
 Player.Character.Health.Disabled = false
 local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
-Humanoid.WalkSpeed = 12
-Humanoid.JumpPower = 75
+Humanoid.WalkSpeed = 8
+Humanoid.JumpPower = 60
 Humanoid.MaxHealth = 5000
 Humanoid.Health = Humanoid.MaxHealth
 for k,v in pairs(Player.Character:GetDescendants()) do
