@@ -6,7 +6,6 @@ local o1 = Instance.new("BillboardGui")
 local o2 = Instance.new("TextBox")
 local o3 = Instance.new("Sound")
 local o4 = Instance.new("PitchShiftSoundEffect")
-local o5 = Instance.new("PitchShiftSoundEffect")
 o1.Parent = mas
 o1.Size = UDim2.new(8,0,2,0)
 o1.Active = true
@@ -29,11 +28,8 @@ o3.Parent = mas
 o3.PlaybackSpeed = 1
 o3.SoundId = "rbxassetid://2459890956"
 o3.Volume = 3
-o4.Name = "PitchShift"
 o4.Octave = 1
 o4.Parent = o3
-o5.Octave = 1
-o5.Parent = o3
 mas.Parent = workspace
 mas:MakeJoints()
 local mas1 = mas:GetChildren()
@@ -59,7 +55,7 @@ function onCharacterAppearanceLoaded(Character)
         for x = 1,string.len(Message) do
           MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
           if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
-            TextVoice.PitchShift.Octave = math.random(18,22)/20
+            TextVoice.PitchShiftSoundEffect.Octave = math.random(18,22)/20
             TextVoice:Play()
             wait(1/20)
           else
