@@ -1,0 +1,19 @@
+script.Parent = game.Players.LocalPlayer.Character:FindFirstChild("WitherSword") or game.Players.LocalPlayer.Backpack:WaitForChild("WitherSword")
+local ContextActionService = game:GetService("ContextActionService")
+local UserInputService = game:GetService("UserInputService")
+ContextActionService:BindAction("Parry",function(actionName,inputState,inputObj)
+	if script.Parent.Parent ~= game.Players.LocalPlayer.Character then return end
+	if inputState == Enum.UserInputState.Begin then
+		script.Parent.ParryButton:FireServer(true)
+	elseif inputState == Enum.UserInputState.End then
+		script.Parent.ParryButton:FireServer(false)
+	end
+end,false,Enum.UserInputType.MouseButton2)
+ContextActionService:BindAction("Special",function(actionName,inputState,inputObj)
+	if script.Parent.Parent ~= game.Players.LocalPlayer.Character then return end
+	if inputState == Enum.UserInputState.Begin then
+		if script.Parent.Enabled then
+			script.Parent.SpecialMove:FireServer()
+		end
+	end
+end,false,Enum.KeyCode.Q)
