@@ -111,23 +111,15 @@ function blow(hit)
 	local hum = vCharacter:FindFirstChildOfClass("Humanoid") -- non-nil if tool held by a character
 	local vPlayer = game.Players:playerFromCharacter(vCharacter)
 	if humanoid~=nil and humanoid ~= hum and hum ~= nil then
-		local eplayer=game.Players:getPlayerFromCharacter(humanoid.Parent)
-		-- if eplayer and eplayer.TeamColor~=vPlayer.TeamColor then
 		-- final check, make sure sword is in-hand
-			local right_arm = vCharacter:FindFirstChild("Right Arm")
-			if (right_arm ~= nil) then
-				local joint = right_arm:FindFirstChild("RightGrip")
-				if (joint ~= nil and (joint.Part0 == DamagePart or joint.Part1 == DamagePart)) then
-					tagHumanoid(humanoid, vPlayer)
-					humanoid:TakeDamage(damage)
-					if humanoid.Health == 0 then
-						local Debris = game:GetService("Debris")
-						Debris:AddItem(humanoid,0.25)
-						Debris:AddItem(humanoid.Parent,0.5)
-					end
-				end
+		local right_arm = vCharacter:FindFirstChild("Right Arm")
+		if (right_arm ~= nil) then
+			local joint = right_arm:FindFirstChild("RightGrip")
+			if (joint ~= nil and (joint.Part0 == DamagePart or joint.Part1 == DamagePart)) then
+				tagHumanoid(humanoid, vPlayer)
+				humanoid:TakeDamage(damage)
 			end
-		-- end
+		end
 	end
 end
 
