@@ -1,0 +1,323 @@
+--Originally by PenguinAnonymous. Simplified by WaverlyCole
+--Errors: 
+mas = Instance.new("Model",game:GetService("Lighting")) 
+mas.Name = "Model2Script"
+o1 = Instance.new("Tool")
+o2 = Instance.new("Part")
+o3 = Instance.new("Part")
+o4 = Instance.new("WedgePart")
+o5 = Instance.new("RemoteEvent")
+o6 = Instance.new("RemoteEvent")
+o1.Name = "WitherSword"
+o1.Parent = mas
+o2.Name = "Part1"
+o2.Parent = o1
+o2.Material = Enum.Material.DiamondPlate
+o2.BrickColor = BrickColor.new("Dark stone grey")
+o2.CanCollide = false
+o2.Size = Vector3.new(1, 0.5, 1.5)
+o2.CFrame = CFrame.new(18.5, 20.25, -24, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o2.BottomSurface = Enum.SurfaceType.Smooth
+o2.TopSurface = Enum.SurfaceType.Smooth
+o2.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o2.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o3.Name = "Handle"
+o3.Parent = o1
+o3.Material = Enum.Material.DiamondPlate
+o3.BrickColor = BrickColor.new("Dark stone grey")
+o3.CanCollide = false
+o3.Size = Vector3.new(0.5, 1, 0.5)
+o3.CFrame = CFrame.new(18.5, 19.5, -24, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+o3.BottomSurface = Enum.SurfaceType.Smooth
+o3.TopSurface = Enum.SurfaceType.Smooth
+o3.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o3.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o4.Name = "Part2"
+o4.Parent = o1
+o4.Material = Enum.Material.Concrete
+o4.BrickColor = BrickColor.new("Dark stone grey")
+o4.Rotation = Vector3.new(-180, 0, -180)
+o4.CanCollide = false
+o4.Size = Vector3.new(0.100000009, 4, 1)
+o4.CFrame = CFrame.new(18.5, 22.5, -24, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+o4.BottomSurface = Enum.SurfaceType.Smooth
+o4.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o4.Color = Color3.new(0.388235, 0.372549, 0.384314)
+o5.Name = "ParryButton"
+o5.Parent = o1
+o6.Name = "SpecialMove"
+o6.Parent = o1
+mas.Parent = workspace
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+	mas1[i].Parent = owner.Backpack
+end
+mas:Destroy()
+script.Parent = o1
+
+local Tool = script.Parent
+local Handle = script.Parent.Handle
+local DamagePart = script.Parent.Part2
+local damage = 0
+local slash_damage = 10
+local lunge_damage = 20
+local spin_damage = 30
+
+local SlashSound = Instance.new("Sound")
+SlashSound.SoundId = "rbxasset://sounds\\swordslash.wav"
+SlashSound.Parent = Handle
+SlashSound.Volume = 1
+
+local LungeSound1 = Instance.new("Sound")
+LungeSound1.SoundId = "rbxasset://sounds\\swordlunge.wav"
+LungeSound1.Parent = Handle
+LungeSound1.Volume = 1
+
+local LungeSound2 = Instance.new("Sound")
+LungeSound2.SoundId = "rbxasset://sounds\\swordlunge.wav"
+LungeSound2.Parent = Handle
+LungeSound2.Volume = 1
+LungeSound2.PlaybackSpeed = 0.75
+
+local UnsheathSound = Instance.new("Sound")
+UnsheathSound.SoundId = "rbxasset://sounds\\unsheath.wav"
+UnsheathSound.Parent = Handle
+UnsheathSound.Volume = 1
+
+function tagHumanoid(humanoid, player)
+	local creator_tag = Instance.new("ObjectValue")
+	creator_tag.Value = player
+	creator_tag.Name = "creator"
+	creator_tag.Parent = humanoid
+	local Debris = game:GetService("Debris")
+	Debris:AddItem(creator_tag,1)
+end
+
+function blow(hit)
+	
+	if (hit.Parent == nil) then -- happens when bullet hits sword
+		local vCharacter = Tool.Parent
+		local hum = vCharacter:FindFirstChildOfClass("Humanoid") -- non-nil if tool held by a character
+		if hum ~= nil then
+			local Debris = game:GetService("Debris")
+			local ff = Instance.new("ForceField",vCharacter)
+			ff.Visible = false
+			Debris:AddItem(ff,0.2)
+		end
+		return
+	end 
+
+	local humanoid = hit.Parent:FindFirstChildOfClass("Humanoid")
+	local vCharacter = Tool.Parent
+	local hum = vCharacter:FindFirstChildOfClass("Humanoid") -- non-nil if tool held by a character
+	local vPlayer = game.Players:playerFromCharacter(vCharacter)
+	if humanoid~=nil and humanoid ~= hum and hum ~= nil then
+		local eplayer=game.Players:getPlayerFromCharacter(humanoid.Parent)
+		if eplayer and eplayer.TeamColor~=vPlayer.TeamColor then
+		-- final check, make sure sword is in-hand
+		local right_arm = vCharacter:FindFirstChild("Right Arm")
+			if (right_arm ~= nil) then
+				local joint = right_arm:FindFirstChild("RightGrip")
+				if (joint ~= nil and (joint.Part0 == DamagePart or joint.Part1 == DamagePart)) then
+					tagHumanoid(humanoid, vPlayer)
+					humanoid:TakeDamage(damage)
+					if humanoid.Health == 0 then
+						local Debris = game:GetService("Debris")
+						Debris:AddItem(humanoid,0.25)
+						Debris:AddItem(humanoid.Parent,0.5)
+					end
+				end
+			end
+		end
+	end
+end
+
+function GetPartsInTool(Tool)
+	local Parts = {}
+	if Tool == nil then
+		Tool = script.Parent
+	end
+	if Tool:IsA("Tool") then
+		for _,Part in pairs(Tool:GetDescendants()) do
+			if Part:IsA("BasePart") then
+				if (Tool.RequiresHandle and Part.Name ~= "Handle") or (not Tool.RequiresHandle) then
+					table.insert(Parts,Part)
+				end
+			end
+		end
+	end
+	return Parts
+end
+
+function swordUp()
+	Tool.Grip = CFrame.Angles(math.rad(0),math.rad(0),math.rad(0))
+end
+
+function swordOut()
+	Tool.Grip = CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
+end
+
+function swordOut2()
+	Tool.Grip = CFrame.Angles(math.rad(90),math.rad(0),math.rad(-90))
+end
+
+function swordAcross()
+	Tool.Grip = CFrame.Angles(math.rad(-90),math.rad(90),math.rad(0))
+end
+
+function attack()
+	damage = slash_damage
+	SlashSound:Play()
+	LungeSound1:Stop()
+	LungeSound2:Stop()
+	local anim = Instance.new("StringValue")
+	anim.Name = "toolanim"
+	anim.Value = "Slash"
+	anim.Parent = Tool
+end
+
+function lunge()
+	damage = lunge_damage
+
+	SlashSound:Stop()
+	LungeSound1:Play()
+	LungeSound2:Stop()
+
+	local anim = Instance.new("StringValue")
+	anim.Name = "toolanim"
+	anim.Value = "Lunge"
+	anim.Parent = Tool
+
+	wait(.25)
+	swordOut()
+	wait(.75)
+	swordUp()
+
+	damage = slash_damage
+end
+
+function onSpecialMove(player)
+	local spins = 2
+	if not Tool.Enabled then return end
+	local Players = game:GetService("Players")
+	if player ~= Players:GetPlayerFromCharacter(Tool.Parent) then return end
+	local hum = Tool.Parent:FindFirstChildOfClass("Humanoid")
+	if hum == nil then return end
+	if Tool.Parent:FindFirstChild("HumanoidRootPart") == nil then return end
+	Tool.Enabled = false
+	damage = spin_damage
+	SlashSound:Stop()
+	LungeSound1:Stop()
+	LungeSound2:Play()
+	local force = Instance.new("BodyAngularVelocity",Tool.Parent.HumanoidRootPart)
+	hum.WalkSpeed = hum.WalkSpeed * 1.5
+	force.MaxTorque = Vector3.new(math.huge,math.huge,math.huge)
+	force.AngularVelocity = Vector3.new(math.rad(0),math.pi * 3.875,math.rad(0))
+	swordOut2()
+	for x = 1,spins do
+		local anim = Instance.new("StringValue")
+		anim.Name = "toolanim"
+		anim.Value = "Lunge"
+		anim.Parent = Tool
+		wait(.5)
+		anim:Destroy()
+	end
+	hum.WalkSpeed = hum.WalkSpeed / 1.5
+	hum.WalkSpeed = hum.WalkSpeed / 2
+	damage = 0
+	force.AngularVelocity = Vector3.new(math.rad(0),math.rad(0),math.rad(0))
+	swordUp()
+	force:Destroy()
+	wait(spins / 2)
+	hum.WalkSpeed = hum.WalkSpeed * 2
+	damage = slash_damage
+	Tool.Enabled = true
+end
+
+function onParryButton(player,Held)
+	local Players = game:GetService("Players")
+	if player ~= Players:GetPlayerFromCharacter(Tool.Parent) then return end
+	if (not Tool.Enabled) and (Held) then
+		repeat wait() until (Tool.Enabled)
+	end
+	Tool.Enabled = not Held
+	if Held then
+		damage = 0
+		swordAcross()
+		local hum = script.Parent.Parent:FindFirstChildOfClass("Humanoid")
+		if hum and hum.Health > 0 then
+			hum.MaxHealth = hum.MaxHealth * 10
+			hum.Health = hum.Health * 10
+		end
+	else
+		damage = slash_damage
+		swordUp()
+		local hum = script.Parent.Parent:FindFirstChildOfClass("Humanoid")
+		if hum and hum.Health > 0 then
+			hum.Health = hum.Health / 10
+			hum.MaxHealth = hum.MaxHealth / 10
+		end
+	end
+end
+
+function UpdateWelds(ClsnsEnabled)
+	if not script.Parent.RequiresHandle then return end
+	local Parts = GetPartsInTool()
+	Handle.CanCollide = ClsnsEnabled
+	Handle:BreakJoints()
+	for _,Part in pairs(Parts) do
+		Part.CanCollide = ClsnsEnabled
+		local Weld = Instance.new("Weld",Handle)
+		Weld.Name = (Part.Name).."_Weld"
+		Weld.Part0 = script.Parent.Handle
+		Weld.Part1 = Part
+	end
+	Handle.Part1_Weld.C0 = CFrame.new(Vector3.new(0,0.75,0))
+	Handle.Part2_Weld.C0 = CFrame.new(Vector3.new(0,3,0))
+	Handle.Part2_Weld.C1 = CFrame.Angles(math.rad(0),math.rad(180),math.rad(0))
+end
+
+local last_attack = 0
+
+function onActivated()
+
+	if not Tool.Enabled then
+		return
+	end
+
+	Tool.Enabled = false
+
+	local character = Tool.Parent;
+	local humanoid = character.Humanoid
+	if humanoid == nil then
+		print("Humanoid not found")
+		return 
+	end
+
+	local r = game:GetService("RunService")
+	local t = r.Stepped:wait()
+
+	if (t - last_attack < .2) then
+		lunge()
+	else
+		attack()
+	end
+
+	last_attack = t
+
+	Tool.Enabled = true
+end
+
+UpdateWelds(true)
+script.Parent.Activated:connect(onActivated)
+script.Parent.ParryButton.OnServerEvent:Connect(onParryButton)
+script.Parent.SpecialMove.OnServerEvent:Connect(onSpecialMove)
+script.Parent.Equipped:Connect(function()
+	UnsheathSound:play()
+	UpdateWelds(false)
+	swordUp()
+	Tool.Enabled = true
+end)
+script.Parent.Unequipped:Connect(function()
+	UpdateWelds(true)
+end)
