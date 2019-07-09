@@ -1,0 +1,82 @@
+local Player = owner
+local Character = Player.Character
+Character.Archivable = true
+local CloneTemplate = Character:Clone()
+for _,Part in pairs(CloneTemplate:GetChildren()) do
+  if Part.Name == CloneTemplate.Name then
+    Part:Destroy()
+  end
+end
+Character.Archivable = false
+local RunService = game:GetService("RunService")
+function SpawnClones(n)
+  for x = 1,n do
+    local Offset = Vector3.new()
+    if math.random(0,1) > 0 then
+      if math.random(0,1) > 0 then
+        Offset = Vector3.new(math.random(1,4) * 4,0,math.random(-4,-1) * 4)
+      else
+        Offset = Vector3.new(math.random(-4,-1) * 4,0,math.random(0,4) * 4)
+      end
+    else
+      if math.random(0,1) > 0 then
+        Offset = Vector3.new(math.random(1,4) * 4,0,math.random(1,4) * 4)
+      else
+        Offset = Vector3.new(math.random(-4,0) * 4,0,math.random(-4,-1) * 4)
+      end
+    end
+    local Clone = CloneTemplate:Clone()
+    local conn = RunService.Heartbeat:Connect(function(x)
+      local CloneTarget = Character.HumanoidRootPart.Position + Offset
+      local YourY = CloneTarget.Y
+      local MyY = Clone.HumanoidRootPart.Position.Y
+      local DeltaY = YourY - MyY
+      if DeltaY > 0.2 then
+        Clone.Humanoid.Jump = true
+      end
+      Clone.Humanoid:MoveTo(CloneTarget)
+    end)
+    Clone.Humanoid.Died:Connect(function()
+      conn:Disconnect()
+      local Debris = game:GetService("Debris")
+      Debris:AddItem(Clone,5)
+      wait(0.25)
+      for k,v in pairs(Clone:GetDescendants()) do
+        if v:IsA("BasePart") and v.Name ~= "HumanoidRootPart" then
+          for x = 1,1 do
+            local Fire = Instance.new("Fire",v)
+            Fire.Color = Color3.fromRGB(191,0,255)
+            Fire.SecondaryColor = Color3.new()
+            Fire.Size = 5
+            Fire.Heat = 3
+            spawn(function()
+              wait(0.5)
+              Fire.Enabled = false
+            end)
+          end
+          spawn(function()
+            for t = 0.1,1,0.1 do
+              wait(0.05)
+              v.Transparency = t
+            end
+          end)
+        end
+      end
+    end)
+    Clone.Parent = Character
+    local CloneTarget = Character.HumanoidRootPart.Position + Offset
+    Clone:MoveTo(CloneTarget)
+    wait(1/15)
+  end
+end
+local OldMessage = ""
+Player.Chatted:connect(function(NewMessage,Recipient)
+  if (string.lower(OldMessage) == "clone..." and string.lower(NewMessage) == "jutsu!") or (string.lower(NewMessage) == "clone jutsu!") then
+    SpawnClones(1)
+  elseif (string.lower(OldMessage) == "clone..." and string.lower(string.sub(NewMessage,1,7)) == "jutsu: ") then
+    SpawnClones(tonumber(string.sub(NewMessage,8)))
+  elseif (string.lower(string.sub(NewMessage,1,13)) == "clone jutsu: ") then
+    SpawnClones(tonumber(string.sub(NewMessage,14)))
+  end
+  OldMessage = NewMessage
+end)
