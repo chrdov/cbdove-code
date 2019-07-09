@@ -3,7 +3,7 @@ function NewTextBox(part)
 local mas = Instance.new("Model",game:GetService("Lighting"))
 mas.Name = "Model2Script"
 local o1 = Instance.new("BillboardGui")
-local o2 = Instance.new("TextBox")
+local o2 = Instance.new("TextLabel")
 local o3 = Instance.new("Sound")
 local o4 = Instance.new("PitchShiftSoundEffect")
 o1.Parent = mas
