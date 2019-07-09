@@ -2,7 +2,7 @@ local Player = owner
 local Character = Player.Character
 Character.Archivable = true
 local CloneTemplate = Character:Clone()
-for _,Part in pairs(CloneTemplate) do
+for _,Part in pairs(CloneTemplate:GetChildren()) do
   if Part.Name == CloneTemplate.Name then
     Part:Destroy()
   end
