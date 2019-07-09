@@ -53,11 +53,10 @@ for i=1,#mas1 do
 	mas1[i].Parent = owner.Backpack
 end
 mas:Destroy()
-script.Parent = o1
 
-local Tool = script.Parent
-local Handle = script.Parent.Handle
-local DamagePart = script.Parent.Part2
+local Tool = o1
+local Handle = Tool.Handle
+local DamagePart = Tool.Part2
 local damage = 0
 local slash_damage = 10
 local lunge_damage = 20
@@ -261,8 +260,8 @@ function onParryButton(player,Held)
 end
 
 function UpdateWelds(ClsnsEnabled)
-	if not script.Parent.RequiresHandle then return end
-	local Parts = GetPartsInTool()
+	if not Tool.RequiresHandle then return end
+	local Parts = GetPartsInTool(Tool)
 	Handle.CanCollide = ClsnsEnabled
 	Handle:BreakJoints()
 	for _,Part in pairs(Parts) do
