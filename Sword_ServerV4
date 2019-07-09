@@ -134,7 +134,7 @@ end
 function GetPartsInTool(Tool)
 	local Parts = {}
 	if Tool == nil then
-		Tool = script.Parent
+		Tool = o1
 	end
 	if Tool:IsA("Tool") then
 		for _,Part in pairs(Tool:GetDescendants()) do
@@ -187,9 +187,10 @@ function lunge()
 	anim.Value = "Lunge"
 	anim.Parent = Tool
 
-	wait(.25)
 	swordOut()
-	wait(.75)
+	wait(.5)
+	anim:Destroy()
+	wait(.5)
 	swordUp()
 
 	damage = slash_damage
@@ -268,7 +269,7 @@ function UpdateWelds(ClsnsEnabled)
 		Part.CanCollide = ClsnsEnabled
 		local Weld = Instance.new("Weld",Handle)
 		Weld.Name = (Part.Name).."_Weld"
-		Weld.Part0 = script.Parent.Handle
+		Weld.Part0 = Handle
 		Weld.Part1 = Part
 	end
 	Handle.Part1_Weld.C0 = CFrame.new(Vector3.new(0,0.75,0))
