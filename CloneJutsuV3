@@ -30,7 +30,7 @@ for x = 1,9 do
     local YourY = CloneTarget.Y
     local MyY = Clone.HumanoidRootPart.Position.Y
     local DeltaY = YourY - MyY
-    wait(x/20)
+    wait(x/15)
     if DeltaY > 0.2 then
       Clone.Humanoid.Jump = true
     end
@@ -66,5 +66,5 @@ for x = 1,9 do
   Clone.Parent = Character
   local CloneTarget = Character.HumanoidRootPart.Position + Offset
   Clone:MoveTo(CloneTarget)
-  wait(1/20)
+  wait(1/15)
 end
