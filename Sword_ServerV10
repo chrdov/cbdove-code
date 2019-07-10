@@ -57,7 +57,7 @@ mas:Destroy()
 local Tool = o1
 local Handle = Tool.Handle
 local DamagePart = Tool.Part2
-local damage = 0
+local damage = 10
 local slash_damage = 10
 local lunge_damage = 20
 local spin_damage = 30
