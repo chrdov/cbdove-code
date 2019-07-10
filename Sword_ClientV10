@@ -1,6 +1,7 @@
 Tool = game.Players.LocalPlayer.Character:FindFirstChild("WitherSword") or game.Players.LocalPlayer.Backpack:WaitForChild("WitherSword")
 local ContextActionService = game:GetService("ContextActionService")
 local UserInputService = game:GetService("UserInputService")
+Tool.Equipped:connect(function()
 ContextActionService:BindAction("Parry",function(actionName,inputState,inputObj)
 	if Tool.Parent ~= game.Players.LocalPlayer.Character then return end
 	if inputState == Enum.UserInputState.Begin then
@@ -17,3 +18,8 @@ ContextActionService:BindAction("Special",function(actionName,inputState,inputOb
 		end
 	end
 end,false,Enum.KeyCode.Q)
+end)
+Tool.Unequipped:connect(function()
+ContextActionService:UnbindAction("Parry")
+ContextActionService:UnbindAction("Special")
+end)
