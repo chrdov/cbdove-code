@@ -66,6 +66,7 @@ function onCharacterAppearanceLoaded(Character)
             end
           end
         end
+        MsgDisplay.TextLabel.Text = Message
         wait(2)
         MsgDisplay.TextLabel.Text = ""
       end
