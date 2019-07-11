@@ -340,3 +340,7 @@ Tool.Unequipped:Connect(function()
     UpdateWelds(true)
 end)
 Tool.Part2.Touched:Connect(blow)
+Player.Character.Health.Disabled = true
+Player.Character.Humanoid.MaxHealth = 1000
+Player.Character.Humanoid.Health = Player.Character.Humanoid.MaxHealth
+Player.Character.Health.Disabled = false
