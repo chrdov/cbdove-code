@@ -131,7 +131,7 @@ end
 function GetPartsInTool(Tool)
 	local Parts = {}
 	if Tool == nil then
-		Tool = script.Parent
+		Tool = o1
 	end
 	if Tool:IsA("Tool") then
 		for _,Part in pairs(Tool:GetDescendants()) do
@@ -280,7 +280,7 @@ function onParryButton(player,Held)
 end
 
 function UpdateWelds(ClsnsEnabled)
-	if not script.Parent.RequiresHandle then return end
+	if not Tool.RequiresHandle then return end
 	local Parts = GetPartsInTool()
 	Handle.CanCollide = ClsnsEnabled
 	Handle:BreakJoints()
