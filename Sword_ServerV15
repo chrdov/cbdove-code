@@ -1,5 +1,4 @@
---Originally by PenguinAnonymous. Simplified by WaverlyCole
---Errors: 
+local Player = game.Players:WaitForChild("CBDove4")
 mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
 o1 = Instance.new("Tool")
@@ -54,7 +53,7 @@ o6.Parent = o1
 mas.Parent = workspace
 local mas1 = mas:GetChildren()
 for i=1,#mas1 do
-    mas1[i].Parent = owner.Backpack
+    mas1[i].Parent = Player.Backpack
 end
 mas:Destroy()
 
