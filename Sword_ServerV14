@@ -263,7 +263,7 @@ function onParryButton(player,Held)
 	if (Held) and damage == slash_damage then
 		damage = 0
 		swordAcross()
-		local hum = script.Parent.Parent:FindFirstChildOfClass("Humanoid")
+		local hum = Tool.Parent:FindFirstChildOfClass("Humanoid")
 		if hum and hum.Health > 0 then
 			hum.MaxHealth = hum.MaxHealth * 10
 			hum.Health = hum.Health * 10
@@ -271,7 +271,7 @@ function onParryButton(player,Held)
 	elseif (not Held) and damage == 0 then
 		damage = slash_damage
 		swordUp()
-		local hum = script.Parent.Parent:FindFirstChildOfClass("Humanoid")
+		local hum = Tool.Parent:FindFirstChildOfClass("Humanoid")
 		if hum and hum.Health > 0 then
 			hum.Health = hum.Health / 10
 			hum.MaxHealth = hum.MaxHealth / 10
@@ -281,14 +281,14 @@ end
 
 function UpdateWelds(ClsnsEnabled)
 	if not Tool.RequiresHandle then return end
-	local Parts = GetPartsInTool()
+	local Parts = GetPartsInTool(ToolTool)
 	Handle.CanCollide = ClsnsEnabled
 	Handle:BreakJoints()
 	for _,Part in pairs(Parts) do
 		Part.CanCollide = ClsnsEnabled
-		local Weld = Instance.new("Weld",Handle)
+		local Weld = Instance.new("Weld",Tool.Handle)
 		Weld.Name = (Part.Name).."_Weld"
-		Weld.Part0 = script.Parent.Handle
+		Weld.Part0 = Tool.Handle
 		Weld.Part1 = Part
 	end
 	Handle.Part1_Weld.C0 = CFrame.new(Vector3.new(0,0.75,0))
