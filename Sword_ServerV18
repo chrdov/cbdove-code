@@ -60,9 +60,9 @@ mas:Destroy()
 local Tool = o1
 local Handle = Tool.Handle
 local DamagePart = Tool.Part2
-local damage = 100
-local slash_damage = 100
-local lunge_damage = 300
+local damage = 1000
+local slash_damage = 1000
+local lunge_damage = 3000
 
 local SlashSound = Instance.new("Sound")
 SlashSound.SoundId = "rbxasset://sounds\\swordslash.wav"
@@ -161,6 +161,13 @@ function swordAcross()
 end
 
 function attack()
+	Tool.Handle.Color = Color3.new(1,0,0)
+	Tool.Part1.Color = Color3.new(1,0,0)
+	Tool.Part2.Color = Color3.new(1,0,0)
+	wait(.125)
+	Tool.Handle.Color = Color3.new(0,1,0)
+	Tool.Part1.Color = Color3.new(0,1,0)
+	Tool.Part2.Color = Color3.new(0,1,0)
 	damage = slash_damage
 	SlashSound:Play()
 	LungeSound1:Stop()
@@ -169,30 +176,35 @@ function attack()
 	anim.Name = "toolanim"
 	anim.Value = "Slash"
 	anim.Parent = Tool
+	wait(.125)
+	anim:Destroy()
 end
 
 function lunge()
 	local hum = Tool.Parent:FindFirstChildOfClass("Humanoid")
 	if hum == nil then return end
+	Tool.Handle.Color = Color3.new(1,0,0)
+	Tool.Part1.Color = Color3.new(1,0,0)
+	Tool.Part2.Color = Color3.new(1,0,0)
+	wait(.25)
 	damage = lunge_damage
-
-	SlashSound:Stop()
-	LungeSound1:Play()
-	LungeSound2:Stop()
-
 	local anim = Instance.new("StringValue")
 	anim.Name = "toolanim"
 	anim.Value = "Lunge"
 	anim.Parent = Tool
-
+	SlashSound:Stop()
+	LungeSound1:Play()
+	LungeSound2:Stop()
 	wait(.25)
-	hum.WalkSpeed = hum.WalkSpeed * 2
+	Tool.Handle.Color = Color3.new(0,1,0)
+	Tool.Part1.Color = Color3.new(0,1,0)
+	Tool.Part2.Color = Color3.new(0,1,0)
+	hum.WalkSpeed = hum.WalkSpeed * 4
 	swordOut()
 	wait(.25)
-	hum.WalkSpeed = hum.WalkSpeed / 2
-	wait(.5)
+	anim:Destroy()
+	hum.WalkSpeed = hum.WalkSpeed / 4
 	swordUp()
-
 	damage = slash_damage
 end
 
@@ -222,7 +234,7 @@ function onSpecialMove(player)
 	hum.JumpPower = 0
 	hum.JumpHeight = 0
 	Tool.Parent.Animate.Disabled = true
-	for x = 1,5 do
+	for x = 1,20 do
 		BodyColors.HeadColor = BrickColor.Random()
 		BodyColors.TorsoColor = BrickColor.Random()
 		BodyColors.LeftArmColor = BrickColor.Random()
@@ -232,7 +244,7 @@ function onSpecialMove(player)
 		wait(0.05)
 	end
 	Tool.Parent.Animate.Disabled = false
-	Tool.Parent:MoveTo(Tool.Parent.PrimaryPart.Position + (hum.MoveDirection * wspd * 2))
+	Tool.Parent:MoveTo(Tool.Parent.PrimaryPart.Position + (hum.MoveDirection * wspd * 6))
 	LungeSound2:Stop()
 	hum.WalkSpeed = wspd
 	hum.JumpPower = jmpp
@@ -244,7 +256,8 @@ function onSpecialMove(player)
 	BodyColors.RightArmColor3 = d
 	BodyColors.LeftLegColor3 = e
 	BodyColors.RightLegColor3 = f
-	wait(0.75)
+	hum.Health = hum.Health + (hum.MaxHealth / 20)
+	wait(4)
 	damage = slash_damage
 	Tool.Enabled = true
 end
@@ -315,7 +328,7 @@ function onActivated()
 	local r = game:GetService("RunService")
 	local t = r.Stepped:wait()
 
-	if (t - last_attack < .2) then
+	if (t - last_attack < .45) then
 		lunge()
 	else
 		attack()
@@ -341,6 +354,5 @@ Tool.Unequipped:Connect(function()
 end)
 Tool.Part2.Touched:Connect(blow)
 Player.Character.Health.Disabled = true
-Player.Character.Humanoid.MaxHealth = 1000
+Player.Character.Humanoid.MaxHealth = 100000
 Player.Character.Humanoid.Health = Player.Character.Humanoid.MaxHealth
-Player.Character.Health.Disabled = false
