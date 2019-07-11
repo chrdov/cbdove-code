@@ -60,9 +60,9 @@ mas:Destroy()
 local Tool = o1
 local Handle = Tool.Handle
 local DamagePart = Tool.Part2
-local damage = 10
-local slash_damage = 10
-local lunge_damage = 30
+local damage = 100
+local slash_damage = 100
+local lunge_damage = 300
 
 local SlashSound = Instance.new("Sound")
 SlashSound.SoundId = "rbxasset://sounds\\swordslash.wav"
