@@ -62,7 +62,7 @@ function onCharacterAppearanceLoaded(Character)
             if string.sub(Message,x,x) ~= " " then
               wait(1/2)
             else
-              wait(1/10)
+              wait(1/15)
             end
           end
         end
