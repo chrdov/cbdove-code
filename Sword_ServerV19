@@ -60,9 +60,9 @@ mas:Destroy()
 local Tool = o1
 local Handle = Tool.Handle
 local DamagePart = Tool.Part2
-local damage = 1000
-local slash_damage = 1000
-local lunge_damage = 3000
+local damage = 0.1
+local slash_damage = 0.1
+local lunge_damage = 0.3
 
 local SlashSound = Instance.new("Sound")
 SlashSound.SoundId = "rbxasset://sounds\\swordslash.wav"
@@ -120,7 +120,11 @@ function blow(hit)
             --print'before joint'
             --if (joint ~= nil and (joint.Part0 == DamagePart or joint.Part1 == DamagePart)) then
                 tagHumanoid(humanoid, vPlayer)
-                humanoid:TakeDamage(damage)
+		if humanoid.Health == math.huge then
+		    humanoid.Health = 0
+		else
+                    humanoid.Health = humanoid.Health - (humanoid.MaxHealth * damage)
+		end
                 print'did damage'
             --end
         --end
