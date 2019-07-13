@@ -157,8 +157,10 @@ return Chat
 end
 function ClearAppearance(Character)
 	for _,Object in pairs(Character:GetChildren()) do
-		if Object:IsA("Shirt") or Object:IsA("ShirtGraphic") or Object:IsA("Pants") or Object:IsA("Accoutrement") or Object:IsA("Script") then
+		if Object:IsA("Shirt") or Object:IsA("ShirtGraphic") or Object:IsA("Pants") or Object:IsA("Accoutrement") then
 			Object:Destroy()
+		elseif Object:IsA("Script") then
+			Object.Disabled = true
 		elseif Object:IsA("BodyColors") then
 			Object.HeadColor = BrickColor.new("Bright yellow")
 			Object.TorsoColor = BrickColor.new("Bright green")
@@ -272,7 +274,7 @@ for Phase = 1,3 do
 		if BossCharacter.Humanoid.Health == 0 then break end
 	end
 	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.FallingDown)
-	wait(1)
+	wait(2)
 	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
 	BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
 end
