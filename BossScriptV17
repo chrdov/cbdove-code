@@ -270,6 +270,7 @@ for Phase = 1,4 do
 	wait(5)
 	BossCharacter:Destroy()
 	elseif Phase == 4 then
+	Music:Stop()
 	BossCharacter.Humanoid.MaxHealth = math.huge
 	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
 	BossCharacter.Humanoid.WalkSpeed = 16
