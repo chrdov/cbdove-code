@@ -197,7 +197,7 @@ ClearAppearance(BossCharacterT)
 BossCharacterT.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.Subject
 BossCharacterT.Humanoid.NameDisplayDistance = 0
 BossCharacterT.Humanoid.MaxHealth = math.huge
-BossCharacterT.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+BossCharacterT.Humanoid.Health = BossCharacterT.Humanoid.MaxHealth
 Player.Character.Archivable = false
 local Music = NewSound()
 Music.Name = "Music"
