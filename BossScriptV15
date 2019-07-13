@@ -92,7 +92,7 @@ o1.ClipsDescendants = true
 o2.Parent = o1
 o2.Name = "TextLabel"
 o2.Size = UDim2.new(1,0,1,0)
-o2.Text = "Abusive Admin"
+o2.Text = "HackerX64"
 o2.BackgroundColor3 = Color3.new(1, 1, 1)
 o2.BackgroundTransparency = 1
 o2.Font = Enum.Font.SourceSans
@@ -142,11 +142,11 @@ spawn(function()
         end
         MsgDisplay.TextLabel.Text = Message
         wait(2)
-        MsgDisplay.TextLabel.Text = "Hacker"
+        MsgDisplay.TextLabel.Text = "HackerX64"
       end
       table.remove(Messages,1)
-	else
-	  wait()
+    else
+      wait()
     end
   end
 end)
@@ -190,8 +190,7 @@ local Player = Players:WaitForChild("CBDove4")
 if Player.Character == nil then Player.CharacterAppearanceLoaded:Wait() end
 Player.Character.Archivable = true
 local BossCharacterT = Player.Character:Clone()
-BossCharacterT.Name = "Hacker"
-BossCharacterT:MoveTo(Vector3.new(0,50,0))
+BossCharacterT.Name = "HackerX64"
 ClearAppearance(BossCharacterT)
 BossCharacterT.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.Subject
 BossCharacterT.Humanoid.NameDisplayDistance = 0
@@ -201,10 +200,12 @@ Player.Character.Archivable = false
 local Music = NewSound()
 Music.Name = "Music"
 Music.Looped = true
-for Phase = 1,3 do
+for Phase = 1,4 do
 	local BossCharacter = BossCharacterT:Clone()
 	BossCharacter.Parent = script
 	local Chat = StartMessageThing(BossCharacter)
+	BossCharacter:MoveTo(Vector3.new(0,0,0))
+	if Phase ~= 4 then
 	local MoveIDs = {}
 	Music:Stop()
 	Music.TimePosition = 0
@@ -224,11 +225,11 @@ for Phase = 1,3 do
 	Music:Play()
 	ff = Instance.new("ForceField",BossCharacter)
 	Chat(":ff me",true)
-	BossCharacter.Humanoid.MaxHealth = 2000 * Phase
+	BossCharacter.Humanoid.MaxHealth = 4000 * Phase
 	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
-	Chat(":health me "..(tostring(2000 * Phase)),true)
-	BossCharacter.Humanoid.WalkSpeed = 12 * Phase
-	Chat(":speed me "..(tostring(12 * Phase)),true)
+	Chat(":health me "..(tostring(4000 * Phase)),true)
+	BossCharacter.Humanoid.WalkSpeed = 16 + (4 * Phase)
+	Chat(":speed me "..(tostring(16 + (4 * Phase))),true)
 	ff:Destroy()
 	Chat(":noff me",false)
 	while true do
@@ -237,9 +238,9 @@ for Phase = 1,3 do
 			for x = 1,5 do
 				if BossCharacter.Humanoid.Health <= 0 then break end
 				BossCharacter.Humanoid:MoveTo(Vector3.new(math.random(-254,254),0,math.random(-254,254)))
-				wait(2)
+				wait(4)
 				BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
-				wait(3)
+				wait(4)
 			end
 			local Target = FindNearestPlayer(BossCharacter.HumanoidRootPart)
 			if Target ~= nil then
@@ -266,6 +267,36 @@ for Phase = 1,3 do
 		end
 		if BossCharacter.Humanoid.Health <= 0 then break end
 	end
+	wait(5)
 	BossCharacter:Destroy()
+	elseif Phase = 4 then
+	BossCharacter.Humanoid.MaxHealth = math.huge
+	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+	BossCharacter.Humanoid.WalkSpeed = 16
+	ff = Instance.new("ForceField",BossCharacter)
+	ff.Visible = false
+	Chat(":ff me",false)
+	Chat("...",false)
+	Chat("Wait...",false)
+	Chat("Where are my powers?",false)
+	Chat("What did you do!?",true)
+	local Voice = NewSound("rbxassetid://395820867",script)
+	local Hint = Instance.new("Hint",script)
+	Hint.Text = "[Admin]: I have disabled HackerX64's access to the Commands..."
+	wait(5)
+	BossCharacter.Humanoid.MaxHealth = 100
+	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+	ff:Destroy()
+	Hint.Text = "[Admin]: Now's your chance. I'll ban him in about 10 seconds, whether you decide to kill him or not."
+	wait(6.5)
+	Chat("Nooo!",false)
+	wait(3.5)
+	BossCharacter:Destroy()
+	Hint.Text = "[Admin]: :ban HackerX64"
+	wait(3)
+	Hint.Text = "[Admin]: Have a nice day."
+	wait(2)
+	Hint:Destroy()
+	end
 end
 
