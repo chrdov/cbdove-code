@@ -269,7 +269,7 @@ for Phase = 1,4 do
 	end
 	wait(5)
 	BossCharacter:Destroy()
-	elseif Phase = 4 then
+	elseif Phase == 4 then
 	BossCharacter.Humanoid.MaxHealth = math.huge
 	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
 	BossCharacter.Humanoid.WalkSpeed = 16
