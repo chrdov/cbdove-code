@@ -197,7 +197,8 @@ BossCharacter.Name = "Hacker"
 BossCharacter:MoveTo(Vector3.new(0,50,0))
 BossCharacter.Parent = script
 ClearAppearance(BossCharacter)
-BossCharacter.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+BossCharacter.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.Subject
+BossCharacter.Humanoid.NameDisplayDistance = 0
 BossCharacter.Humanoid.WalkSpeed = 12
 BossCharacter.Humanoid.MaxHealth = math.huge
 BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
