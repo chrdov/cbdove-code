@@ -233,18 +233,18 @@ for Phase = 1,3 do
 	Chat(":noff me",false)
 	while true do
 		for _,MoveID in pairs(MoveIDs) do
-			if BossCharacter.Humanoid.Health <= 10 then break end
+			if BossCharacter.Humanoid.Health <= 0 then break end
 			for x = 1,5 do
-				if BossCharacter.Humanoid.Health <= 1 then break end
+				if BossCharacter.Humanoid.Health <= 0 then break end
 				BossCharacter.Humanoid:MoveTo(Vector3.new(math.random(-254,254),0,math.random(-254,254)))
-				wait(3/Phase)
-			end
-			if BossCharacter.Humanoid.Health <= 10 then break end
-			local Target = FindNearestPlayer(BossCharacter.HumanoidRootPart)
-			if Target then
+				wait(2)
 				BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
-				wait(3/Phase)
-				if BossCharacter.Humanoid.Health <= 10 then break end
+				wait(3)
+			end
+			local Target = FindNearestPlayer(BossCharacter.HumanoidRootPart)
+			if Target ~= nil then
+				BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
+				if BossCharacter.Humanoid.Health <= 0 then break end
 				if MoveID == 1 then
 					Chat(":bomb "..(Target.Name),false)
 					CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,17.5,0)),script)
@@ -252,21 +252,20 @@ for Phase = 1,3 do
 					Chat(":heal me 500",false)
 					BossCharacter.Humanoid.Health = BossCharacter.Humanoid.Health + 500
 				elseif MoveID == 3 then
-					Chat(":bomb "..(Target.Name).." 5",false)
-					spawn(function()
-						for x = 1,5 do
-							CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,16.5 + x,0)),script)
-							wait()
+					Chat(":checkmoving "..(Target.Name),true)
+					local Humanoid = Player.Character:FindFirstChildOfClass("Humanoid")
+					if Humanoid ~= nil then
+						if Humanoid.MoveDirection ~= Vector3.new(0,0,0) then
+							Chat(":kill "..(Target.Name),false)
+							Player.Character:BreakJoints()
 						end
-					end)
+					end
 				end
 			end
-			if BossCharacter.Humanoid.Health <= 10 then break end
+			if BossCharacter.Humanoid.Health <= 0 then break end
 		end
-		if BossCharacter.Humanoid.Health <= 10 then break end
+		if BossCharacter.Humanoid.Health <= 0 then break end
 	end
-	BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
-	wait(5)
 	BossCharacter:Destroy()
 end
 
