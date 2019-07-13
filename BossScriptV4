@@ -41,9 +41,7 @@ function Activate(Part)
 	Part.Anchored = true
 	Part.CanCollide = false
 	Part.Transparency = 1
-	Part.Explode:Play()
 	print("Explode")
-	Part.Explode.Ended:Wait()
 	Part:Destroy()
 end 
 function CreateBomb(CF,parent)
