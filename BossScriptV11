@@ -257,6 +257,7 @@ for Phase = 1,3 do
 					spawn(function()
 						for x = 1,5 do
 							CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,16.5 + x,0)),script)
+							wait()
 						end
 					end)
 				end
