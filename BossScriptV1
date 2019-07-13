@@ -1,0 +1,279 @@
+script.Name = "BossScript"
+function NewSound(id)
+	local Sound = Instance.new("Sound",script)
+	Sound.SoundId = id or ""
+	return Sound
+end
+function Activate(Part)
+	print("Activate")
+	for x = 1,20 do
+		print("Tick")
+		Part.Color = Color3.new(1,0,0)
+		Part.Tick:Play()
+		wait(0.1 / x)
+		Part.Color = Color3.new(0,0,0)
+		wait(0.4 / x)
+	end
+	local Explosion = Instance.new("Explosion")
+	Explosion.Position = Part.Position
+	Explosion.DestroyJointRadiusPercent = 0
+	Explosion.BlastRadius = 12
+	Explosion.BlastPressure = Explosion.BlastPressure * 2.5
+	Explosion.Hit:Connect(function(hit2,distance)
+		local distanceFactor = 1 - (distance / Explosion.BlastRadius)
+		if hit2.Name == "Head" then
+			local Humanoid = hit2.Parent:FindFirstChildOfClass("Humanoid")
+			if Humanoid then
+				Humanoid:TakeDamage(100 * distanceFactor * 1.25)
+			else
+				hit2:BreakJoints()
+			end
+		else
+			if not (hit2.Parent:IsA("Accoutrement") or hit2.Parent:IsA("Tool")) then
+				local Humanoid = hit2.Parent:FindFirstChildOfClass("Humanoid")
+				if not Humanoid then
+					hit2:BreakJoints()
+				end
+			end
+		end
+	end)
+	Explosion.Parent = Part.Parent
+	Part.Anchored = true
+	Part.CanCollide = false
+	Part.Transparency = 1
+	Part.Explode:Play()
+	print("Explode")
+	Part.Explode.Ended:Wait()
+	Part:Destroy()
+end 
+function CreateBomb(CF,parent)
+	print("Create Bomb")
+	local mas = Instance.new("Model",game:GetService("ReplicatedStorage")) 
+	mas.Name = "Model2Script"
+	local o1 = Instance.new("Part")
+	local o2 = Instance.new("Sound")
+	local o3 = Instance.new("Sound")
+	o1.Name = "Bomb"
+	o1.Parent = mas
+	o1.Material = Enum.Material.Concrete
+	o1.BrickColor = BrickColor.new("Really black")
+	o1.Rotation = Vector3.new(-90, 0, 0)
+	o1.Shape = Enum.PartType.Ball
+	o1.Size = Vector3.new(2, 2, 2)
+	o1.CFrame = CF
+	o1.BottomSurface = Enum.SurfaceType.Smooth
+	o1.TopSurface = Enum.SurfaceType.Smooth
+	o1.Color = Color3.new(0, 0, 0)
+	o1.Color = Color3.new(0, 0, 0)
+	o2.Name = "Tick"
+	o2.Parent = o1
+	o2.SoundId = "rbxassetid://151715959"
+	o3.Name = "Explode"
+	o3.Parent = o1
+	o3.SoundId = "rbxassetid://535689258"
+	o3.Volume = 1
+	mas.Parent = parent
+	local mas1 = mas:GetChildren()
+	for i=1,#mas1 do
+		mas1[i].Parent = parent
+	end
+	mas:Destroy()
+	spawn(function()
+		Activate(o1)
+	end)
+end
+function NewTextBox(part)
+local mas = Instance.new("Model",game:GetService("Lighting"))
+mas.Name = "Model2Script"
+local o1 = Instance.new("BillboardGui")
+local o2 = Instance.new("TextBox")
+o1.Parent = mas
+o1.Size = UDim2.new(8,0,2,0)
+o1.Active = true
+o1.StudsOffset = Vector3.new(0, 2, 0)
+o1.ClipsDescendants = true
+o2.Parent = o1
+o2.Name = "TextLabel"
+o2.Size = UDim2.new(1,0,1,0)
+o2.Text = "Abusive Admin"
+o2.BackgroundColor3 = Color3.new(1, 1, 1)
+o2.BackgroundTransparency = 1
+o2.Font = Enum.Font.SourceSans
+o2.TextSize = 48
+o2.TextColor3 = Color3.new(1, 1, 1)
+o2.TextScaled = true
+o2.TextStrokeColor3 = Color3.new(0, 0, 0)
+o2.TextStrokeTransparency = 0
+o2.TextWrapped = true
+mas.Parent = workspace
+mas:MakeJoints()
+local mas1 = mas:GetChildren()
+for i=1,#mas1 do
+	mas1[i].Parent = part
+end
+mas:Destroy()
+return o1
+end
+function StartMessageThing(Character)
+local MsgDisplay = NewTextBox(Character.PrimaryPart)
+local Messages = {}
+local function Chat(Message,WaitForQueue)
+	table.insert(Messages,Message)
+	if WaitForQueue == nil then
+		WaitForQueue = false
+	end
+	if WaitForQueue then
+		repeat wait() until #Messages == 0
+	end
+end
+spawn(function()
+  while true do
+    if #Messages > 0 then
+      local Message = Messages[1]
+      if not (string.sub(Message,1,1) == "/") then
+        for x = 1,string.len(Message) do
+          MsgDisplay.TextLabel.Text = string.sub(Message,1,x)
+          if string.sub(Message,x,x) ~= " " and string.sub(Message,x,x) ~= ":" and string.sub(Message,x,x) ~= ";" and string.sub(Message,x,x) ~= "<" and string.sub(Message,x,x) ~= ">" and string.sub(Message,x,x) ~= "@" and string.sub(Message,x,x) ~= "#" and string.sub(Message,x,x) ~= "^" and string.sub(Message,x,x) ~= "&" and string.sub(Message,x,x) ~= "/" and string.sub(Message,x,x) ~= "*" and string.sub(Message,x,x) ~= "=" and string.sub(Message,x,x) ~= "+" and string.sub(Message,x,x) ~= "-" and string.sub(Message,x,x) ~= "_" and string.sub(Message,x,x) ~= "!" and string.sub(Message,x,x) ~= "," and string.sub(Message,x,x) ~= "." and string.sub(Message,x,x) ~= "?" and string.sub(Message,x,x) ~= "(" and string.sub(Message,x,x) ~= ")" and string.sub(Message,x,x) ~= "[" and string.sub(Message,x,x) ~= "]" and string.sub(Message,x,x) ~= "{" and string.sub(Message,x,x) ~= "}" and string.sub(Message,x,x) ~= '"' and string.sub(Message,x,x) ~= "\\" and string.sub(Message,x,x) ~= "|" then
+            wait(1/20)
+          else
+            if string.sub(Message,x,x) == " " then
+              wait(1/20)
+            else
+              wait(1/20)
+            end
+          end
+        end
+        MsgDisplay.TextLabel.Text = Message
+        wait(2)
+        MsgDisplay.TextLabel.Text = "Hacker"
+      end
+      table.remove(Messages,1)
+	else
+	  wait()
+    end
+  end
+end)
+return Chat
+end
+function ClearAppearance(Character)
+	for _,Object in pairs(Character:GetChildren()) do
+		if Object:IsA("Shirt") or Object:IsA("ShirtGraphic") or Object:IsA("Pants") or Object:IsA("Accoutrement") or Object:IsA("Script") then
+			Object:Destroy()
+		elseif Object:IsA("BodyColors") then
+			Object.HeadColor = BrickColor.new("Bright yellow")
+			Object.TorsoColor = BrickColor.new("Bright green")
+			Object.LeftArmColor = BrickColor.new("Bright yellow")
+			Object.RightArmColor = BrickColor.new("Bright yellow")
+			Object.LeftLegColor = BrickColor.new("Br. yellowish green")
+			Object.RightLegColor = BrickColor.new("Br. yellowish green")
+		end
+	end
+end
+function FindNearestPlayer(origin)
+	local dists,best = {},{4096}
+	for i,v in pairs(game.Players:GetPlayers()) do
+		if v.Character ~= nil then
+			local dist = (v.Character.HumanoidRootPart.Position - origin.Position).magnitude
+			if v.Character.Humanoid.Health > 0 then
+				table.insert(dists,{v,dist})
+			end
+		end
+	end
+	for i,v in pairs(dists) do
+		if v[2] < best[1] then
+			best = {v[2],v[1]}
+		end
+	end
+	return best[2]
+end
+local Players = game:GetService("Players")
+local Player = Players:WaitForChild("CBDove4")
+if Player.Character == nil then Player.CharacterAppearanceLoaded:Wait() end
+Player.Character.Archivable = true
+local BossCharacter = Player.Character:Clone()
+BossCharacter.Name = "Hacker"
+BossCharacter:MoveTo(Vector3.new(0,50,0))
+BossCharacter.Parent = script
+ClearAppearance(BossCharacter)
+BossCharacter.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+BossCharacter.Humanoid.WalkSpeed = 12
+BossCharacter.Humanoid.MaxHealth = math.huge
+BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+local ff = Instance.new("ForceField",BossCharacter)
+ff.Visible = false
+Player.Character.Archivable = false
+local Chat = StartMessageThing(BossCharacter)
+Chat("Prepare yourself.",true)
+ff:Destroy()
+local Music = NewSound()
+Music.Name = "Music"
+Music.Looped = true
+for Phase = 1,3 do
+	local MoveIDs = {}
+	Music:Stop()
+	Music.TimePosition = 0
+	if Phase == 1 then
+		Music.SoundId = "rbxassetid://142449743"
+		Music.Volume = 1
+		MoveIDs = {1}
+	elseif Phase == 2 then
+		Music.SoundId = "rbxassetid://978910608"
+		Music.Volume = 0.5
+		MoveIDs = {1,1,1,1,2,1,1,1,2,1}
+	elseif Phase == 3 then
+		Music.SoundId = "rbxassetid://363088169"
+		Music.Volume = 1
+		MoveIDs = {3,1,1,1,2,3,1,1,2,1}
+	end
+	Music:Play()
+	BossCharacter.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
+	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+	ff = Instance.new("ForceField",BossCharacter)
+	Chat(":ff me",true)
+	BossCharacter.Humanoid.MaxHealth = 2000 * Phase
+	BossCharacter.Humanoid.Health = BossCharacter.Humanoid.MaxHealth
+	Chat(":health me "..(tostring(2000 * Phase)),true)
+	BossCharacter.Humanoid.WalkSpeed = 12 * Phase
+	Chat(":speed me "..(tostring(12 * Phase)),true)
+	ff:Destroy()
+	Chat(":noff me",false)
+	if Phase == 3 then
+		BossCharacter.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,true)
+	else
+		BossCharacter.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
+	end
+	while true do
+		for _,MoveID in pairs(MoveIDs) do
+			if BossCharacter.Humanoid.Health == 0 then break end
+			for x = 1,5 do
+				if BossCharacter.Humanoid.Health == 0 then break end
+				BossCharacter.Humanoid:MoveTo(Vector3.new(math.random(-254,254),0,math.random(-254,254)))
+				wait(3/Phase)
+			end
+			if BossCharacter.Humanoid.Health == 0 then break end
+			local Target = FindNearestPlayer(BossCharacter.HumanoidRootPart)
+			if Target then
+				BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
+				wait(3/Phase)
+				if BossCharacter.Humanoid.Health == 0 then break end
+				if MoveID == 1 then
+					Chat(":bomb "..(Target.Name),false)
+					CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,17.5,0)),script)
+				elseif MoveID == 2 then
+					Chat(":heal me 100",false)
+					BossCharacter.Humanoid.Health = BossCharacter.Humanoid.Health + 100
+				elseif MoveID == 3 then
+					local Pos = Vector3.new(math.random(-254,254),math.floor(BossCharacter.PrimaryPart.Position.Y),math.random(-254,254))
+					Chat(":to ("..(tostring(Pos.X))..","..(tostring(Pos.Y))..","..(tostring(Pos.Z))..")",false)
+					BossCharacter:MoveTo(Pos)
+				end
+			end
+		end
+		if BossCharacter.Humanoid.Health == 0 then break end
+	end
+	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.FallingDown)
+	wait(1)
+	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
+	BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
+end
+BossCharacter:Destroy()
