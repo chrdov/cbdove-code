@@ -250,8 +250,8 @@ for Phase = 1,3 do
 					Chat(":bomb "..(Target.Name),false)
 					CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,17.5,0)),script)
 				elseif MoveID == 2 then
-					Chat(":heal me 100",false)
-					BossCharacter.Humanoid.Health = BossCharacter.Humanoid.Health + 100
+					Chat(":heal me 500",false)
+					BossCharacter.Humanoid.Health = BossCharacter.Humanoid.Health + 500
 				elseif MoveID == 3 then
 					local Pos = Vector3.new(math.random(-254,254),math.floor(BossCharacter.PrimaryPart.Position.Y),math.random(-254,254))
 					Chat(":to ("..(tostring(Pos.X))..","..(tostring(Pos.Y))..","..(tostring(Pos.Z))..")",false)
