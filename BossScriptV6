@@ -211,7 +211,8 @@ Music.Name = "Music"
 Music.Looped = true
 BossCharacter.Humanoid.HealthChanged:Connect(function()
 	if BossCharacter.Humanoid.Health == 0 and BossCharacter.Humanoid:GetStateEnabled(Enum.HumanoidStateType.Dead) == false then
-		BossCharacter.Humanoid.Health = 1
+		BossCharacter.Humanoid.Health = 10
+		BossCharacter.Humanoid.PlatformStand = true
 	end
 end)
 for Phase = 1,3 do
@@ -243,25 +244,20 @@ for Phase = 1,3 do
 	Chat(":speed me "..(tostring(12 * Phase)),true)
 	ff:Destroy()
 	Chat(":noff me",false)
-	if Phase == 3 then
-		BossCharacter.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,true)
-	else
-		BossCharacter.Humanoid:SetStateEnabled(Enum.HumanoidStateType.Dead,false)
-	end
 	while true do
 		for _,MoveID in pairs(MoveIDs) do
-			if BossCharacter.Humanoid.Health == 1 then break end
+			if BossCharacter.Humanoid.Health <= 10 then break end
 			for x = 1,5 do
-				if BossCharacter.Humanoid.Health == 1 then break end
+				if BossCharacter.Humanoid.Health <= 1 then break end
 				BossCharacter.Humanoid:MoveTo(Vector3.new(math.random(-254,254),0,math.random(-254,254)))
 				wait(3/Phase)
 			end
-			if BossCharacter.Humanoid.Health == 1 then break end
+			if BossCharacter.Humanoid.Health <= 10 then break end
 			local Target = FindNearestPlayer(BossCharacter.HumanoidRootPart)
 			if Target then
 				BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
 				wait(3/Phase)
-				if BossCharacter.Humanoid.Health == 1 then break end
+				if BossCharacter.Humanoid.Health <= 10 then break end
 				if MoveID == 1 then
 					Chat(":bomb "..(Target.Name),false)
 					CreateBomb(CFrame.new(Player.Character.HumanoidRootPart.Position + Vector3.new(0,17.5,0)),script)
@@ -274,12 +270,13 @@ for Phase = 1,3 do
 					BossCharacter:MoveTo(Pos)
 				end
 			end
+			if BossCharacter.Humanoid.Health <= 10 then break end
 		end
-		if BossCharacter.Humanoid.Health == 1 then break end
+		if BossCharacter.Humanoid.Health <= 10 then break end
 	end
-	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.FallingDown)
-	wait(2)
-	BossCharacter.Humanoid:ChangeState(Enum.HumanoidStateType.GettingUp)
 	BossCharacter.Humanoid:MoveTo(BossCharacter.HumanoidRootPart.Position)
+	BossCharacter.Humanoid.PlatformStand = true
+	wait(3)
+	BossCharacter.Humanoid.PlatformStand = false
 end
 BossCharacter:Destroy()
