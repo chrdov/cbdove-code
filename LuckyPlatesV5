@@ -69,35 +69,39 @@ local function OnPlayerAdded(Player)
 		end
 	end)
 	Player.CharacterAdded:Connect(function(Character)
-		Character.Humanoid.Died:Connect(function()
-			if Player.Team == Alive then
-				print((Player.Name).." died.")
-				Player.Team = Dead
-				local Plate = Plates:FindFirstChild(Player.Name)
-				if Plate then
-					Plate.BrickColor = BrickColor.new("Bright red")
-					Plate.Transparency = 0.5
-					local Debris = game:GetService("Debris")
-					Debris:AddItem(Plate,2)
+		if Character:FindFirstChild("Humanoid") then
+			Character.Humanoid.Died:Connect(function()
+				if Player.Team == Alive then
+					print((Player.Name).." died.")
+					Player.Team = Dead
+					local Plate = Plates:FindFirstChild(Player.Name)
+					if Plate then
+						Plate.BrickColor = BrickColor.new("Bright red")
+						Plate.Transparency = 0.5
+						local Debris = game:GetService("Debris")
+						Debris:AddItem(Plate,2)
+					end
 				end
-			end
-		end)
+			end)
+		end
 	end)
 	if Player.Character ~= nil then
 		local Character = Player.Character
-		Character.Humanoid.Died:Connect(function()
-			if Player.Team == Alive then
-				print((Player.Name).." died.")
-				Player.Team = Dead
-				local Plate = Plates:FindFirstChild(Player.Name)
-				if Plate then
-					Plate.BrickColor = BrickColor.new("Bright red")
-					Plate.Transparency = 0.5
-					local Debris = game:GetService("Debris")
-					Debris:AddItem(Plate,2)
+		if Character:FindFirstChild("Humanoid") then
+			Character.Humanoid.Died:Connect(function()
+				if Player.Team == Alive then
+					print((Player.Name).." died.")
+					Player.Team = Dead
+					local Plate = Plates:FindFirstChild(Player.Name)
+					if Plate then
+						Plate.BrickColor = BrickColor.new("Bright red")
+						Plate.Transparency = 0.5
+						local Debris = game:GetService("Debris")
+						Debris:AddItem(Plate,2)
+					end
 				end
-			end
-		end)
+			end)
+		end
 	end
 end
 Players.PlayerAdded:Connect(OnPlayerAdded)
