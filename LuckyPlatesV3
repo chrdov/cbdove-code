@@ -16,21 +16,21 @@ local Players = game:GetService("Players")
 function GetPlayersOnTeam(Team)
 	local TeamPlayers = {}
 	for _,Player in pairs(Players:GetPlayers()) do
-		if Player.Team == Team then
+		if Player.Team == Team and Player.Neutral == false then
 			table.insert(TeamPlayers,#TeamPlayers + 1,Player)
 		end
 	end
 	return TeamPlayers
 end
 local Teams = game:GetService("Teams")
+local Dead = Instance.new("Team",Teams)
+Dead.TeamColor = BrickColor.new("Bright red")
+Dead.Name = "Plates (Dead)"
+Dead.AutoAssignable = false
 local Alive = Instance.new("Team",Teams)
 Alive.TeamColor = BrickColor.new("White")
 Alive.Name = "Plates (Alive)"
 Alive.AutoAssignable = false
-local Dead = Instance.new("Team",Teams)
-Dead.TeamColor = BrickColor.new("White")
-Dead.Name = "Plates (Dead)"
-Dead.AutoAssignable = false
 Teams.DescendantRemoving:Connect(function(Team)
 	if Team == Dead then
 		wait()
@@ -41,7 +41,7 @@ Teams.DescendantRemoving:Connect(function(Team)
 	elseif Team == Alive then
 		wait()
 		Alive = Instance.new("Team",Teams)
-		Alive.TeamColor = BrickColor.new("Bright red")
+		Alive.TeamColor = BrickColor.new("White")
 		Alive.Name = "Plates (Alive)"
 		Alive.AutoAssignable = false
 	end
