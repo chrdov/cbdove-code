@@ -36,7 +36,7 @@ local Origin = Vector3.new((4096 * 64),0,(4096 * 64))
 local Spacing = Vector3.new(32,0,32)
 local Plates = Instance.new("Folder",script)
 Plates.Name = "Plates"
-local Hint = Instance.new("Hint",script)
+local Hint = Instance.new("Hint",game.Workspace)
 local function OnPlayerAdded(Player)
 	Player.Chatted:Connect(function(Message,Recipient)
 		if Recipient == nil then
