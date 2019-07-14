@@ -1,4 +1,4 @@
-local Player = game.Players.LocalPlayer -- Server Portion: h/https://github.com/chrdov/cbdove-code/raw/master/ShadowV2
+local Player = game.Players.LocalPlayer
 script.Parent = Player.PlayerGui
 local Character = Player.Character
 local KeyDown = Character:WaitForChild("KeyDown")
