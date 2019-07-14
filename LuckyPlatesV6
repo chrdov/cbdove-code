@@ -17,38 +17,14 @@ local Players = game:GetService("Players")
 function GetPlayersOnTeam(Team)
 	local TeamPlayers = {}
 	for _,Player in pairs(Players:GetPlayers()) do
-		if Player.Team == Team and Player.Neutral == false then
+		if Player.TeamColor == Team then
 			table.insert(TeamPlayers,#TeamPlayers + 1,Player)
 		end
 	end
 	return TeamPlayers
 end
-local Teams = game:GetService("Teams")
-local Dead = Instance.new("Team",Teams)
-Dead.TeamColor = BrickColor.new("Bright red")
-Dead.Name = "Plates (Dead)"
-Dead.AutoAssignable = false
-local Alive = Instance.new("Team",Teams)
-Alive.TeamColor = BrickColor.new("Bright blue")
-Alive.Name = "Plates (Alive)"
-Alive.AutoAssignable = false
-Teams.DescendantRemoving:Connect(function(Team)
-	if Team == Dead then
-		Dead = Instance.new("Team")
-		wait()
-		Dead.TeamColor = BrickColor.new("Bright red")
-		Dead.Name = "Plates (Dead)"
-		Dead.AutoAssignable = false
-		Dead.Parent = Teams
-	elseif Team == Alive then
-		Alive = Instance.new("Team")
-		wait()
-		Alive.TeamColor = BrickColor.new("Bright blue")
-		Alive.Name = "Plates (Alive)"
-		Alive.AutoAssignable = false
-		Alive.Parent = Teams
-	end
-end)
+local Dead = BrickColor.new("Bright red")
+local Alive = BrickColor.new("Bright blue")
 local Origin = Vector3.new((4096 * 16),0,(4096 * 16) - 24)
 local Spacing = Vector3.new(48,0,48)
 local Plates = Instance.new("Folder",script)
@@ -56,24 +32,22 @@ Plates.Name = "Plates"
 local function OnPlayerAdded(Player)
 	Player.Chatted:Connect(function(Message,Recipient)
 		if Recipient == nil then
-			if Message == "/plates join" and Player.TeamColor == BrickColor.White() and Player.Neutral == true and (#(GetPlayersOnTeam(Dead)) + #(GetPlayersOnTeam(Alive))) < 9 then
-				Player.Team = Dead
-				Player.Neutral = false
-			elseif Message == "/plates leave" and (Player.Team == Dead or Player.Team == Alive) and Player.Neutral == false then
-				if Player.Team == Alive then
+			if Message == "/plates join" and Player.TeamColor == BrickColor.White() and (#(GetPlayersOnTeam(Dead)) + #(GetPlayersOnTeam(Alive))) < 9 then
+				Player.TeamColor = Dead
+			elseif Message == "/plates leave" and (Player.TeamColor == Dead or Player.TeamColor == Alive) then
+				if Player.TeamColor == Alive then
 					Player:LoadCharacter()
 				end
 				Player.TeamColor = BrickColor.White()
-				Player.Neutral = true
 			end
 		end
 	end)
 	Player.CharacterAdded:Connect(function(Character)
 		if Character:FindFirstChild("Humanoid") then
 			Character.Humanoid.Died:Connect(function()
-				if Player.Team == Alive then
+				if Player.TeamColor == Alive then
 					print((Player.Name).." died.")
-					Player.Team = Dead
+					Player.TeamColor = Dead
 					local Plate = Plates:FindFirstChild(Player.Name)
 					if Plate then
 						Plate.BrickColor = BrickColor.new("Bright red")
@@ -89,9 +63,9 @@ local function OnPlayerAdded(Player)
 		local Character = Player.Character
 		if Character:FindFirstChild("Humanoid") then
 			Character.Humanoid.Died:Connect(function()
-				if Player.Team == Alive then
+				if Player.TeamColor == Alive then
 					print((Player.Name).." died.")
-					Player.Team = Dead
+					Player.TeamColor = Dead
 					local Plate = Plates:FindFirstChild(Player.Name)
 					if Plate then
 						Plate.BrickColor = BrickColor.new("Bright red")
