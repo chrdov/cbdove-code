@@ -18,7 +18,7 @@ local Players = game:GetService("Players")
 function GetPlayersOnTeam(Team)
 	local TeamPlayers = {}
 	for _,Player in pairs(Players:GetPlayers()) do
-		if Player.TeamColor == Team then
+		if Player.TeamColor == Team and (not Player.Neutral) then
 			table.insert(TeamPlayers,#TeamPlayers + 1,Player)
 		end
 	end
