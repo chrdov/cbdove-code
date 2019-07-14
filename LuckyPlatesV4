@@ -10,6 +10,7 @@ local function NewPlate(Position,Name,Parent,Size)
 	o1.BottomSurface = Enum.SurfaceType.Smooth
 	o1.TopSurface = Enum.SurfaceType.Smooth
 	o1.Parent = Parent or script
+	wait(0.1)
 	return o1
 end
 local Players = game:GetService("Players")
@@ -28,22 +29,24 @@ Dead.TeamColor = BrickColor.new("Bright red")
 Dead.Name = "Plates (Dead)"
 Dead.AutoAssignable = false
 local Alive = Instance.new("Team",Teams)
-Alive.TeamColor = BrickColor.new("White")
+Alive.TeamColor = BrickColor.new("Bright blue")
 Alive.Name = "Plates (Alive)"
 Alive.AutoAssignable = false
 Teams.DescendantRemoving:Connect(function(Team)
 	if Team == Dead then
+		Dead = Instance.new("Team")
 		wait()
-		Dead = Instance.new("Team",Teams)
 		Dead.TeamColor = BrickColor.new("Bright red")
 		Dead.Name = "Plates (Dead)"
 		Dead.AutoAssignable = false
+		Dead.Parent = Teams
 	elseif Team == Alive then
+		Alive = Instance.new("Team")
 		wait()
-		Alive = Instance.new("Team",Teams)
-		Alive.TeamColor = BrickColor.new("White")
+		Alive.TeamColor = BrickColor.new("Bright blue")
 		Alive.Name = "Plates (Alive)"
 		Alive.AutoAssignable = false
+		Alive.Parent = Teams
 	end
 end)
 local Origin = Vector3.new((4096 * 16),0,(4096 * 16) - 24)
@@ -125,7 +128,6 @@ while true do
 					else
 						local Plate = NewPlate(Origin + (Spacing * Vector3.new(x,0,z / 5)),"Dummy",Plates)
 					end
-					wait(0.2)
 				end
 			end
 			if #(GetPlayersOnTeam(Alive)) > 1 then
