@@ -1,0 +1,35 @@
+local Player = owner -- Client Portion: hl/https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV2
+local Character = Player.Character
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
+local InvisParts = {}
+KeyDown.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player then
+		if Key == "f" then
+			for _,Part in pairs(Character:GetDescendants()) do
+				if Part:IsA("BasePart") then
+					InvisParts[Part] = Part.Transparency
+					Part.Transparency = 1
+				elseif Part:IsA("Humanoid") then
+					Part.WalkSpeed = Part.WalkSpeed * 3
+				end
+			end
+		end
+	end
+end)
+KeyUp.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player then
+		if Key == "f" then
+			for _,Part in pairs(Character:GetDescendants()) do
+				if Part:IsA("BasePart") then
+					Part.Transparency = InvisParts[Part]
+					InvisParts[Part] = nil
+				elseif Part:IsA("Humanoid") then
+					Part.WalkSpeed = Part.WalkSpeed / 3
+				end
+			end
+		end
+	end
+end)
