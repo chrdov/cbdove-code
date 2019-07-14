@@ -9,7 +9,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player then
 		if Key == "f" then
 			for _,Part in pairs(Character:GetDescendants()) do
-				if Part:IsA("BasePart") then
+				if Part:IsA("BasePart") or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
 					Part.Transparency = 1
 				elseif Part:IsA("Humanoid") then
@@ -23,7 +23,7 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player then
 		if Key == "f" then
 			for _,Part in pairs(Character:GetDescendants()) do
-				if Part:IsA("BasePart") then
+				if Part:IsA("BasePart") or Part:IsA("Decal") then
 					Part.Transparency = InvisParts[Part]
 					InvisParts[Part] = nil
 				elseif Part:IsA("Humanoid") then
