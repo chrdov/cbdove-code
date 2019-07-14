@@ -27,11 +27,11 @@ end
 local Dead = BrickColor.new("Bright red")
 local Alive = BrickColor.new("Bright blue")
 local Team1 = Instance.new("Team",game:GetService("Teams"))
-Team1.Name = "Lucky Plates SB (Dead)"
+Team1.Name = "Lucky Plates SBE (Dead)"
 Team1.TeamColor = Dead
 Team1.AutoAssignable = false
 local Team2 = Instance.new("Team",game:GetService("Teams"))
-Team2.Name = "Lucky Plates SB (Alive)"
+Team2.Name = "Lucky Plates SBE (Alive)"
 Team2.TeamColor = Alive
 Team2.AutoAssignable = false
 local Origin = Vector3.new((4096 * 64),0,(4096 * 64))
