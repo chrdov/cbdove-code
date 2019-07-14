@@ -13,8 +13,10 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 				if Part:IsA("BasePart") or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
 					Part.Transparency = 0.75
-					PartColors[Part] = Part.Color
-					Part.Color = Color3.new(0,0,0)
+					if Part:IsA("BasePart") then
+						PartColors[Part] = Part.Color
+						Part.Color = Color3.new(0,0,0)
+					end
 				elseif Part:IsA("Humanoid") then
 					Part.WalkSpeed = Part.WalkSpeed * 3
 				end
@@ -29,8 +31,10 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
 				if Part:IsA("BasePart") or Part:IsA("Decal") then
 					Part.Transparency = InvisParts[Part]
 					InvisParts[Part] = nil
-					Part.Color = PartColors[Part]
-					PartColors[Part] = nil
+					if Part:IsA("BasePart") then
+						Part.Color = PartColors[Part]
+						PartColors[Part] = nil
+					end
 				elseif Part:IsA("Humanoid") then
 					Part.WalkSpeed = Part.WalkSpeed / 3
 				end
