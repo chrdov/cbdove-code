@@ -12,10 +12,12 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			for _,Part in pairs(Character:GetDescendants()) do
 				if Part:IsA("BasePart") or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
-					Part.Transparency = 0.75
 					if Part:IsA("BasePart") then
+						Part.Transparency = 0.75
 						PartColors[Part] = Part.Color
 						Part.Color = Color3.new(0,0,0)
+					else
+						Part.Transparency = 1
 					end
 				elseif Part:IsA("Humanoid") then
 					Part.WalkSpeed = Part.WalkSpeed * 3
