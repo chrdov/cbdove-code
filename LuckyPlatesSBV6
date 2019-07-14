@@ -108,8 +108,8 @@ while true do
 		Hint.Text = ""
 		if (#(GetPlayersOnTeam(Dead)) + #(GetPlayersOnTeam(Alive))) > 1 then
 			local DeadPlayers = GetPlayersOnTeam(Dead)
-			for z = 0,20,5 do
-				for x = 1,5,1 do
+			for z = 0,12,4 do
+				for x = 1,4,1 do
 					local Player = DeadPlayers[x + z]
 					if Player ~= nil then
 						local Plate = NewPlate(Origin + (Spacing * Vector3.new(x,0,z / 5)),Player.Name,Plates)
