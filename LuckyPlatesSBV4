@@ -42,13 +42,15 @@ local Hint = Instance.new("Hint",game.Workspace)
 local function OnPlayerAdded(Player)
 	Player.Chatted:Connect(function(Message,Recipient)
 		if Recipient == nil then
-			if Message == "/plates in" and Player.TeamColor == BrickColor.White() and (#(GetPlayersOnTeam(Dead)) + #(GetPlayersOnTeam(Alive))) < 9 then
+			if Message == "/plates in" and Player.TeamColor == BrickColor.White() and (Player.Neutral) and (#(GetPlayersOnTeam(Dead)) + #(GetPlayersOnTeam(Alive))) < 9 then
 				Player.TeamColor = Dead
-			elseif Message == "/plates out" and (Player.TeamColor == Dead or Player.TeamColor == Alive) then
+				Player.Neutral = false
+			elseif Message == "/plates out" and (Player.TeamColor == Dead or Player.TeamColor == Alive) and (not Player.Neutral) then
 				if Player.TeamColor == Alive then
 					Player:LoadCharacter()
 				end
 				Player.TeamColor = BrickColor.White()
+				Player.Neutral = true
 			end
 		end
 	end)
