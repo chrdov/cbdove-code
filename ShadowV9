@@ -10,7 +10,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player then
 		if Key == "f" then
 			for _,Part in pairs(Character:GetDescendants()) do
-				if Part:IsA("BasePart") or Part:IsA("Decal") and Part.Name ~= "HumanoidRootPart" then
+				if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
 					if Part:IsA("BasePart") then
 						Part.Transparency = 0.75
