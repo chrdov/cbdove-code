@@ -1,4 +1,4 @@
-local Player = owner -- Client Portion: hl/https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV2
+local Player = owner -- Client Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV2
 local Character = Player.Character
 local KeyDown = Instance.new("RemoteEvent",Character)
 local KeyUp = Instance.new("RemoteEvent",Character)
