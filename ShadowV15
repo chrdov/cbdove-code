@@ -8,7 +8,7 @@ local InvisParts = {}
 local debounce = {}
 local Invisible = false
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
-	if Plr == Player and debounce[Key] == false then
+	if Plr == Player and debounce[Key] == nil then
 		debounce[Key] = true
 		if Key == "f" then
 			Invisible = not Invisible
@@ -43,6 +43,6 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and debounce[Key] == true then
-		debounce[Key] = false
+		debounce[Key] = nil
 	end
 end)
