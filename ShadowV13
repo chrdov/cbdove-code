@@ -5,18 +5,16 @@ local KeyUp = Instance.new("RemoteEvent",Character)
 KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 local InvisParts = {}
-local PartColors = {}
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player then
 		if Key == "f" then
 			for _,Part in pairs(Character:GetDescendants()) do
 				if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
-					Part.Transparency = 1
-					if Part:IsA("BasePart") then
-						PartColors[Part] = Part.Color
-						Part.Color = Color3.new(0,0,0)
-					end
+					local TweenService = game:GetService("TweenService")
+					local TweenProperties = {Transparency = 1}
+					local Tween = TweenService:Create(Part,TweenInfo.new(0.1),TweenProperties)
+					Tween:Play()
 				elseif Part:IsA("Humanoid") then
 					Part.WalkSpeed = Part.WalkSpeed * 3
 				end
@@ -29,12 +27,11 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
 		if Key == "f" then
 			for _,Part in pairs(Character:GetDescendants()) do
 				if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
-					Part.Transparency = InvisParts[Part]
+					local TweenService = game:GetService("TweenService")
+					local TweenProperties = {Transparency = InvisParts[Part]}
+					local Tween = TweenService:Create(Part,TweenInfo.new(0.1),TweenProperties)
+					Tween:Play()
 					InvisParts[Part] = nil
-					if Part:IsA("BasePart") then
-						Part.Color = PartColors[Part]
-						PartColors[Part] = nil
-					end
 				elseif Part:IsA("Humanoid") then
 					Part.WalkSpeed = Part.WalkSpeed / 3
 				end
