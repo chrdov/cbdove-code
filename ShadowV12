@@ -12,7 +12,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			for _,Part in pairs(Character:GetDescendants()) do
 				if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 					InvisParts[Part] = Part.Transparency
-					Part.Transparency = 0.75
+					Part.Transparency = 1
 					if Part:IsA("BasePart") then
 						PartColors[Part] = Part.Color
 						Part.Color = Color3.new(0,0,0)
