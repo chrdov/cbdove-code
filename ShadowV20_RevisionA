@@ -14,12 +14,6 @@ local Target = {}
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
-		if Target.Point ~= nil then
-			print("("..Target.Point.X..","..Target.Point.Y..","..Target.Point.Z..")")
-		end
-		if Target.Part ~= nil then
-			print(Target.Part:GetFullName())
-		end
 		if debounce[Key] == nil then
 			debounce[Key] = true
 			if Key == "f" then
