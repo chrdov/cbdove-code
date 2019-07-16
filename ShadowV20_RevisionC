@@ -61,6 +61,7 @@ spawn(function()
 	local Debris = game:GetService("Debris")
 	while wait(1/20) do
 		if Invisible then
+			wait(0.5 - 1/20)
 			if Invisible then
 				local Clone = Instance.new("Model")
 				for _,Part in pairs(Character:GetChildren()) do
