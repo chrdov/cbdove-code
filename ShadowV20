@@ -23,7 +23,6 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							Tween:Play()
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
-								wait(0.1)
 								Part.WalkSpeed = Part.WalkSpeed * 3
 							end)
 						end
@@ -38,6 +37,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							InvisParts[Part] = nil
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
+								wait(0.1)
 								Part.WalkSpeed = Part.WalkSpeed / 3
 							end)
 						end
