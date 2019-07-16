@@ -1,0 +1,55 @@
+local Player = owner -- Client Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV4
+local Character = Player.Character
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
+local InvisParts = {}
+local debounce = {}
+local Invisible = false
+KeyDown.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player then
+		if debounce[Key] == nil then
+			debounce[Key] = true
+			if Key == "f" then
+				Invisible = not Invisible
+				if Invisible then
+					for _,Part in pairs(Character:GetDescendants()) do
+						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
+							InvisParts[Part] = Part.Transparency
+							local TweenService = game:GetService("TweenService")
+							local TweenProperties = {Transparency = 1}
+							local Tween = TweenService:Create(Part,TweenInfo.new(0.1),TweenProperties)
+							Tween:Play()
+						elseif Part:IsA("Humanoid") then
+							spawn(function()
+								wait(0.1)
+								Part.WalkSpeed = Part.WalkSpeed * 3
+							end)
+						end
+					end
+				elseif not Invisible then
+					for _,Part in pairs(Character:GetDescendants()) do
+						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
+							local TweenService = game:GetService("TweenService")
+							local TweenProperties = {Transparency = InvisParts[Part]}
+							local Tween = TweenService:Create(Part,TweenInfo.new(0.1),TweenProperties)
+							Tween:Play()
+							InvisParts[Part] = nil
+						elseif Part:IsA("Humanoid") then
+							spawn(function()
+								Part.WalkSpeed = Part.WalkSpeed / 3
+							end)
+						end
+					end
+				end
+				wait(0.1)
+			end
+			debounce[Key] = nil
+		end
+	end
+end)
+KeyUp.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player then
+	end
+end)f
