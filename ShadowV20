@@ -6,9 +6,11 @@ KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 local InvisParts = {}
 local debounce = {}
+local heldKeys = {}
 local Invisible = false
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
-	if Plr == Player then
+	if Plr == Player and heldKeys[Key] == nil then
+		heldKeys[Key] = true
 		if debounce[Key] == nil then
 			debounce[Key] = true
 			if Key == "f" then
@@ -50,6 +52,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	end
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
-	if Plr == Player then
+	if Plr == Player and heldKeys[Key] == true then
+		heldKeys[Key] = nil
 	end
-end)f
+end)
