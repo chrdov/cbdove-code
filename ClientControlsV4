@@ -2,7 +2,11 @@ local Player = game.Players.LocalPlayer
 script.Parent = Player.PlayerGui
 local Character = Player.Character
 local KeyDown = Character:WaitForChild("KeyDown")
+local KeyUp = Character:WaitForChild("KeyUp")
 local Mouse = Player:GetMouse()
 Mouse.KeyDown:connect(function(key)
 KeyDown:FireServer(key)
+end)
+Mouse.KeyUp:connect(function(key)
+KeyUp:FireServer(key)
 end)
