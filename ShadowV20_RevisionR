@@ -81,6 +81,7 @@ function NewExplosionPart(Position,Distance)
 		o2:Play()
 		spawn(function()
 			o2.Ended:Wait()
+			o1.CanCollide = false
 			Tween:Play()
 			Debris:AddItem(o1,1/8)
 		end)
