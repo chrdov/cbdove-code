@@ -1,5 +1,73 @@
+function GetNearbyHumanoids(Position,Distance,OwnerCharacter)
+	if OwnerCharacter == nil then
+		OwnerCharacter = Instance.new("Model")
+		OwnerCharacter.Name = "nil"
+	end
+	local Humanoids = {}
+	local Descendants = game.Workspace:GetDescendants()
+	for _,Object in pairs(Descendants) do
+		if Object:IsA("Model") and Object ~= OwnerCharacter then
+			local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+			if Humanoid ~= nil then
+				local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
+				if HumanoidRootPart ~= nil then
+					if Distance > (HumanoidRootPart.Position - Position).Magnitude then
+						Distance = (HumanoidRootPart.Position - Position).Magnitude
+						table.insert(Humanoids,1,Humanoid)
+					end
+				end
+			end
+		end
+	end
+	return Humanoids
+end
 local Player = owner -- Client Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV5
 local Character = Player.Character
+function NewHurtSphere(Position,Distance,Damage)
+	local debounce = false
+	local function DoDamage()
+		if debounce then return end
+		debounce = true
+		local Humanoids = GetNearbyHumanoids(Position,Distance,Character)
+		for _,Humanoid in pairs(Humanoids) do
+			Humanoid:TakeDamage(Damage)
+		end
+	end
+	return DoDamage
+end
+function NewExplosionPart(Position,Distance)
+	local TweenService = game:GetService("TweenService")
+	local TweenProperties = {Size = Vector3.new(2,2,2),Transparency = 1}
+	local o1 = Instance.new("Part")
+	local o2 = Instance.new("Sound")
+	o1.BottomSurface = Enum.SurfaceType.Smooth
+	o1.TopSurface = Enum.SurfaceType.Smooth
+	o1.Anchored = true
+	o1.CanCollide = false
+	o1.Color = Color3.new(0,0,0)
+	o1.Shape = Enum.PartType.Ball
+	o1.Size = Vector3.new(2,2,2)
+	o1.Transparency = 0
+	o1.Material = Enum.Material.SmoothPlastic
+	o1.CFrame = CFrame.new(Position)
+	o2.Name = "Explode"
+	o2.Parent = o1
+	o2.PlaybackSpeed = 4
+	o2.SoundId = "rbxassetid://12222084"
+	o2.Volume = 1
+	local Tween = TweenService:Create(o1,TweenInfo.new(o2.TimeLength / (o2.PlaybackSpeed * 4)),TweenProperties)
+	local debounce = false
+	local function PlayExplosion()
+		if debounce then return end
+		debounce = true
+		local Debris = game:GetService("Debris")
+		o1.Parent = game.Workspace
+		Tween:Play()
+		o2:Play()
+		Debris:AddItem(o1,o2.TimeLength / o2.PlaybackSpeed)
+	end
+	return PlayExplosion
+end
 local CloneT = Instance.new("Model")
 for _,Part in pairs(Character:GetChildren()) do
 	if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) then
@@ -17,6 +85,12 @@ for _,Part in pairs(Character:GetChildren()) do
 		PClone.Parent = CloneT
 	end
 end
+local Humanoid = Character:FindFirstChildOfClass("Humanoid")
+Character.Health.Disabled = true
+if Humanoid ~= nil then
+	Humanoid.MaxHealth = 1000000
+	Humanoid.Health = Humanoid.MaxHealth
+end
 local KeyDown = Instance.new("RemoteEvent",Character)
 local KeyUp = Instance.new("RemoteEvent",Character)
 local MouseMove = Instance.new("RemoteEvent",Character)
@@ -29,15 +103,15 @@ local heldKeys = {}
 local Invisible = false
 local Target = {}
 local FF
-local Counter = 1/5
+local Counter = 1/2
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
 		if debounce[Key] == nil then
 			debounce[Key] = true
-			if Key == "f" then
+			if Key == "q" then
 				if not Invisible then
-					Counter = 1/5
+					Counter = 1/2
 					if FF == nil then
 						FF = Instance.new("ForceField",Character)
 						FF.Visible = false
@@ -47,11 +121,11 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							InvisParts[Part] = Part.Transparency
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = 1}
-							local Tween = TweenService:Create(Part,TweenInfo.new(0.125),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
 							Tween:Play()
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
-								wait(0.125)
+								wait(1/4)
 								Part.WalkSpeed = Part.WalkSpeed * 1.5
 								Part.MaxHealth = Part.MaxHealth * 100
 								Part.Health = Part.Health * 100
@@ -59,7 +133,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 						end
 					end
 					Invisible = not Invisible
-					wait(0.125)
+					wait(1/2)
 				elseif Invisible then
 					if FF ~= nil then
 						FF:Destroy()
@@ -69,7 +143,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = InvisParts[Part]}
-							local Tween = TweenService:Create(Part,TweenInfo.new(0.125),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
 							Tween:Play()
 							InvisParts[Part] = nil
 						elseif Part:IsA("Humanoid") then
@@ -80,9 +154,18 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							end)
 						end
 					end
-					wait(0.125)
+					wait(1/2)
 					Invisible = not Invisible
 				end
+			elseif Key == "e" and (not Invisible) then
+				local Position = Target.Point
+				local Distance = 10
+				local Damage = 10
+				local Explode = NewExplosionPart(Position,Distance)
+				local DoDamage = NewHurtSphere(Position,Distance,Damage)
+				Explode()
+				DoDamage()
+				wait(1/4)
 			end
 			debounce[Key] = nil
 		end
@@ -99,7 +182,7 @@ RunService.Heartbeat:Connect(function(x)
 				Counter = 0
 			end
 			if Counter == 0 and Invisible then
-				Counter = 1/5
+				Counter = 1/2
 				local Clone = CloneT:Clone()
 				for _,Part2 in pairs(CloneT:GetChildren()) do
 					local Part1 = Character:FindFirstChild(Part2.Name)
@@ -117,11 +200,11 @@ RunService.Heartbeat:Connect(function(x)
 						end
 						local TweenService = game:GetService("TweenService")
 						local TweenProperties = {Transparency = 1}
-						local Tween = TweenService:Create(Part,TweenInfo.new(1),TweenProperties)
+						local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
 						Tween:Play()
 					end
 				end
-				Debris:AddItem(Clone,1)
+				Debris:AddItem(Clone,1/4)
 			end
 		end
 	end
