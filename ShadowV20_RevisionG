@@ -87,12 +87,18 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	end
 end)
 local RunService = game:GetService("RunService")
-RunService.Heartbeat:Connect(function(x)
+local Counter = 1/15
+RunService.Heartbeat:Connect(function()
 	if Character.Parent ~= nil then
 		local TweenService = game:GetService("TweenService")
 		local Debris = game:GetService("Debris")
 		if Invisible then
-			if Invisible then
+			Counter = Counter - x
+			if Counter < 0 then
+				Counter = 0
+			end
+			if Counter == 0 and Invisible then
+				Counter = 1/15
 				local Clone = CloneT:Clone()
 				for _,Part2 in pairs(CloneT:GetChildren()) do
 					local Part1 = Character:FindFirstChild(Part2.Name)
