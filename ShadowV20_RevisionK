@@ -29,6 +29,7 @@ local heldKeys = {}
 local Invisible = false
 local Target = {}
 local FF
+local Counter = 1/5
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
@@ -36,6 +37,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			debounce[Key] = true
 			if Key == "f" then
 				if not Invisible then
+					Counter = 1/5
 					if FF == nil then
 						FF = Instance.new("ForceField",Character)
 						FF.Visible = false
@@ -87,7 +89,6 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	end
 end)
 local RunService = game:GetService("RunService")
-local Counter = 1/15
 RunService.Heartbeat:Connect(function(x)
 	if Character.Parent ~= nil then
 		local TweenService = game:GetService("TweenService")
@@ -98,7 +99,7 @@ RunService.Heartbeat:Connect(function(x)
 				Counter = 0
 			end
 			if Counter == 0 and Invisible then
-				Counter = 1/15
+				Counter = 1/5
 				local Clone = CloneT:Clone()
 				for _,Part2 in pairs(CloneT:GetChildren()) do
 					local Part1 = Character:FindFirstChild(Part2.Name)
