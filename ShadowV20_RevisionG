@@ -9,6 +9,9 @@ for _,Part in pairs(Character:GetChildren()) do
 		for _,Thing in pairs(PClone:GetChildren()) do
 			if (not Thing:IsA("DataModelMesh")) then
 				Thing:Destroy()
+			else
+				Thing.Scale = Thing.Scale + Vector3.new(0.15,0.15,0.15)
+				Thing.Offset = Thing.Offset + Vector3.new(0,0.05,0)
 			end
 		end
 		PClone.Parent = CloneT
@@ -25,6 +28,7 @@ local debounce = {}
 local heldKeys = {}
 local Invisible = false
 local Target = {}
+local FF
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
@@ -32,41 +36,49 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			debounce[Key] = true
 			if Key == "f" then
 				if not Invisible then
+					if FF == nil then
+						FF = Instance.new("ForceField",Character)
+						FF.Visible = false
+					end
 					for _,Part in pairs(Character:GetDescendants()) do
 						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 							InvisParts[Part] = Part.Transparency
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = 1}
-							local Tween = TweenService:Create(Part,TweenInfo.new(0.25),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(0.125),TweenProperties)
 							Tween:Play()
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
-								wait(0.25)
+								wait(0.125)
 								Part.WalkSpeed = Part.WalkSpeed * 1.5
-								Part.MaxHealth = Part.MaxHealth * 10
-								Part.Health = Part.Health * 10
+								Part.MaxHealth = Part.MaxHealth * 100
+								Part.Health = Part.Health * 100
 							end)
 						end
 					end
 					Invisible = not Invisible
-					wait(0.25)
+					wait(0.125)
 				elseif Invisible then
+					if FF ~= nil then
+						FF:Destroy()
+						FF = nil
+					end
 					for _,Part in pairs(Character:GetDescendants()) do
 						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = InvisParts[Part]}
-							local Tween = TweenService:Create(Part,TweenInfo.new(0.25),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(0.125),TweenProperties)
 							Tween:Play()
 							InvisParts[Part] = nil
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
 								Part.WalkSpeed = Part.WalkSpeed / 1.5
-								Part.Health = Part.Health / 10
-								Part.MaxHealth = Part.MaxHealth / 10
+								Part.Health = Part.Health / 100
+								Part.MaxHealth = Part.MaxHealth / 100
 							end)
 						end
 					end
-					wait(0.25)
+					wait(0.125)
 					Invisible = not Invisible
 				end
 			end
@@ -75,33 +87,35 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	end
 end)
 local RunService = game:GetService("RunService")
-RunService.Heartbeat:Connect(function()
-	local TweenService = game:GetService("TweenService")
-	local Debris = game:GetService("Debris")
-	if Invisible then
+RunService.Heartbeat:Connect(function(x)
+	if Character.Parent ~= nil then
+		local TweenService = game:GetService("TweenService")
+		local Debris = game:GetService("Debris")
 		if Invisible then
-			local Clone = CloneT:Clone()
-			for _,Part2 in pairs(CloneT:GetChildren()) do
-				local Part1 = Character:FindFirstChild(Part2.Name)
-				if Part1 ~= nil then
-					Part2.CFrame = Part1.CFrame
-				end
-			end
-			Clone.Parent = game.Workspace
-			for _,Part in pairs(Clone:GetDescendants()) do
-				if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
-					Part.Transparency = 0.9
-					if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) then
-						Part.Anchored = true
-						Part.CanCollide = false
+			if Invisible then
+				local Clone = CloneT:Clone()
+				for _,Part2 in pairs(CloneT:GetChildren()) do
+					local Part1 = Character:FindFirstChild(Part2.Name)
+					if Part1 ~= nil then
+						Part2.CFrame = Part1.CFrame
 					end
-					local TweenService = game:GetService("TweenService")
-					local TweenProperties = {Transparency = 1}
-					local Tween = TweenService:Create(Part,TweenInfo.new(0.25),TweenProperties)
-					Tween:Play()
 				end
+				Clone.Parent = game.Workspace.Terrain
+				for _,Part in pairs(Clone:GetDescendants()) do
+					if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
+						Part.Transparency = 0.975
+						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) then
+							Part.Anchored = true
+							Part.CanCollide = false
+						end
+						local TweenService = game:GetService("TweenService")
+						local TweenProperties = {Transparency = 1}
+						local Tween = TweenService:Create(Part,TweenInfo.new(1),TweenProperties)
+						Tween:Play()
+					end
+				end
+				Debris:AddItem(Clone,1)
 			end
-			Debris:AddItem(Clone,0.25)
 		end
 	end
 end)
