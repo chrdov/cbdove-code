@@ -55,7 +55,6 @@ function NewExplosionPart(Position,Distance)
 	local TweenService = game:GetService("TweenService")
 	local TweenProperties = {Transparency = 1}
 	local o1 = Instance.new("Part")
-	local o2 = Instance.new("Sound")
 	o1.BottomSurface = Enum.SurfaceType.Smooth
 	o1.TopSurface = Enum.SurfaceType.Smooth
 	o1.Anchored = true
@@ -66,11 +65,6 @@ function NewExplosionPart(Position,Distance)
 	o1.Transparency = 0
 	o1.Material = Enum.Material.SmoothPlastic
 	o1.CFrame = CFrame.new(Position)
-	o2.Name = "Explode"
-	o2.Parent = o1
-	o2.PlaybackSpeed = 6
-	o2.SoundId = "rbxassetid://12222084"
-	o2.Volume = 0.5
 	local Tween = TweenService:Create(o1,TweenInfo.new(1/4),TweenProperties)
 	local debounce = false
 	local function PlayExplosion()
@@ -78,7 +72,6 @@ function NewExplosionPart(Position,Distance)
 		debounce = true
 		local Debris = game:GetService("Debris")
 		o1.Parent = script
-		o2:Play()
 		Tween:Play()
 		Debris:AddItem(o1,1/4)
 	end
