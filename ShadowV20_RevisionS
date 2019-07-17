@@ -59,7 +59,7 @@ function NewExplosionPart(Position,Distance)
 	o1.BottomSurface = Enum.SurfaceType.Smooth
 	o1.TopSurface = Enum.SurfaceType.Smooth
 	o1.Anchored = true
-	o1.CanCollide = true
+	o1.CanCollide = false
 	o1.Color = Color3.new(0,0,0)
 	o1.Shape = Enum.PartType.Ball
 	o1.Size = Vector3.new(2,2,2) * Distance
@@ -68,10 +68,10 @@ function NewExplosionPart(Position,Distance)
 	o1.CFrame = CFrame.new(Position)
 	o2.Name = "Explode"
 	o2.Parent = o1
-	o2.PlaybackSpeed = 4
+	o2.PlaybackSpeed = 6
 	o2.SoundId = "rbxassetid://12222084"
-	o2.Volume = 1
-	local Tween = TweenService:Create(o1,TweenInfo.new(1/8),TweenProperties)
+	o2.Volume = 0.5
+	local Tween = TweenService:Create(o1,TweenInfo.new(1/4),TweenProperties)
 	local debounce = false
 	local function PlayExplosion()
 		if debounce then return end
@@ -79,12 +79,8 @@ function NewExplosionPart(Position,Distance)
 		local Debris = game:GetService("Debris")
 		o1.Parent = script
 		o2:Play()
-		spawn(function()
-			o2.Ended:Wait()
-			o1.CanCollide = false
-			Tween:Play()
-			Debris:AddItem(o1,1/8)
-		end)
+		Tween:Play()
+		Debris:AddItem(o1,1/4)
 	end
 	return PlayExplosion
 end
@@ -178,14 +174,16 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					Invisible = not Invisible
 				end
 			elseif Key == "e" and (not Invisible) then
-				local Position = Target.Point
-				local Distance = 10
-				local Damage = 10
-				local Explode = NewExplosionPart(Position,Distance)
-				local DoDamage = NewHurtSphere(Position,Distance,Damage)
-				Explode()
-				DoDamage()
-				wait(1/4)
+				while heldKeys[Key] do
+					local Position = Target.Point
+					local Distance = 10
+					local Damage = 10
+					local Explode = NewExplosionPart(Position,Distance)
+					local DoDamage = NewHurtSphere(Position,Distance,Damage)
+					Explode()
+					DoDamage()
+					wait(1/8)
+				end
 			end
 			debounce[Key] = nil
 		end
