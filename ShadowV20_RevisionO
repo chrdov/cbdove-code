@@ -37,7 +37,7 @@ function NewHurtSphere(Position,Distance,Damage)
 end
 function NewExplosionPart(Position,Distance)
 	local TweenService = game:GetService("TweenService")
-	local TweenProperties = {Size = Vector3.new(2,2,2),Transparency = 1}
+	local TweenProperties = {Size = Vector3.new(2,2,2)}
 	local o1 = Instance.new("Part")
 	local o2 = Instance.new("Sound")
 	o1.BottomSurface = Enum.SurfaceType.Smooth
@@ -61,7 +61,7 @@ function NewExplosionPart(Position,Distance)
 		if debounce then return end
 		debounce = true
 		local Debris = game:GetService("Debris")
-		o1.Parent = game.Workspace
+		o1.Parent = script
 		Tween:Play()
 		o2:Play()
 		Debris:AddItem(o1,o2.TimeLength / o2.PlaybackSpeed)
