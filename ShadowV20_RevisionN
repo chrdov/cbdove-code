@@ -157,7 +157,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					wait(1/2)
 					Invisible = not Invisible
 				end
-			elseif Key == "e" and (not Invisible) then
+			elseif Key == "e" then
 				local Position = Target.Point
 				local Distance = 10
 				local Damage = 10
