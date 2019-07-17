@@ -110,7 +110,7 @@ RunService.Heartbeat:Connect(function(x)
 				Clone.Parent = game.Workspace.Terrain
 				for _,Part in pairs(Clone:GetDescendants()) do
 					if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
-						Part.Transparency = 0.975
+						Part.Transparency = 0.75
 						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) then
 							Part.Anchored = true
 							Part.CanCollide = false
