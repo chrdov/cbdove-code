@@ -63,7 +63,7 @@ function NewExplosionPart(Position,Distance)
 	o1.Color = Color3.new(0,0,0)
 	o1.Shape = Enum.PartType.Ball
 	o1.Size = Vector3.new(2,2,2) * Distance
-	o1.Transparency = 1
+	o1.Transparency = 0
 	o1.Material = Enum.Material.SmoothPlastic
 	o1.CFrame = CFrame.new(Position)
 	o2.Name = "Explode"
