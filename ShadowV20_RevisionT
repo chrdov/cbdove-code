@@ -182,7 +182,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					local DoDamage = NewHurtSphere(Position,Distance,Damage)
 					Explode()
 					DoDamage()
-					wait(1/8)
+					wait(1/4)
 				end
 			end
 			debounce[Key] = nil
