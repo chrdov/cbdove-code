@@ -88,7 +88,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 end)
 local RunService = game:GetService("RunService")
 local Counter = 1/15
-RunService.Heartbeat:Connect(function()
+RunService.Heartbeat:Connect(function(x)
 	if Character.Parent ~= nil then
 		local TweenService = game:GetService("TweenService")
 		local Debris = game:GetService("Debris")
