@@ -1,3 +1,4 @@
+-- Client Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV5
 function GetNearbyHumanoids(Position,Distance,OwnerCharacter)
 	if OwnerCharacter == nil then
 		OwnerCharacter = Instance.new("Model")
@@ -9,7 +10,7 @@ function GetNearbyHumanoids(Position,Distance,OwnerCharacter)
 		if Object:IsA("Model") and Object ~= OwnerCharacter then
 			local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 			if Humanoid ~= nil then
-				local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
+				local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart") or Object:FindFirstChild("Torso")
 				if HumanoidRootPart ~= nil then
 					if Distance > (HumanoidRootPart.Position - Position).Magnitude then
 						Distance = (HumanoidRootPart.Position - Position).Magnitude
@@ -21,33 +22,48 @@ function GetNearbyHumanoids(Position,Distance,OwnerCharacter)
 	end
 	return Humanoids
 end
-local Player = owner -- Client Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV5
+local Player = owner
 local Character = Player.Character
-function NewHurtSphere(Position,Distance,Damage)
-	local debounce = false
-	local function DoDamage()
-		if debounce then return end
-		debounce = true
-		local Humanoids = GetNearbyHumanoids(Position,Distance,Character)
-		for _,Humanoid in pairs(Humanoids) do
-			Humanoid:TakeDamage(Damage)
+function NewHurtSphere(Position,Distance,Damage,Advanced)
+	if Advanced then
+		local HurtSphere = {}
+		HurtSphere.ClassName = "HurtSphere"
+		HurtSphere.Position = Position
+		HurtSphere.Distance = Distance
+		HurtSphere.Damage = Damage
+		function HurtSphere:DoDamage()
+			local Humanoids = GetNearbyHumanoids(HurtSphere.Position,HurtSphere.Distance,Character)
+			for _,Humanoid in pairs(Humanoids) do
+				Humanoid:TakeDamage(HurtSphere.Damage)
+			end
 		end
+		return HurtSphere
+	else
+		local debounce = false
+		local function DoDamage()
+			if debounce then return end
+			debounce = true
+			local Humanoids = GetNearbyHumanoids(Position,Distance,Character)
+			for _,Humanoid in pairs(Humanoids) do
+				Humanoid:TakeDamage(Damage)
+			end
+		end
+		return DoDamage
 	end
-	return DoDamage
 end
 function NewExplosionPart(Position,Distance)
 	local TweenService = game:GetService("TweenService")
-	local TweenProperties = {Size = Vector3.new(2,2,2)}
+	local TweenProperties = {Transparency = 1}
 	local o1 = Instance.new("Part")
 	local o2 = Instance.new("Sound")
 	o1.BottomSurface = Enum.SurfaceType.Smooth
 	o1.TopSurface = Enum.SurfaceType.Smooth
 	o1.Anchored = true
-	o1.CanCollide = false
+	o1.CanCollide = true
 	o1.Color = Color3.new(0,0,0)
 	o1.Shape = Enum.PartType.Ball
-	o1.Size = Vector3.new(2,2,2)
-	o1.Transparency = 0
+	o1.Size = Vector3.new(2,2,2) * Distance
+	o1.Transparency = 1
 	o1.Material = Enum.Material.SmoothPlastic
 	o1.CFrame = CFrame.new(Position)
 	o2.Name = "Explode"
@@ -55,16 +71,19 @@ function NewExplosionPart(Position,Distance)
 	o2.PlaybackSpeed = 4
 	o2.SoundId = "rbxassetid://12222084"
 	o2.Volume = 1
-	local Tween = TweenService:Create(o1,TweenInfo.new(o2.TimeLength / (o2.PlaybackSpeed * 4)),TweenProperties)
+	local Tween = TweenService:Create(o1,TweenInfo.new(1/8),TweenProperties)
 	local debounce = false
 	local function PlayExplosion()
 		if debounce then return end
 		debounce = true
 		local Debris = game:GetService("Debris")
 		o1.Parent = script
-		Tween:Play()
 		o2:Play()
-		Debris:AddItem(o1,o2.TimeLength / o2.PlaybackSpeed)
+		spawn(function()
+			o2.Ended:Wait()
+			Tween:Play()
+			Debris:AddItem(o1,1/8)
+		end)
 	end
 	return PlayExplosion
 end
@@ -103,7 +122,7 @@ local heldKeys = {}
 local Invisible = false
 local Target = {}
 local FF
-local Counter = 1/2
+local Counter = 1/4
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
@@ -157,7 +176,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					wait(1/2)
 					Invisible = not Invisible
 				end
-			elseif Key == "e" then
+			elseif Key == "e" and (not Invisible) then
 				local Position = Target.Point
 				local Distance = 10
 				local Damage = 10
@@ -182,7 +201,7 @@ RunService.Heartbeat:Connect(function(x)
 				Counter = 0
 			end
 			if Counter == 0 and Invisible then
-				Counter = 1/2
+				Counter = 1/4
 				local Clone = CloneT:Clone()
 				for _,Part2 in pairs(CloneT:GetChildren()) do
 					local Part1 = Character:FindFirstChild(Part2.Name)
