@@ -32,10 +32,12 @@ function OnPlayerAdded(Player)
 				Message = string.sub(Message,8)
 			end
 			if Recipient ~= nil then
+				Message = Chat:FilterStringAsync(Message,Player,Recipient)
 				local Msg = "["..Player.Name.."]: "..Message
 				SendMessage(Recipient,Msg)
 			else
 				local Msg = "["..Player.Name.."]: "..Message
+				Message = Chat:FilterStringForBroadcast(Message,Player)
 				for _,Recipient in pairs(Players:GetPlayers()) do
 					SendMessage(Recipient,Msg)
 				end
@@ -49,9 +51,11 @@ function OnPlayerAdded(Player)
 				Message = string.sub(Message,14)
 			end
 			if Recipient ~= nil then
+				Message = Chat:FilterStringAsync(Message,Player,Recipient)
 				local Msg = Message
 				SendMessage(Recipient,Msg)
 			else
+				Message = Chat:FilterStringForBroadcast(Message,Player)
 				local Msg = Message
 				for _,Recipient in pairs(Players:GetPlayers()) do
 					SendMessage(Recipient,Msg)
