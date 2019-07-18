@@ -3,7 +3,7 @@
 function SendMessage(Player,Msg)
 	local Debris = game:GetService("Debris")
 	local o1 = Instance.new("ScreenGui")
-	local o2 = Instance.new("TextBox")
+	local o2 = Instance.new("TextLabel")
 	o1.Name = "MsgGui"
 	o2.Name = "Message"
 	o2.Parent = o1
@@ -18,9 +18,8 @@ function SendMessage(Player,Msg)
 	o2.TextScaled = true
 	o2.TextStrokeTransparency = 0
 	o2.TextWrapped = true
-	o2.TextEditable = false
 	o1.Parent = Player.PlayerGui
-	Debris:AddItem(o1,1.5 + (string.len(Msg) * 0.5))
+	Debris:AddItem(o1,1.8 + (string.len(Msg) * 0.2))
 end
 local Chat = game:GetService("Chat")
 local Players = game:GetService("Players")
@@ -33,11 +32,9 @@ function OnPlayerAdded(Player)
 				Message = string.sub(Message,8)
 			end
 			if Recipient ~= nil then
-				Message = Chat:FilterStringAsync(Message,Player,Recipient)
 				local Msg = "["..Player.Name.."]: "..Message
 				SendMessage(Recipient,Msg)
 			else
-				Message = Chat:FilterStringForBroadcast(Message,Player)
 				local Msg = "["..Player.Name.."]: "..Message
 				for _,Recipient in pairs(Players:GetPlayers()) do
 					SendMessage(Recipient,Msg)
@@ -52,11 +49,9 @@ function OnPlayerAdded(Player)
 				Message = string.sub(Message,14)
 			end
 			if Recipient ~= nil then
-				Message = Chat:FilterStringAsync(Message,Player,Recipient)
 				local Msg = Message
 				SendMessage(Recipient,Msg)
 			else
-				Message = Chat:FilterStringForBroadcast(Message,Player)
 				local Msg = Message
 				for _,Recipient in pairs(Players:GetPlayers()) do
 					SendMessage(Recipient,Msg)
