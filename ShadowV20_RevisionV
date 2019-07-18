@@ -34,7 +34,11 @@ function NewHurtSphere(Position,Distance,Damage,Advanced)
 		function HurtSphere:DoDamage()
 			local Humanoids = GetNearbyHumanoids(HurtSphere.Position,HurtSphere.Distance,Character)
 			for _,Humanoid in pairs(Humanoids) do
+				local Health = Humanoid.Health
 				Humanoid:TakeDamage(HurtSphere.Damage)
+				if Humanoid.Health > (Health - HurtSphere.Damage) then
+					Humanoid.Parent:BreakJoints()
+				end
 			end
 		end
 		return HurtSphere
@@ -45,7 +49,11 @@ function NewHurtSphere(Position,Distance,Damage,Advanced)
 			debounce = true
 			local Humanoids = GetNearbyHumanoids(Position,Distance,Character)
 			for _,Humanoid in pairs(Humanoids) do
+				local Health = Humanoid.Health
 				Humanoid:TakeDamage(Damage)
+				if Humanoid.Health > (Health - Damage) then
+					Humanoid.Parent:BreakJoints()
+				end
 			end
 		end
 		return DoDamage
