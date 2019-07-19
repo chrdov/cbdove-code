@@ -1,0 +1,32 @@
+local DeviceRotation = Instance.new("CFrameValue")
+local Remote_DeviceRotationChanged = Instance.new("RemoteEvent")
+local RealGravityForce = Instance.new("BodyForce")
+Remote_DeviceRotationChanged.Name = "Remote_DeviceRotationChanged"
+RealGravityForce.Name = "RealGravityForce"
+RealGravityForce.Force = Vector3.new(0,game.Workspace.Gravity,0)
+DeviceRotation.Changed:Connect(function()
+	for _,Part in pairs(script.Parent:GetDescendants()) do
+		if Part:IsA("BasePart") then
+			local RGF = Part:FindFirstChild("RealGravityForce")
+			if RGF ~= nil then
+				RGF.Force = (Vector3.new(0,game.Workspace.Gravity,0) * Part:GetMass()) + (DeviceRotation.Value.LookVector * -1 * game.Workspace.Gravity * Part:GetMass())
+			end
+		end
+	end
+end)
+Remote_DeviceRotationChanged.OnServerEvent:Connect(function(Player,cf)
+	DeviceRotation.Value = cf
+end)
+DeviceRotation.Value = CFrame.new()
+local RealGravityForce = Instance.new("BodyForce")
+Remote_DeviceRotationChanged.Name = "Remote_DeviceRotationChanged"
+RealGravityForce.Name = "RealGravityForce"
+RealGravityForce.Force = Vector3.new(0,0,0)
+for _,Part in pairs(script.Parent:GetDescendants()) do
+	if Part:IsA("BasePart") then
+		local RGF = RealGravityForce:Clone()
+		RGF.Parent = Part
+		RGF.Force = (Vector3.new(0,game.Workspace.Gravity,0) * Part:GetMass()) + (DeviceRotation.Value.LookVector * -1 * game.Workspace.Gravity * Part:GetMass())
+	end
+end
+RealGravityForce:Destroy()
