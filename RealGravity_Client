@@ -1,0 +1,8 @@
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote_DeviceRotationChanged = ReplicatedStorage:WaitForChild("CBDove_Remote_DeviceRotationChanged")
+if UserInputService.GyroscopeEnabled then
+	UserInputService.DeviceRotationChanged:Connect(function(rt,cf)
+		ReplicatedStorage.Remote_DeviceRotationChanged:FireServer(cf)
+	end)
+end
