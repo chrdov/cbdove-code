@@ -1,3 +1,5 @@
+local Player = owner
+local Character = Player.Character
 local DeviceRotation = Instance.new("CFrameValue")
 local Remote_DeviceRotationChanged = game:GetService("ReplicatedStorage"):FindFirstChild("CBDove_Remote_DeviceRotationChanged") or Instance.new("RemoteEvent",game:GetService("ReplicatedStorage"))
 local RealGravityForce = Instance.new("BodyForce")
@@ -5,7 +7,7 @@ Remote_DeviceRotationChanged.Name = "CBDove_Remote_DeviceRotationChanged"
 RealGravityForce.Name = "RealGravityForce"
 RealGravityForce.Force = Vector3.new(0,game.Workspace.Gravity,0)
 DeviceRotation.Changed:Connect(function()
-	for _,Part in pairs(script.Parent:GetDescendants()) do
+	for _,Part in pairs(Character:GetDescendants()) do
 		if Part:IsA("BasePart") then
 			local RGF = Part:FindFirstChild("RealGravityForce")
 			if RGF ~= nil then
@@ -22,7 +24,7 @@ local RealGravityForce = Instance.new("BodyForce")
 Remote_DeviceRotationChanged.Name = "Remote_DeviceRotationChanged"
 RealGravityForce.Name = "RealGravityForce"
 RealGravityForce.Force = Vector3.new(0,0,0)
-for _,Part in pairs(script.Parent:GetDescendants()) do
+for _,Part in pairs(Character:GetDescendants()) do
 	if Part:IsA("BasePart") then
 		local RGF = RealGravityForce:Clone()
 		RGF.Parent = Part
