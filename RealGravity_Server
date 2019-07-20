@@ -17,7 +17,7 @@ end)
 Remote_DeviceRotationChanged.OnServerEvent:Connect(function(Player,cf)
 	DeviceRotation.Value = cf
 end)
-DeviceRotation.Value = CFrame.new()
+DeviceRotation.Value = CFrame.Angles(math.rad(90),math.rad(0),math.rad(0))
 local RealGravityForce = Instance.new("BodyForce")
 Remote_DeviceRotationChanged.Name = "Remote_DeviceRotationChanged"
 RealGravityForce.Name = "RealGravityForce"
