@@ -1,8 +1,12 @@
+-- Local Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV5
+-- Server Portion: Below
 local Player = owner or game.Players:WaitForChild("CBDove4")
+Player.CharacterAppearanceId = 21605672
+Player:LoadCharacter()
+print("Fake CBDove4 Boss Battle Script Remade")
 local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
-local Shirt = Character:FindFirstChildOfClass("Shirt") or Instance.new("Shirt",Character)
-local Pants = Character:FindFirstChildOfClass("Pants") or Instance.new("Pants",Character)
+local BodyColors = Character:FindFirstChildOfClass("BodyColors") or Instance.new("BodyColors",Character)
 local welds = {}
 welds.torsoWeld = Instance.new("Weld",Character:WaitForChild("HumanoidRootPart"))
 welds.leftLegWeld = Instance.new("Weld",Character:WaitForChild("Torso"))
@@ -67,10 +71,12 @@ KeyUp.Name = "KeyUp"
 MouseMove.Name = "MouseMove"
 local Target = {}
 local debounce = {}
+local walkDebounce = false
 local heldKeys = {}
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
+		if debounce[Key] == true then
 	end
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
@@ -83,4 +89,44 @@ MouseMove.OnServerEvent:Connect(function(Plr,TargetPoint,TargetPart)
 		Target.Point = TargetPoint
 		Target.Part = TargetPart
 	end
+end)
+game:GetService("RunService").Heartbeat:connect(function()
+for k,_ in pairs(welds) do
+local aC0 = defaultC0[k] * targetC0[k]
+local aC1 = defaultC1[k] * targetC1[k]
+local bC0 = welds[k].C0
+local bC1 = welds[k].C1
+welds[k].C0 = bC0:Lerp(aC0,alpha)
+welds[k].C1 = bC1:Lerp(aC1,alpha)
+end
+if not debounce then
+alpha = 0.9
+if Humanoid.MoveDirection.Magnitude > 0 then
+targetC0.headWeld = CFrame.new(0,0,0)
+targetC0.torsoWeld = CFrame.new(0,0,0)
+targetC0.leftArmWeld = CFrame.Angles(math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude,0,0)
+targetC0.rightArmWeld = CFrame.Angles(math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude,0,0)
+targetC0.leftLegWeld = CFrame.Angles(math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude,0,0)
+targetC0.rightLegWeld = CFrame.Angles(math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude,0,0)
+targetC1.headWeld = CFrame.new(0,0,0)
+targetC1.torsoWeld = CFrame.new(0,0,0)
+targetC1.leftArmWeld = CFrame.new(0,0,0)
+targetC1.rightArmWeld = CFrame.new(0,0,0)
+targetC1.leftLegWeld = CFrame.new(0,0,0)
+targetC1.rightLegWeld = CFrame.new(0,0,0)
+else
+targetC0.headWeld = CFrame.Angles(math.rad(10),0,0)
+targetC0.torsoWeld = CFrame.Angles(math.rad(10),0,0)
+targetC0.leftArmWeld = CFrame.Angles(math.rad(10),0,math.rad(-10))
+targetC0.rightArmWeld = CFrame.Angles(math.rad(10),0,math.rad(10))
+targetC0.leftLegWeld = CFrame.Angles(math.rad(10),0,math.rad(-10))
+targetC0.rightLegWeld = CFrame.Angles(math.rad(10),0,math.rad(10))
+targetC1.headWeld = CFrame.new(0,0,0)
+targetC1.torsoWeld = CFrame.new(0,0,0)
+targetC1.leftArmWeld = CFrame.new(0,0,0)
+targetC1.rightArmWeld = CFrame.new(0,0,0)
+targetC1.leftLegWeld = CFrame.new(0,0,0)
+targetC1.rightLegWeld = CFrame.new(0,0,0)
+end
+end
 end)
