@@ -69,7 +69,7 @@ local MouseMove = Instance.new("RemoteEvent",Character)
 KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 MouseMove.Name = "MouseMove"
-local alpha = 0.8
+local alpha = 0.9
 local Target = {}
 local debounce = {}
 local walkDebounce = false
@@ -102,7 +102,7 @@ local bC1 = v.C1
 v.C0 = bC0:Lerp(aC0,alpha)
 v.C1 = bC1:Lerp(aC1,alpha)
 end
-if not debounce then
+if not walkDebounce then
 alpha = 0.9
 if Humanoid.MoveDirection.Magnitude > 0 then
 targetC0.headWeld = CFrame.new(0,0,0)
