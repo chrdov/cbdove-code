@@ -78,7 +78,9 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
 		if debounce[Key] == false then
-			
+			if Key == "q" then
+				sw
+			end
 		end
 	end
 end)
@@ -107,10 +109,10 @@ alpha = 0.9
 if Humanoid.MoveDirection.Magnitude > 0 then
 targetC0.headWeld = CFrame.Angles(math.rad(-10),0,0)
 targetC0.torsoWeld = CFrame.Angles(math.rad(-10),0,0)
-targetC0.leftArmWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,0)
-targetC0.rightArmWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,0)
-targetC0.leftLegWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,0)
-targetC0.rightLegWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,0)
+targetC0.leftArmWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-10))
+targetC0.rightArmWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-10))
+targetC0.leftLegWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-10))
+targetC0.rightLegWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-10))
 targetC1.headWeld = CFrame.new(0,0,0)
 targetC1.torsoWeld = CFrame.new(0,0.1,-0.1)
 targetC1.leftArmWeld = CFrame.new(0,0,0)
