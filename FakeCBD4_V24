@@ -101,7 +101,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 				walkDebounce = true
 				local ff = Instance.new("ForceField",Character)
 				wait(1/30)
-				Humanoid.JumpPower = 60
+				Humanoid.JumpPower = 120
 				walkDebounce = false
 				repeat
 					local Pos1 = Character.HumanoidRootPart.Position
