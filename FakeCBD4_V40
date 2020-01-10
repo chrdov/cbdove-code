@@ -122,6 +122,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,200-(i*200),0)
 					end
 					WPart:Destroy()
+					wait(1/60)
+					BodyPos.Position = BodyPos.Position + Vector3.new(0,2.5,0)
 					BodyPos:Destroy()
 					local Explosion = Instance.new("Explosion")
 					Explosion.Visible = false
