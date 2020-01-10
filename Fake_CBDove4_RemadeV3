@@ -76,7 +76,9 @@ local heldKeys = {}
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
-		if debounce[Key] == true then
+		if debounce[Key] == false then
+			
+		end
 	end
 end)
 KeyUp.OnServerEvent:Connect(function(Plr,Key)
