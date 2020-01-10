@@ -69,6 +69,7 @@ local MouseMove = Instance.new("RemoteEvent",Character)
 KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 MouseMove.Name = "MouseMove"
+local alpha = 0.8
 local Target = {}
 local debounce = {}
 local walkDebounce = false
