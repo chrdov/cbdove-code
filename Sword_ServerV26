@@ -248,10 +248,10 @@ function onSpecialMove(player)
 	BodyColors.RightArmColor3 = d
 	BodyColors.LeftLegColor3 = e
 	BodyColors.RightLegColor3 = f
-	wait(2)
 	hum.WalkSpeed = wspd
 	hum.JumpPower = jmpp
 	hum.JumpHeight = jmph
+	wait(2)
 	damage = slash_damage
 	Tool.Enabled = true
 end
