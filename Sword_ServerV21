@@ -75,10 +75,10 @@ LungeSound1.Parent = Handle
 LungeSound1.Volume = 1
 
 local LungeSound2 = Instance.new("Sound")
-LungeSound2.SoundId = "rbxassetid://1588058260"
+LungeSound2.SoundId = "rbxasset://sounds\\swordlunge.wav"
 LungeSound2.Parent = Handle
 LungeSound2.Volume = 1
-LungeSound2.PlaybackSpeed = 4
+LungeSound2.PlaybackSpeed = 0.75
 
 local UnsheathSound = Instance.new("Sound")
 UnsheathSound.SoundId = "rbxasset://sounds\\unsheath.wav"
@@ -171,10 +171,6 @@ function swordAcross()
 end
 
 function attack()
-	Tool.Handle.Color = Color3.new(1,0,0)
-	Tool.Part1.Color = Color3.new(1,0,0)
-	Tool.Part2.Color = Color3.new(1,0,0)
-	wait(.125)
 	Tool.Handle.Color = Color3.new(0,1,0)
 	Tool.Part1.Color = Color3.new(0,1,0)
 	Tool.Part2.Color = Color3.new(0,1,0)
@@ -193,10 +189,6 @@ end
 function lunge()
 	local hum = Tool.Parent:FindFirstChildOfClass("Humanoid")
 	if hum == nil then return end
-	Tool.Handle.Color = Color3.new(1,0,0)
-	Tool.Part1.Color = Color3.new(1,0,0)
-	Tool.Part2.Color = Color3.new(1,0,0)
-	wait(.25)
 	damage = lunge_damage
 	local anim = Instance.new("StringValue")
 	anim.Name = "toolanim"
@@ -240,25 +232,18 @@ function onSpecialMove(player)
 	SlashSound:Stop()
 	LungeSound1:Stop()
 	LungeSound2:Play()
-	hum.WalkSpeed = 0
+	hum.WalkSpeed = wspd * 2
 	hum.JumpPower = 0
 	hum.JumpHeight = 0
 	Tool.Parent.Animate.Disabled = true
-	for x = 1,20 do
-		BodyColors.HeadColor = BrickColor.Random()
-		BodyColors.TorsoColor = BrickColor.Random()
-		BodyColors.LeftArmColor = BrickColor.Random()
-		BodyColors.RightArmColor = BrickColor.Random()
-		BodyColors.LeftLegColor = BrickColor.Random()
-		BodyColors.RightLegColor = BrickColor.Random()
-		wait(0.05)
+	swordOut2()
+	for i = 1,60 do
+		Tool.Parent.HumanoidRootPart.RootJoint.C0 = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.RootJoint.C0 * CFrame.Angles(0,math.rad(48),0)
+		wait(1/30)
 	end
+	swordUp()
 	Tool.Parent.Animate.Disabled = false
 	Tool.Parent:MoveTo(Tool.Parent.PrimaryPart.Position + (hum.MoveDirection * wspd * 6))
-	LungeSound2:Stop()
-	hum.WalkSpeed = wspd
-	hum.JumpPower = jmpp
-	hum.JumpHeight = jmph
 	damage = 0
 	BodyColors.HeadColor3 = a
 	BodyColors.TorsoColor3 = b
@@ -266,8 +251,10 @@ function onSpecialMove(player)
 	BodyColors.RightArmColor3 = d
 	BodyColors.LeftLegColor3 = e
 	BodyColors.RightLegColor3 = f
-	hum.Health = hum.Health + (hum.MaxHealth / 20)
-	wait(4)
+	wait(2)
+	hum.WalkSpeed = wspd
+	hum.JumpPower = jmpp
+	hum.JumpHeight = jmph
 	damage = slash_damage
 	Tool.Enabled = true
 end
@@ -338,7 +325,7 @@ function onActivated()
 	local r = game:GetService("RunService")
 	local t = r.Stepped:wait()
 
-	if (t - last_attack < .45) then
+	if (t - last_attack < .25) then
 		lunge()
 	else
 		attack()
