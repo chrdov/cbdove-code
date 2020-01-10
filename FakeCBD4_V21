@@ -100,6 +100,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			walkDebounce = true
 			local ff = Instance.new("ForceField",Character)
 			if Key == "q" and Character:FindFirstChild("HumanoidRootPart") ~= nil then
+				Humanoid.JumpPower = 50
+				Humanoid.Jump = true
 				walkDebounce = false
 				repeat
 					local Pos1 = Character.HumanoidRootPart.Position
