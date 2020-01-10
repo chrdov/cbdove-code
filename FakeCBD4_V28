@@ -8,7 +8,7 @@ function MakeWarningPart(Position,Size)
 	WarningPart.Material = "Neon"
 	WarningPart.Color = Color3.new(1,0,0)
 	WarningPart.Shape = "Ball"
-	WarningPart.Transparency = 0.75
+	WarningPart.Transparency = 0.5
 	WarningPart.Size = Vector3.new(Size * 2,Size * 2,Size * 2)
 	WarningPart.CFrame = CFrame.new(Position)
 	return WarningPart
@@ -108,11 +108,11 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					local Pos2 = MouseTarget.Point
 					local BodyPos = Instance.new("BodyPosition")
 					BodyPos.Position = Pos1
-					BodyPos.MaxForce = Vector3.new(math.huge,0,math.huge)
-					BodyPos.P = 100000
-					BodyPos.D = 100
+					BodyPos.MaxForce = Vector3.new(500000,0,500000)
+					BodyPos.P = 500000
+					BodyPos.D = 25000
 					BodyPos.Parent = Character.HumanoidRootPart
-					local WPart = MakeWarningPart(Pos2,16)
+					local WPart = MakeWarningPart(Pos2,24)
 					Humanoid.Jump = true
 					for i = 1/25,1,1/25 do
 						BodyPos.Position = Pos1:Lerp(Pos2,i)
@@ -121,14 +121,15 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					WPart:Destroy()
 					BodyPos:Destroy()
 					local Explosion = Instance.new("Explosion")
+					Explosion.Visible = false
 					Explosion.Position = Pos2
-					Explosion.BlastRadius = 16
+					Explosion.BlastRadius = 24
 					Explosion.Parent = game.Workspace
 				until not heldKeys[Key]
 				wait(0.5)
 				walkDebounce = false
 				ff:Destroy()
-				wait(2.5)
+				wait(1.5)
 				Humanoid.JumpPower = 50
 				Humanoid.WalkSpeed = 16
 			end
