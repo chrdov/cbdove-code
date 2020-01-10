@@ -238,7 +238,7 @@ function onSpecialMove(player)
 	Tool.Parent.Animate.Disabled = true
 	swordOut2()
 	for i = 1,60 do
-		Tool.Parent.HumanoidRootPart.RootJoint.C0 = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.RootJoint.C0 * CFrame.Angles(0,math.rad(48),0)
+		Tool.Parent.HumanoidRootPart.RootJoint.C0 = Tool.Parent.HumanoidRootPart.RootJoint.C0 * CFrame.Angles(0,math.rad(48),0)
 		wait(1/30)
 	end
 	swordUp()
