@@ -79,7 +79,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 		heldKeys[Key] = true
 		if debounce[Key] == false then
 			if Key == "q" then
-				sw
+				
 			end
 		end
 	end
