@@ -1,5 +1,18 @@
 -- Local Portion: https://github.com/chrdov/cbdove-code/raw/master/ClientControlsV5
 -- Server Portion: Below
+function MakeWarningPart(Position,Size)
+	local WarningPart = Instance.new("Part",game.Workspace)
+	WarningPart.Anchored = true
+	WarningPart.Locked = true
+	WarningPart.CanCollide = false
+	WarningPart.Material = "Neon"
+	WarningPart.Color = Color3.new(1,0,0)
+	WarningPart.Shape = "Ball"
+	WarningPart.Transparency = 0.75
+	WarningPart.Size = Vector3.new(Size * 2,Size * 2,Size * 2)
+	WarningPart.CFrame = CFrame.new(Position)
+	return WarningPart
+end
 local Player = owner or game.Players:WaitForChild("CBDove4")
 Player.CharacterAppearanceId = 21605672
 Player:LoadCharacter()
@@ -74,19 +87,46 @@ local MouseTarget = {}
 local debounce = {}
 local walkDebounce = false
 local heldKeys = {}
+Humanoid.MaxHealth = 10000
+Humanoid.Health = 10000
+Character.Health.Disabled = true
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
 		if debounce[Key] == nil then
+			Humanoid.JumpPower = 0
+			Humanoid.WalkSpeed = 0
 			debounce[Key] = true
 			walkDebounce = true
-			if Key == " " then
-				Humanoid.JumpPower = 50
-				wait(0.45)
-				Humanoid.JumpPower = 0
-				wait(0.55)
+			local ff = Instance.new("ForceField",Character)
+			if Key == "q" and Character:FindFirstChild("HumanoidRootPart") ~= nil then
+				walkDebounce = false
+				repeat
+					local Pos1 = Character.HumanoidRootPart.Position
+					local Pos2 = MouseTarget.Point
+					local BodyPos = Instance.new("BodyPosition")
+					BodyPos.Position = Pos1
+					BodyPos.MaxForce = Vector3.new(math.huge,math.huge,math.huge)
+					BodyPos.P = 2000000
+					BodyPos.D = 500000
+					BodyPos.Parent = Character.HumanoidRootPart
+					local WPart = MakeWarningPart(Pos2,16)
+					for i = 1/90,1,1/90 do
+						local x = i*20
+						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,(-(x - 10)^2 + 100)/10,0)
+						wait(1/30)
+					end
+					WPart:Destroy()
+					local Explosion = Instance.new("Explosion")
+					Explosion.Position = Pos2
+				until not heldKeys[Key]
+				wait(1)
 			end
 			walkDebounce = false
+			ff:Destroy()
+			wait(2)
+			Humanoid.JumpPower = 50
+			Humanoid.WalkSpeed = 16
 			debounce[Key] = nil
 		end
 	end
@@ -105,6 +145,20 @@ end)
 game:GetService("RunService").Heartbeat:connect(function()
 if not walkDebounce then
 alpha = 0.75
+if Humanoid.FloorMaterial == Enum.Material.Air then
+targetC0.headWeld = CFrame.Angles(math.rad(0),0,0)
+targetC0.torsoWeld = CFrame.Angles(math.rad(0),0,0)
+targetC0.leftArmWeld = CFrame.Angles(math.rad(-40),0,math.rad(-5))
+targetC0.rightArmWeld = CFrame.Angles(math.rad(125),0,math.rad(5))
+targetC0.leftLegWeld = CFrame.Angles(math.rad(80),0,math.rad(-5))
+targetC0.rightLegWeld = CFrame.Angles(math.rad(-40),0,math.rad(5))
+targetC1.headWeld = CFrame.new(0,0,0)
+targetC1.torsoWeld = CFrame.new(0,0,0)
+targetC1.leftArmWeld = CFrame.new(0,0,0)
+targetC1.rightArmWeld = CFrame.new(0,0,0)
+targetC1.leftLegWeld = CFrame.new(0,0,0)
+targetC1.rightLegWeld = CFrame.new(0,0,0)
+else
 if Humanoid.MoveDirection.Magnitude > 0 then
 targetC0.headWeld = CFrame.Angles(math.rad(-5),0,0)
 targetC0.torsoWeld = CFrame.Angles(math.rad(-5),0,0)
@@ -131,6 +185,7 @@ targetC1.leftArmWeld = CFrame.new(0,0,0)
 targetC1.rightArmWeld = CFrame.new(0,0,0)
 targetC1.leftLegWeld = CFrame.new(0,0,0)
 targetC1.rightLegWeld = CFrame.new(0,0,0)
+end
 end
 end
 for k,v in pairs(welds) do
