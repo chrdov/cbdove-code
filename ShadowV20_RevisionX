@@ -22,7 +22,7 @@ function GetNearbyHumanoids(Position,Distance,OwnerCharacter)
 	end
 	return Humanoids
 end
-local Player = owner
+local Player = owner or game.Players:WaitForChild("CBDove4")
 local Character = Player.Character
 function NewHurtSphere(Position,Distance,Damage,Advanced)
 	if Advanced then
