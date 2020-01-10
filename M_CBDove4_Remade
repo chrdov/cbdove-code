@@ -59,3 +59,28 @@ targetC1.leftArmWeld = CFrame.new(0,0,0)
 targetC1.rightArmWeld = CFrame.new(0,0,0)
 targetC1.leftLegWeld = CFrame.new(0,0,0)
 targetC1.rightLegWeld = CFrame.new(0,0,0)
+local KeyDown = Instance.new("RemoteEvent",Character)
+local KeyUp = Instance.new("RemoteEvent",Character)
+local MouseMove = Instance.new("RemoteEvent",Character)
+KeyDown.Name = "KeyDown"
+KeyUp.Name = "KeyUp"
+MouseMove.Name = "MouseMove"
+local Target = {}
+local debounce = {}
+local heldKeys = {}
+KeyDown.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player and heldKeys[Key] == nil then
+		heldKeys[Key] = true
+	end
+end)
+KeyUp.OnServerEvent:Connect(function(Plr,Key)
+	if Plr == Player and heldKeys[Key] == true then
+		heldKeys[Key] = nil
+	end
+end)
+MouseMove.OnServerEvent:Connect(function(Plr,TargetPoint,TargetPart)
+	if Plr == Player then
+		Target.Point = TargetPoint
+		Target.Part = TargetPart
+	end
+end)
