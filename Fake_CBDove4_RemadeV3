@@ -93,13 +93,13 @@ MouseMove.OnServerEvent:Connect(function(Plr,TargetPoint,TargetPart)
 	end
 end)
 game:GetService("RunService").Heartbeat:connect(function()
-for k,_ in pairs(welds) do
+for k,v in pairs(welds) do
 local aC0 = defaultC0[k] * targetC0[k]
 local aC1 = defaultC1[k] * targetC1[k]
-local bC0 = welds[k].C0
-local bC1 = welds[k].C1
-welds[k].C0 = bC0:Lerp(aC0,alpha)
-welds[k].C1 = bC1:Lerp(aC1,alpha)
+local bC0 = v.C0
+local bC1 = v.C1
+v.C0 = bC0:Lerp(aC0,alpha)
+v.C1 = bC1:Lerp(aC1,alpha)
 end
 if not debounce then
 alpha = 0.9
