@@ -115,11 +115,11 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					local WPart = MakeWarningPart(Pos2,24)
 					for i = 1/20,10/20,1/20 do
 						wait(1/30)
-						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,i*10,0)
+						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,i*1000,0)
 					end
 					for i = 11/20,1,1/20 do
 						wait(1/30)
-						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,10-(i*10),0)
+						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,1000-(i*1000),0)
 					end
 					WPart:Destroy()
 					BodyPos:Destroy()
