@@ -109,8 +109,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					local BodyPos = Instance.new("BodyPosition")
 					BodyPos.Position = Pos1
 					BodyPos.MaxForce = Vector3.new(math.huge,0,math.huge)
-					BodyPos.P = 100000000
-					BodyPos.D = 100000
+					BodyPos.P = 10000000
+					BodyPos.D = 1000
 					BodyPos.Parent = Character.HumanoidRootPart
 					local WPart = MakeWarningPart(Pos2,16)
 					Humanoid.Jump = true
