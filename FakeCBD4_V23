@@ -101,23 +101,21 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			local ff = Instance.new("ForceField",Character)
 			if Key == "q" and Character:FindFirstChild("HumanoidRootPart") ~= nil then
 				wait(1/30)
-				Humanoid.JumpPower = 100
-				wait(1/30)
-				Humanoid.Jump = true
+				Humanoid.JumpPower = 60
 				walkDebounce = false
 				repeat
 					local Pos1 = Character.HumanoidRootPart.Position
 					local Pos2 = MouseTarget.Point
 					local BodyPos = Instance.new("BodyPosition")
 					BodyPos.Position = Pos1
-					BodyPos.MaxForce = Vector3.new(100000000,100000000,100000000)
+					BodyPos.MaxForce = Vector3.new(math.huge,0,math.huge)
 					BodyPos.P = 100000000
-					BodyPos.D = 1000000
+					BodyPos.D = 100000
 					BodyPos.Parent = Character.HumanoidRootPart
 					local WPart = MakeWarningPart(Pos2,16)
-					for i = 1/90,1,1/90 do
-						local x = i*20
-						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,(-(x - 10)^2 + 100)/10,0)
+					Humanoid.Jump = true
+					for i = 1/30,1,1/30 do
+						BodyPos.Position = Pos1:Lerp(Pos2,i)
 						wait(1/30)
 					end
 					WPart:Destroy()
