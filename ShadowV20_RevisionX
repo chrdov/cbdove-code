@@ -160,7 +160,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 						if (Part.Name ~= "HumanoidRootPart" and Part:IsA("BasePart")) or Part:IsA("Decal") then
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = InvisParts[Part]}
-							local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(1),TweenProperties)
 							Tween:Play()
 							InvisParts[Part] = nil
 						elseif Part:IsA("Humanoid") then
@@ -175,8 +175,8 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					Invisible = not Invisible
 				end
 			elseif Key == "e" and (not Invisible) then
-				while heldKeys[Key] do
-					local Position = Target.Point
+				while heldKeys[Key] and Character ~= nil and Character:FindFirstChild("Torso") ~= nil do
+					local Position = Character.Torso.Position
 					local Distance = 10
 					local Damage = 10
 					local Explode = NewExplosionPart(Position,Distance)
