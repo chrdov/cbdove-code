@@ -70,17 +70,24 @@ KeyDown.Name = "KeyDown"
 KeyUp.Name = "KeyUp"
 MouseMove.Name = "MouseMove"
 local alpha = 0.75
-local Target = {}
+local MouseTarget = {}
 local debounce = {}
 local walkDebounce = false
 local heldKeys = {}
 KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
-		if debounce[Key] == false then
-			if Key == "q" then
-				
+		if debounce[Key] == nil then
+			debounce[Key] = true
+			walkDebounce = true
+			if Key == " " then
+				Humanoid.JumpPower = 50
+				wait(0.45)
+				Humanoid.JumpPower = 0
+				wait(0.55)
 			end
+			walkDebounce = false
+			debounce[Key] = nil
 		end
 	end
 end)
@@ -89,30 +96,22 @@ KeyUp.OnServerEvent:Connect(function(Plr,Key)
 		heldKeys[Key] = nil
 	end
 end)
-MouseMove.OnServerEvent:Connect(function(Plr,TargetPoint,TargetPart)
+MouseMove.OnServerEvent:Connect(function(Plr,MouseTargetPoint,MouseTargetPart)
 	if Plr == Player then
-		Target.Point = TargetPoint
-		Target.Part = TargetPart
+		MouseTarget.Point = MouseTargetPoint
+		MouseTarget.Part = MouseTargetPart
 	end
 end)
 game:GetService("RunService").Heartbeat:connect(function()
-for k,v in pairs(welds) do
-local aC0 = defaultC0[k] * targetC0[k]
-local aC1 = defaultC1[k] * targetC1[k]
-local bC0 = v.C0
-local bC1 = v.C1
-v.C0 = bC0:Lerp(aC0,alpha)
-v.C1 = bC1:Lerp(aC1,alpha)
-end
 if not walkDebounce then
 alpha = 0.75
 if Humanoid.MoveDirection.Magnitude > 0 then
-targetC0.headWeld = CFrame.Angles(math.rad(-10),0,0)
-targetC0.torsoWeld = CFrame.Angles(math.rad(-10),0,0)
-targetC0.leftArmWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-5))
-targetC0.rightArmWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(5))
-targetC0.leftLegWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(-5))
-targetC0.rightLegWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(10),0,math.rad(5))
+targetC0.headWeld = CFrame.Angles(math.rad(-5),0,0)
+targetC0.torsoWeld = CFrame.Angles(math.rad(-5),0,0)
+targetC0.leftArmWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(5),0,math.rad(-5))
+targetC0.rightArmWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(5),0,math.rad(5))
+targetC0.leftLegWeld = CFrame.Angles((math.rad(40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(5),0,math.rad(-5))
+targetC0.rightLegWeld = CFrame.Angles((math.rad(-40) * math.sin(game.Workspace.DistributedGameTime * 9 * (Humanoid.WalkSpeed / 16)) * Humanoid.MoveDirection.Magnitude) + math.rad(5),0,math.rad(5))
 targetC1.headWeld = CFrame.new(0,0,0)
 targetC1.torsoWeld = CFrame.new(0,0.1,-0.1)
 targetC1.leftArmWeld = CFrame.new(0,0,0)
@@ -120,12 +119,12 @@ targetC1.rightArmWeld = CFrame.new(0,0,0)
 targetC1.leftLegWeld = CFrame.new(0,0,0)
 targetC1.rightLegWeld = CFrame.new(0,0,0)
 else
-targetC0.headWeld = CFrame.Angles(math.rad(-10),0,0)
-targetC0.torsoWeld = CFrame.Angles(math.rad(-10),0,0)
-targetC0.leftArmWeld = CFrame.Angles(math.rad(10),0,math.rad(-5))
-targetC0.rightArmWeld = CFrame.Angles(math.rad(10),0,math.rad(5))
-targetC0.leftLegWeld = CFrame.Angles(math.rad(10),0,math.rad(-5))
-targetC0.rightLegWeld = CFrame.Angles(math.rad(10),0,math.rad(5))
+targetC0.headWeld = CFrame.Angles(math.rad(-5),0,0)
+targetC0.torsoWeld = CFrame.Angles(math.rad(-5),0,0)
+targetC0.leftArmWeld = CFrame.Angles(math.rad(5),0,math.rad(-5))
+targetC0.rightArmWeld = CFrame.Angles(math.rad(5),0,math.rad(5))
+targetC0.leftLegWeld = CFrame.Angles(math.rad(5),0,math.rad(-5))
+targetC0.rightLegWeld = CFrame.Angles(math.rad(5),0,math.rad(5))
 targetC1.headWeld = CFrame.new(0,0,0)
 targetC1.torsoWeld = CFrame.new(0,0.1,-0.1)
 targetC1.leftArmWeld = CFrame.new(0,0,0)
@@ -133,5 +132,13 @@ targetC1.rightArmWeld = CFrame.new(0,0,0)
 targetC1.leftLegWeld = CFrame.new(0,0,0)
 targetC1.rightLegWeld = CFrame.new(0,0,0)
 end
+end
+for k,v in pairs(welds) do
+local aC0 = defaultC0[k] * targetC0[k]
+local aC1 = defaultC1[k] * targetC1[k]
+local bC0 = v.C0
+local bC1 = v.C1
+v.C0 = bC0:Lerp(aC0,alpha)
+v.C1 = bC1:Lerp(aC1,alpha)
 end
 end)
