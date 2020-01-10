@@ -128,7 +128,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			debounce[Key] = true
 			if Key == "q" then
 				if not Invisible then
-					Counter = 1/2
+					Counter = 1
 					if FF == nil then
 						FF = Instance.new("ForceField",Character)
 						FF.Visible = false
@@ -138,7 +138,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							InvisParts[Part] = Part.Transparency
 							local TweenService = game:GetService("TweenService")
 							local TweenProperties = {Transparency = 1}
-							local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
+							local Tween = TweenService:Create(Part,TweenInfo.new(1),TweenProperties)
 							Tween:Play()
 						elseif Part:IsA("Humanoid") then
 							spawn(function()
@@ -150,7 +150,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 						end
 					end
 					Invisible = not Invisible
-					wait(1/2)
+					wait(1)
 				elseif Invisible then
 					if FF ~= nil then
 						FF:Destroy()
@@ -171,7 +171,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 							end)
 						end
 					end
-					wait(1/2)
+					wait(1)
 					Invisible = not Invisible
 				end
 			elseif Key == "e" and (not Invisible) then
@@ -201,7 +201,7 @@ RunService.Heartbeat:Connect(function(x)
 				Counter = 0
 			end
 			if Counter == 0 and Invisible then
-				Counter = 1/4
+				Counter = 1
 				local Clone = CloneT:Clone()
 				for _,Part2 in pairs(CloneT:GetChildren()) do
 					local Part1 = Character:FindFirstChild(Part2.Name)
@@ -219,11 +219,11 @@ RunService.Heartbeat:Connect(function(x)
 						end
 						local TweenService = game:GetService("TweenService")
 						local TweenProperties = {Transparency = 1}
-						local Tween = TweenService:Create(Part,TweenInfo.new(1/4),TweenProperties)
+						local Tween = TweenService:Create(Part,TweenInfo.new(1),TweenProperties)
 						Tween:Play()
 					end
 				end
-				Debris:AddItem(Clone,1/4)
+				Debris:AddItem(Clone,1)
 			end
 		end
 	end
