@@ -94,12 +94,12 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 	if Plr == Player and heldKeys[Key] == nil then
 		heldKeys[Key] = true
 		if debounce[Key] == nil then
-			Humanoid.JumpPower = 0
-			Humanoid.WalkSpeed = 0
 			debounce[Key] = true
-			walkDebounce = true
-			local ff = Instance.new("ForceField",Character)
 			if Key == "q" and Character:FindFirstChild("HumanoidRootPart") ~= nil then
+				Humanoid.JumpPower = 0
+				Humanoid.WalkSpeed = 0
+				walkDebounce = true
+				local ff = Instance.new("ForceField",Character)
 				wait(1/30)
 				Humanoid.JumpPower = 60
 				walkDebounce = false
@@ -125,13 +125,13 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					Explosion.BlastRadius = 16
 					Explosion.Parent = game.Workspace
 				until not heldKeys[Key]
-				wait(1)
+				wait(0.5)
+				walkDebounce = false
+				ff:Destroy()
+				wait(2.5)
+				Humanoid.JumpPower = 50
+				Humanoid.WalkSpeed = 16
 			end
-			walkDebounce = false
-			ff:Destroy()
-			wait(2)
-			Humanoid.JumpPower = 50
-			Humanoid.WalkSpeed = 16
 			debounce[Key] = nil
 		end
 	end
