@@ -235,15 +235,12 @@ function onSpecialMove(player)
 	hum.WalkSpeed = wspd * 2
 	hum.JumpPower = 0
 	hum.JumpHeight = 0
-	Tool.Parent.Animate.Disabled = true
 	swordOut2()
 	for i = 1,60 do
-		Tool.Parent.HumanoidRootPart.RootJoint.C1 = Tool.Parent.HumanoidRootPart.RootJoint.C1 * CFrame.Angles(0,math.rad(-48),0)
+		Tool.Parent.HumanoidRootPart.RootJoint.C1 = Tool.Parent.HumanoidRootPart.RootJoint.C1 * CFrame.Angles(0,0,math.rad(-48))
 		wait(1/30)
 	end
 	swordUp()
-	Tool.Parent.Animate.Disabled = false
-	Tool.Parent:MoveTo(Tool.Parent.PrimaryPart.Position + (hum.MoveDirection * wspd * 6))
 	damage = 0
 	BodyColors.HeadColor3 = a
 	BodyColors.TorsoColor3 = b
