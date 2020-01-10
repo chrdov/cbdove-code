@@ -113,12 +113,12 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					BodyPos.D = 25000
 					BodyPos.Parent = Character.HumanoidRootPart
 					local WPart = MakeWarningPart(Pos2,24)
-					for i = 1/20,10/20,1/20 do
-						wait(1/30)
+					for i = 1/40,20/40,1/40 do
+						wait(1/20)
 						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,i*100,0)
 					end
-					for i = 11/20,1,1/20 do
-						wait(1/30)
+					for i = 21/40,1,1/40 do
+						wait(1/20)
 						BodyPos.Position = Pos1:Lerp(Pos2,i) + Vector3.new(0,100-(i*100),0)
 					end
 					WPart:Destroy()
