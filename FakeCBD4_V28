@@ -109,7 +109,7 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 					local BodyPos = Instance.new("BodyPosition")
 					BodyPos.Position = Pos1
 					BodyPos.MaxForce = Vector3.new(500000000,0,500000000)
-					BodyPos.P = 500000
+					BodyPos.P = 500000000
 					BodyPos.D = 25000
 					BodyPos.Parent = Character.HumanoidRootPart
 					local WPart = MakeWarningPart(Pos2,24)
