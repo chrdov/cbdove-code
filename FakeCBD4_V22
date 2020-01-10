@@ -100,7 +100,9 @@ KeyDown.OnServerEvent:Connect(function(Plr,Key)
 			walkDebounce = true
 			local ff = Instance.new("ForceField",Character)
 			if Key == "q" and Character:FindFirstChild("HumanoidRootPart") ~= nil then
-				Humanoid.JumpPower = 50
+				wait(1/30)
+				Humanoid.JumpPower = 100
+				wait(1/30)
 				Humanoid.Jump = true
 				walkDebounce = false
 				repeat
@@ -153,10 +155,10 @@ alpha = 0.75
 if Humanoid.FloorMaterial == Enum.Material.Air then
 targetC0.headWeld = CFrame.Angles(math.rad(0),0,0)
 targetC0.torsoWeld = CFrame.Angles(math.rad(0),0,0)
-targetC0.leftArmWeld = CFrame.Angles(math.rad(-40),0,math.rad(-5))
+targetC0.leftArmWeld = CFrame.Angles(math.rad(-50),0,math.rad(-5))
 targetC0.rightArmWeld = CFrame.Angles(math.rad(125),0,math.rad(5))
 targetC0.leftLegWeld = CFrame.Angles(math.rad(80),0,math.rad(-5))
-targetC0.rightLegWeld = CFrame.Angles(math.rad(-40),0,math.rad(5))
+targetC0.rightLegWeld = CFrame.Angles(math.rad(-50),0,math.rad(5))
 targetC1.headWeld = CFrame.new(0,0,0)
 targetC1.torsoWeld = CFrame.new(0,0,0)
 targetC1.leftArmWeld = CFrame.new(0,0,0)
