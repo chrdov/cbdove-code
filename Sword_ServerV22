@@ -1,4 +1,4 @@
-local Player = game.Players:WaitForChild("CBDove4")
+local Player = game:GetService("Players"):WaitForChild("CBDove4")
 mas = Instance.new("Model",game:GetService("Lighting")) 
 mas.Name = "Model2Script"
 o1 = Instance.new("Tool")
