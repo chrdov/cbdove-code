@@ -16,7 +16,7 @@ end
 local Player = owner or game.Players:WaitForChild("CBDove4")
 Player.CharacterAppearanceId = 21605672
 Player:LoadCharacter()
-print("Fake CBDove4 Boss Battle Script Remade")
+print("Fake CBDove4 Boss Battle Script")
 local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 local BodyColors = Character:FindFirstChildOfClass("BodyColors") or Instance.new("BodyColors",Character)
