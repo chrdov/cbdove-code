@@ -1,0 +1,69 @@
+local Player = owner
+Player.Character.Archivable = true
+local Character = Player.Character:Clone()
+Player.Character.Archivable = false
+Character.Parent = Player.Character
+local Debris = game:GetService("Debris")
+local Players = game:GetService("Players")
+Character.Humanoid.Died:Connect(function()
+	Debris:AddItem(Character,5)
+end)
+local CommandsQueue = {}
+local RunService = game:GetService("RunService")
+spawn(function()
+	while Character.Parent ~= nil do
+		if Character.Humanoid.Health > 0 then
+			if #CommandsQueue >= 1 then
+				local Command = string.lower(tostring(table.remove(CommandsQueue,1)))
+				if Command == "north" then
+					Character.Humanoid:Move(Vector3.new(0,0,-1))
+					wait(0.5)
+					Character.Humanoid:Move(Vector3.new(0,0,0))
+				elseif Command == "south" then
+					Character.Humanoid:Move(Vector3.new(0,0,1))
+					wait(0.5)
+					Character.Humanoid:Move(Vector3.new(0,0,0))
+				elseif Command == "west" then
+					Character.Humanoid:Move(Vector3.new(-1,0,0))
+					wait(0.5)
+					Character.Humanoid:Move(Vector3.new(0,0,0))
+				elseif Command == "east" then
+					Character.Humanoid:Move(Vector3.new(1,0,0))
+					wait(0.5)
+					Character.Humanoid:Move(Vector3.new(0,0,0))
+				elseif Command == "jump" then
+					Character.Humanoid.Jump = true
+					RunService.Heartbeat:Wait()
+				elseif Command == "tool" or Command == "weapon" or Command == "usetool" or Command == "useweapon" then
+					local Tool = Character:FindFirstChildWhichIsA("Tool")
+					if Tool ~= nil then
+						Tool:Activate()
+						RunService.Heartbeat:Wait()
+						Tool:Deactivate()
+					end
+				end
+			end
+		end
+    RunService.Heartbeat:Wait()
+	end
+end)
+function onChatted(p,m,r)
+	if Character.Parent == nil then return end
+	if r ~= nil then return end
+	if string.sub(m,1,5) == "!bot " then
+		m = string.sub(m,6)
+		for Command in string.gmatch(m,"%S+") do
+			table.insert(CommandsQueue,#CommandsQueue + 1,Command)
+		end
+	end
+end
+for _,p in pairs(Players:GetPlayers()) do
+	p.Chatted:Connect(function(m,r)
+		onChatted(p,m,r)
+	end)
+end
+Players.PlayerAdded:Connect(function(p)
+	p.Chatted:Connect(function(m,r)
+		onChatted(p,m,r)
+	end)
+end)
