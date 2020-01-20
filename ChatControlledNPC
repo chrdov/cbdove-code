@@ -8,6 +8,7 @@ local Players = game:GetService("Players")
 Character.Humanoid.Died:Connect(function()
 	Debris:AddItem(Character,5)
 end)
+Character.Name = "Chat Controlled NPC"
 local CommandsQueue = {}
 local RunService = game:GetService("RunService")
 spawn(function()
