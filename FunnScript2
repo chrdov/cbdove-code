@@ -1,9 +1,3 @@
---Instructions Copy and paste into script builder,
---Put two names into "YOURNAME", and "THE VICTIM" (One of them doesn't have to be you)
-
---This Script Makes two players in your game.. Well.. I think its in the title ;D
-
-----------------------------------------------------------------------------------------
 function fWeld(zName, zParent, zPart0, zPart1, zCoco, a, b, c, d, e, f) 
 local funcw = Instance.new("Weld") 
 funcw.Name = zName 
