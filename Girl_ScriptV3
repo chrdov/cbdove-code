@@ -3,7 +3,7 @@ local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 Humanoid.WalkSpeed = 8
 Humanoid.JumpPower = 0
-Humanoid.JumpHeight
+Humanoid.JumpHeight = 0
 local Chat = game:GetService("Chat")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
