@@ -1,4 +1,4 @@
-local Player = owner or game:GetService("Players").PlayerAdded:Wait()
+local Player = game:GetService("Players").LocalPlayer
 local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 Humanoid.WalkSpeed = 8
@@ -8,5 +8,5 @@ local Chat = game:GetService("Chat")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
 	wait(3)
-	Chat:Chat(Character.PrimaryPart,Phrases[math.random(#Phrases)],1)
+	print(Phrases[math.random(#Phrases)])
 end
