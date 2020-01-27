@@ -2,6 +2,8 @@ local Player = owner or game:GetService("Players").PlayerAdded:Wait()
 local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 Humanoid.WalkSpeed = 8
+Humanoid.JumpPower = 0
+Humanoid.JumpHeight
 local Chat = game:GetService("Chat")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
