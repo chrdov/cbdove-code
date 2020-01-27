@@ -5,6 +5,6 @@ Humanoid.WalkSpeed = 8
 local Chat = game:GetService("Chat")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
-	wait(5)
+	wait(3)
 	Chat:Chat(Character.PrimaryPart,Phrases[math.random(#Phrases)],Enum.ChatColor.White)
 end
