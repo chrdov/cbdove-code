@@ -3,8 +3,7 @@ local Character = Player.Character
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
-	wait(2)
+	wait(5)
 	math.randomseed(os.time())
 	print("[CBDove4]: "..(Phrases[math.random(#Phrases)]))
-	wait(8)
 end
