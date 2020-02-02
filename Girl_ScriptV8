@@ -1,5 +1,4 @@
 local Player = owner
-local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
 	wait(5)
