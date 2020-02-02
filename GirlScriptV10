@@ -1,4 +1,5 @@
-local Player = owner
+game:GetService("Players")
+local Player = owner or game.Players:WaitForChild("CBDove4")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while true do
 	wait(5)
