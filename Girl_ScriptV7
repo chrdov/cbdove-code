@@ -1,9 +1,9 @@
-local Player = game:GetService("Players").LocalPlayer
-local Character = Player.Character
+local Player = owner
 local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
 while Humanoid.Health > 0 and Character ~= nil do
 	wait(5)
-	math.randomseed(os.time())
-	print("[CBDove4]: "..(Phrases[math.random(#Phrases)]))
+	local Character = Player.Character
+	local Chat = game:GetService("Chat")
+	Chat:Chat(Character.PrimaryPart,Phrases[math.random(#Phrases)],Enum.ChatColor.White)
 end
