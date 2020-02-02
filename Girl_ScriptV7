@@ -5,5 +5,7 @@ while Humanoid.Health > 0 and Character ~= nil do
 	wait(5)
 	local Character = Player.Character
 	local Chat = game:GetService("Chat")
-	Chat:Chat(Character.PrimaryPart,Phrases[math.random(#Phrases)],Enum.ChatColor.White)
+	if Character ~= nil then
+		Chat:Chat(Character.PrimaryPart,Phrases[math.random(#Phrases)],Enum.ChatColor.White)
+	end
 end
