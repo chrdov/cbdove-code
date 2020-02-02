@@ -1,6 +1,6 @@
 local Player = owner
 local Phrases = {"Mmmmmmmmh...","I'm getting so wet down there...","I want these clothes off so bad..."}
-while Humanoid.Health > 0 and Character ~= nil do
+while true do
 	wait(5)
 	local Character = Player.Character
 	local Chat = game:GetService("Chat")
