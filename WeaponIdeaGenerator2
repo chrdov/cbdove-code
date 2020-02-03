@@ -3,8 +3,6 @@ local WordBank2 = {"Fiery","Icy","Metallic","Demonic","Thunderous","Natural","Hy
 local WordBank3 = {"Fire","Winds","Earth","Life","Thunder","Metal","Demons","Illusions","Ice","Waters","Storms","Zombies"}
 math.randomseed(os.time())
 local Word1 = WordBank1[math.random(#WordBank1)]
-math.randomseed(os.time())
 local Word2 = WordBank2[math.random(#WordBank2)]
-math.randomseed(os.time())
 local Word3 = WordBank3[math.random(#WordBank3)]
 print((Word1).." of "..(Word2).." "..(Word3))
