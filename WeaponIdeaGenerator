@@ -1,6 +1,6 @@
 local WordBank1 = {"Bow","Staff","Sword"}
-local WordBank2 = {"Fiery","Icy","Metallic","Demonic","Electric","Natural","Hypnotic","Rocky","Windy","Wavy"}
-local WordBank3 = {"Fire","Wind","Earth","Life","Electricity","Metal","Demons","Illusion","Ice","Waves"}
+local WordBank2 = {"Fiery","Icy","Metallic","Demonic","Thunderous","Natural","Hypnotic","Rocky","Windy","Wavy","Stormy"}
+local WordBank3 = {"Fire","Winds","Earth","Life","Thunder","Metal","Demons","Illusions","Ice","Waters","Storms"}
 math.randomseed(os.time())
 local Word1 = WordBank1[math.random(#WordBank1)]
 math.randomseed(os.time())
