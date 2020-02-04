@@ -1,8 +1,10 @@
 local WordBank1 = {"Bow","Staff","Sword"}
-local WordBank2 = {"Fiery","Icy","Metallic","Demonic","Thunderous","Natural","Hypnotic","Rocky","Windy","Wavy","Stormy","Undead"}
-local WordBank3 = {"Fire","Winds","Earth","Life","Thunder","Metal","Demons","Illusions","Ice","Waters","Storms","Zombies"}
+local WordBank2 = {"Fiery","Windy","Rocky","Demonic","Thunderous","Natural","Hypnotic","Metallic","Icy","Wavy","Stormy","Undead"}
+local WordBank3 = {"Fire","Winds","Earth","Demons","Thunder","Life","Illusions","Metal","Ice","Waters","Storms","Zombies"}
 math.randomseed(os.time())
 local Word1 = WordBank1[math.random(#WordBank1)]
-local Word2 = WordBank2[math.random(#WordBank2)]
+local Word2Index = math.random(#WordBank2)
+local Word2 = table.remove(WordBank2,Word2Index)
+table.remove(WordBank3,Word2Index)
 local Word3 = WordBank3[math.random(#WordBank3)]
 print((Word1).." of "..(Word2).." "..(Word3))
