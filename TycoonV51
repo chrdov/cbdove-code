@@ -353,20 +353,16 @@ RebirthMultiply.Changed:Connect(function()
   Cash.Value = 0
   Speed.MinValue = 1
   Worth.MinValue = 1
-  Speed.MaxValue = 5
+  Speed.MaxValue = (RebirthMultiply.Value) * 5
   Worth.MaxValue = (RebirthMultiply.Value ^ 2) * 5
   Speed.Value = Speed.MinValue
   Worth.Value = Worth.MinValue
-  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\nRebirth: Times "..(RebirthMultiply.Value)
+  RebirthLabel.Text = (PlayerObject.Value.Name).."'s Tycoon\n Life #"..(RebirthMultiply.Value)
 end)
 Worth.Name = "Worth"
 Speed.Name = "Speed"
 function CalcCost(base,level)
-  if level == RebirthMultiply.Value then
-    return base * (level ^ 3)
-  else
-    return base * (level) * (RebirthMultiply.Value)
-  end
+  return base * (level) * (RebirthMultiply.Value)
 end
 function YouCanRebirth()
   if Cash.Value >= CalcCost(BaseRebirthCost,RebirthMultiply.Value) and Speed.Value == Speed.MaxValue and Worth.Value == Worth.MaxValue then
@@ -398,7 +394,7 @@ function StartTycoon()
   end)()
   CollectorPart.Touched:Connect(function(hit)
     if hit.Parent ~= nil then
-      Cash.Value = Cash.Value + (Worth.Value * RebirthMultiply.Value)
+      Cash.Value = Cash.Value + (Worth.Value)
       hit:Destroy()
     end
   end)
