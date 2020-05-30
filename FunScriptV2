@@ -1,5 +1,24 @@
-n1 = "CBDove4"
-n2 = "Dummy"
+--Instructions Copy and paste into script builder,
+--Put two names into "YOURNAME", and "THE VICTIM" (One of them doesn't have to be you)
+
+--This Script Makes two players in your game.. Well.. I think its in the title ;D
+
+----------------------------------------------------------------------------------------
+function fWeld(zName, zParent, zPart0, zPart1, zCoco, a, b, c, d, e, f) 
+local funcw = Instance.new("Weld") 
+funcw.Name = zName 
+funcw.Parent = zParent 
+funcw.Part0 = zPart0 
+funcw.Part1 = zPart1 
+if (zCoco == true) then 
+funcw.C0 = CFrame.new(a, b, c) * CFrame.fromEulerAnglesXYZ(d, e, f) 
+else 
+funcw.C1 = CFrame.new(a, b, c) * CFrame.fromEulerAnglesXYZ(d, e, f) 
+end 
+return funcw 
+end
+function fun(n1, n2)
+pcall(function()
 t1 = game.Workspace[n1].Torso
 t2 = game.Workspace[n2].Torso
 t2.Parent.Humanoid.PlatformStand = true
@@ -163,3 +182,5 @@ end
 end))
 end
 end
+end
+fun("", "CBDove4")
