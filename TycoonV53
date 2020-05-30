@@ -331,7 +331,7 @@ local PhysicsService = game:GetService("PhysicsService")
 local myName = "CBDove4_Tycoon"
 local myId = PhysicsService:CreateCollisionGroup(myName)
 local defName = PhysicsService:GetCollisionGroupName(0)
-PhysicsService:CollisionGroupSetCollidable(myName,defName)
+PhysicsService:CollisionGroupSetCollidable(myName,defName,false)
 for i,part in pairs(o1:GetDescendants()) do
 if part:IsA("BasePart") then
 part.CollisionGroupId = myId
