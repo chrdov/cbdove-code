@@ -1,5 +1,5 @@
 local Player = owner
-local MyColor = Color3.fromRGB(127,0,255)
+local MyColor = Color3.fromRGB(127,0,0)
 Player.Character:WaitForChild("HumanoidRootPart")
 local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
 Light.Color = MyColor
