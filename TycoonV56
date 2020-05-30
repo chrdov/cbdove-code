@@ -329,6 +329,9 @@ end
 mas:Destroy()
 local PhysicsService = game:GetService("PhysicsService")
 local myName = "CBDove4_Tycoon"
+pcall(function()
+PhysicsService:CreateCollisionGroup(myName)
+end)
 local myId = PhysicsService:GetCollisionGroupId(myName)
 local defName = PhysicsService:GetCollisionGroupName(0)
 PhysicsService:CollisionGroupSetCollidable(myName,defName,false)
