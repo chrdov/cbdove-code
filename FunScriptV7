@@ -181,5 +181,4 @@ end
 end
 end))
 end
-end
-fun("", "CBDove4")
+fun("Dummy", "CBDove4")
