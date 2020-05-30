@@ -327,6 +327,16 @@ for i=1,#mas1 do
   mas1[i].Parent = script
 end
 mas:Destroy()
+local PhysicsService = game:GetService("PhysicsService")
+local myName = "CBDove4_Tycoon"
+local myId = PhysicsService:CreateCollisionGroup(myName)
+local defName = PhysicsService:GetCollisionGroupName(0)
+PhysicsService:CollisionGroupSetCollidable(myName,defName)
+for i,part in pairs(o1:GetDescendants()) do
+if part:IsA("BasePart") then
+part.CollisionGroupId = myId
+end
+end
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
 local RunService = game:GetService("RunService")
