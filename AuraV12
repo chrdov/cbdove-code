@@ -1,4 +1,4 @@
-local Player = owner
+local Player = game.Players:WaitForChild("CBDove4")
 local MyColor = Color3.fromRGB(127,0,0)
 Player.Character:WaitForChild("HumanoidRootPart")
 local Light = Instance.new("PointLight",Player.Character:FindFirstChild("HumanoidRootPart"))
