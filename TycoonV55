@@ -337,6 +337,12 @@ if part:IsA("BasePart") then
 part.CollisionGroupId = myId
 end
 end
+o14.Parent.CanCollide = false
+o28.Parent.CanCollide = false
+o18.Parent.CanCollide = false
+o14.Parent.CollisionGroupId = 0
+o28.Parent.CollisionGroupId = 0
+o18.Parent.CollisionGroupId = 0
 return o1,o3,o9,o10,o23,o24,o25,o26,o14.Parent,o28.Parent,o18.Parent
 end
 local RunService = game:GetService("RunService")
